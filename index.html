@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  body { margin: 0; padding: 0; font-family: Arial, sans-serif; }
+  #status { font-size: 13px; color: #666; padding: 5px; }
+  #status.ok { color: green; }
+  #status.error { color: red; }
+</style>
+</head>
+<body>
+<div id="status">Esperando referencia...</div>
+<script>
+const AIRTABLE_TOKEN = "patrBH3CMO0o3Mv7r";
+const AIRTABLE_BASE  = "appmY7jVeBehY5Mz7";
+const AIRTABLE_TABLE = "CARTERA INMUEBLES";
+
+// Escuchar mensajes desde JotForm
+window.addEventListener("message", function(event) {
+  var ref = event.data;
+  if (typeof ref !== "string" || ref.length < 2) return;
+  buscarReferencia(ref.toUpperCase());
+});
+
+function buscarReferencia(referencia) {
+  document.getElementById("status").textContent = "Buscando...";
+  document.getElementById("status").className = "";
+
+  var url = "https://api.airtable.com/v0/"
+          + AIRTABLE_BASE + "/"
+          + encodeURIComponent(AIRTABLE_TABLE)
+          + "?filterByFormula=" + encodeURIComponent("REFERENCIA='" + referencia + "'")
+          + "&maxRecords=1";
+
+  fetch(url, {
+    headers: { "Authorization": "Bearer " + AIRTABLE_TOKEN }
+  })
+  .then(function(res) { return res.json(); })
+  .then(function(data) {
+    if (data.records && data.records.length > 0) {
+      var fields = data.records[0].fields;
+      document.getElementById("status").textContent = "✅ Referencia encontrada";
+      document.getElementById("status").className = "ok";
+      // Enviar datos a JotForm
+      window.parent.postMessage(JSON.stringify(fields), "*");
+    } else {
+      document.getElementById("status").textContent = "❌ Referencia no encontrada";
+      document.getElementById("status").className = "error";
+    }
+  })
+  .catch(function(err) {
+    document.getElementById("status").textContent = "Error de conexión";
+    document.getElementById("status").className = "error";
+  });
+}
+</script>
+</body>
+</html>
