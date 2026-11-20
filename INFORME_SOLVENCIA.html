@@ -246,7 +246,7 @@ for (var i = 0; i < Math.min(nInq, 4); i++) {
   var ini = nombre.split(/\s+/).filter(Boolean).slice(0,2).map(function(w){ return w[0]; }).join('').toUpperCase();
   var motivo = q(t.mot), detalle = motivo === 'Estudios' ? q(t.cen) : (/Trabajo/.test(motivo) ? q(t.emp) : q(t.otro));
   var avalista = /Avalista/i.test(q(t.sol));
-  var mini = '<div class="k">Motivo</div><div class="v">'+esc(motivo || '—')+'</div>';
+  var mini = '<div class="k">Motivo del alquiler</div><div class="v">'+esc(motivo || '—')+'</div>';
   if (detalle) mini += '<div class="k">'+(motivo === 'Estudios' ? 'Centro' : (/Trabajo/.test(motivo) ? 'Empresa' : 'Detalle'))+'</div><div class="v">'+esc(detalle)+'</div>';
   if (q(t.doc) && q(t.doc) !== 'N/A') mini += '<div class="k">Acreditación</div><div class="v">'+esc(q(t.doc))+'</div>';
   mini += '<div class="k">Solvencia</div><div class="v">'+(avalista ? 'Avalada' : 'Propia')+'</div>';
