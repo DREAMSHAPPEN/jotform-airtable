@@ -40,6 +40,10 @@ la sección 4 (su `input_XXX` cambia), borrar o recrear el campo REFERENCIA, o d
 python3 herramientas/reconstruir.py RUTA_DEL_HTML_NUEVO.html NOMBRE_FORMULARIO
 ```
 
+**Diseño (CSS):** el diseño visual va en el CSS personalizado de JotForm (Diseñador → Estilos → Inyectar CSS), así viene ya dentro del export.
+La copia de cada CSS está en `herramientas/css/`. Si un export llega SIN el bloque «DH DISEÑO…» que tenía la versión del repo,
+`reconstruir.py` se para y avisa (para no perder el diseño por accidente).
+
 **Formulario totalmente nuevo:** dime qué campo es la REFERENCIA, si debe bloquear el envío cuando no
 existe en Airtable, y qué columnas de Airtable van en qué campos.
 
@@ -65,7 +69,7 @@ La columna «Excepciones» indica lo que se sale de eso.
 | CONFIRMAR_FECHA_SALIDA | 260404957152355 | `input_378` | 3 | botón de envío input_408; fechas de Airtable convertidas a DD/MM/AAAA |
 | CONTACTO_PROPIEDAD | 253393126842358 | `input_306` | 1 | — |
 | DATOS_CONTRATO | 252986821301357 | `input_357` | 31 | — |
-| DATOS_RESERVA | 252701841871356 | `input_298` | 13 | botón de JotForm Sign; bloque DH EXTRA (campos obligatorios completos + altura de los textos 1–5) |
+| DATOS_RESERVA | 252701841871356 | `input_298` | 13 | botón de JotForm Sign; bloque DH EXTRA (campos obligatorios completos + altura de los textos 1–5); diseño en el CSS personalizado de JotForm (bloque «DH DISEÑO RESERVA», copia en `herramientas/css/DATOS_RESERVA.css`) |
 | DATOS_SUMINISTROS | 260874819333364 | `input_317` | 1 | — |
 | DEVOLUCION_DE_FIANZA | 261116538998369 | `input_455` | 10 | fechas de Airtable convertidas a DD/MM/AAAA |
 | DOCUMENTACION_CONTRATO | 253184377345362 | `input_345` | 1 | — |

@@ -68,6 +68,11 @@ def main():
         elif not en_actual and not en_nuevo:
             avisos.append(f"{i} ya no existía antes tampoco (resto antiguo, sin efecto).")
 
+    # Diseño CSS (bloque «DH DISEÑO…»): debe venir ya dentro del export de JotForm (CSS personalizado)
+    for m in re.finditer(r"/\* ===== (DH DISEÑO[^=]*?) ===== \*/", actual):
+        if m.group(1) not in nuevo:
+            errores.append(f"El HTML nuevo NO trae el diseño «{m.group(1).strip()}». Pégalo en JotForm (Diseñador → Estilos → Inyectar CSS) desde herramientas/css/ y vuelve a exportar.")
+
     for a in avisos:
         print("AVISO:", a)
     if errores:
