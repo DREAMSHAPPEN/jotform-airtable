@@ -54,6 +54,7 @@ La columna «Excepciones» indica lo que se sale de eso.
 | ALBARAN_FINALIZACION_ALQUILER | 261296771911362 | `input_486` | 8 | — |
 | ALTA_PROPIEDAD | 253353585653363 | `input_135` | 0 | NO bloquea el envío (solo limpia la referencia) |
 | AUTORIZACION_COMERCIALIZACION | 263225564982061 | `input_2` | 14 | botón de JotForm Sign; el autorrelleno localiza los campos por ETIQUETA (no por input_XXX); oculta Propietario 2/3 si no existen; lee `?ref=` del enlace; diseño y orden en el CSS personalizado de JotForm (bloque «DH DISEÑO») |
+| VERIFICACION_PERFIL_SOLVENCIA | 262793349901062 | `input_3` | 0 | lo rellena Juan; autorrelleno por número de pregunta (Q en el script) desde DOCUMENTACION INQUILINOS (tblDEOgGd0gJ1sFGb, alimentada por el escenario Make «12.JF-AT. DOCUMENTACIÓN CONTRATO…») + DIRECCIÓN de CARTERA; pone Nº de inquilinos y dispara las condiciones; lee `?ref=` |
 | CALCULAR_DEVOLUCION_FIANZA | 261166944755366 | `input_440` | 9 | — |
 | CAMBIO_SUMINISTROS | 261265033882356 | `input_317` | 3 | CUPS rellenados con retardo según el desplegable input_316 |
 | CHECK-IN | 253224147452351 | `input_351` | 18 | — |
@@ -160,6 +161,15 @@ El orden de los campos, los textos y el diseño están en JotForm (CSS personali
 | BANCO | `input_17` | BANCO |
 | IBAN | `input_18` | IBAN |
 | SWIFT/BIC | `input_19` | SWIFT/BIC |
+
+### VERIFICACION_PERFIL_SOLVENCIA
+Al escribir la REFERENCIA (o con `?ref=`):
+| Campo | Origen |
+|---|---|
+| DIRECCIÓN (`input_4`) | CARTERA INMUEBLES · DIRECCIÓN |
+| Nº de inquilinos (`input_32`) | nº de inquilinos distintos en DOCUMENTACION INQUILINOS (máx. 4) |
+| Inquilino N – Nombre / Motivo del alquiler / Centro / Empresa / Especificar / Documento aportado / Solvencia / Avalista nombre y relación | DOCUMENTACION INQUILINOS: filas con esa REFERENCIA y sin «USADO EN INFORME», orden FECHA ENVÍO; si un inquilino envió varias veces, su último envío |
+Si no hay documentación recibida solo carga la dirección y lo avisa. Todo queda editable.
 
 ### CALCULAR_DEVOLUCION_FIANZA
 
