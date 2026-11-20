@@ -1761,7 +1761,7 @@ JotForm.paymentExtrasOnTheFly([{"description":"","name":"q3_textbox1","qid":"3",
    Al escribir la REFERENCIA:
    - DIRECCIÓN desde CARTERA INMUEBLES.
    - Inquilinos 1-4 desde DOCUMENTACION INQUILINOS (una fila por envío de DOCUMENTACIÓN CONTRATO),
-     solo envíos de los últimos 60 días (DIAS) y sin "USADO EN INFORME", en orden de envío; si un inquilino envió varias veces se usa
+     solo envíos de DOCUMENTACIÓN CONTRATO (no las filas ORIGEN = DATOS CONTRATO) de los últimos 60 días (DIAS) y sin "USADO EN INFORME", en orden de envío; si un inquilino envió varias veces se usa
      su último envío. Rellena nombre, motivo, centro/empresa/especificar, documento aportado,
      solvencia (Propia/Avalista) y nombre y relación del avalista, y pone el Nº de inquilinos.
    Todo queda editable: revisa y corrige lo que haga falta antes de enviar. */
@@ -1844,7 +1844,7 @@ JotForm.paymentExtrasOnTheFly([{"description":"","name":"q3_textbox1","qid":"3",
     var refF = "TRIM(UPPER({REFERENCIA}))='" + ref.replace(/'/g, "") + "'";
     Promise.all([
       at(T_CARTERA, refF, "&maxRecords=1&fields%5B%5D=DIRECCI%C3%93N"),
-      at(T_DOCS, "AND(" + refF + ", NOT({USADO EN INFORME}), IS_AFTER({FECHA ENVÍO}, DATEADD(NOW(), -" + DIAS + ", 'days')))", "&sort%5B0%5D%5Bfield%5D=FECHA%20ENV%C3%8DO&sort%5B0%5D%5Bdirection%5D=asc")
+      at(T_DOCS, "AND(" + refF + ", NOT({USADO EN INFORME}), {ORIGEN} != 'DATOS CONTRATO', IS_AFTER({FECHA ENVÍO}, DATEADD(NOW(), -" + DIAS + ", 'days')))", "&sort%5B0%5D%5Bfield%5D=FECHA%20ENV%C3%8DO&sort%5B0%5D%5Bdirection%5D=asc")
     ]).then(function(res) {
       if (mia !== peticion) return;
       var cartera = res[0].records || [], docs = res[1].records || [];
