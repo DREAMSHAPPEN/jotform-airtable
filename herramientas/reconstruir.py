@@ -10,7 +10,7 @@ Ejemplo:
 
 Qué hace:
   1. Lee el HTML actual del repo (NOMBRE_FORMULARIO.html) y saca SOLO los bloques
-     añadidos a mano (autorrelleno de Airtable y GUARDA REFERENCIA).
+     añadidos a mano (autorrelleno de Airtable, GUARDA REFERENCIA y DH EXTRA).
   2. Los pega al final del HTML nuevo de JotForm (justo antes de </body>).
   3. Comprueba que el ID del formulario coincide y que todos los campos (input_XXX)
      que usan esos bloques siguen existiendo en el HTML nuevo. Si alguno falta,
@@ -22,7 +22,7 @@ import sys
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
-CUSTOM = re.compile(r'<script>(?:(?!</script>).)*?(?:AIRTABLE_TOKEN|GUARDA REFERENCIA)(?:(?!</script>).)*?</script>\r?\n?', re.S)
+CUSTOM = re.compile(r'<script>(?:(?!</script>).)*?(?:AIRTABLE_TOKEN|GUARDA REFERENCIA|DH EXTRA)(?:(?!</script>).)*?</script>\r?\n?', re.S)
 
 
 def form_id(html):

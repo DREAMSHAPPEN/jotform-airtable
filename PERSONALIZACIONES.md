@@ -7,13 +7,14 @@ rehacer la versión de GitHub sin perder nada.
 ## 1. Qué se añade a mano (no es configurable en JotForm)
 
 JotForm no permite meter código propio en sus formularios, así que todo esto vive **solo** en GitHub.
-En los 32 formularios son siempre bloques `<script>` pegados **al final del HTML, después del formulario**.
+En los 32 formularios son bloques `<script>` pegados **al final del HTML, después del formulario**.
 El contenido del formulario (campos, textos, diseño, lógica condicional) **no se ha tocado**: eso sigue
 saliendo tal cual de JotForm.
 
 | Bloque | Qué hace | Dónde está |
 |---|---|---|
 | **Autorrelleno Airtable** | Al escribir la REFERENCIA, busca en Airtable (base DH, tabla CARTERA INMUEBLES) y rellena los campos del formulario según una tabla «columna de Airtable → campo de JotForm» (sección 4). En la mayoría también bloquea el botón y los campos hasta confirmar la referencia y muestra ✅/❌. | Bloque con `AIRTABLE_TOKEN` |
+| **DH EXTRA** (solo algunos formularios) | Lógica propia de un formulario concreto. En DATOS_RESERVA: no deja pulsar «IR A PAGO RESERVA» si falta algún campo obligatorio visible (excepto la firma, que se hace después en JotForm Sign) y lista lo que falta; y ajusta la altura de los textos 1)–5) para que se lean enteros sin scroll. | Bloque que empieza por `/* DH EXTRA` |
 | **GUARDA REFERENCIA** | Quita todos los espacios y pone MAYÚSCULAS en la REFERENCIA mientras se escribe. Si no coincide **exactamente** con Airtable: vacía los datos rellenados, bloquea el envío y muestra ❌. Repite la comprobación al pulsar enviar. | Último bloque, empieza por `/* GUARDA REFERENCIA (DH)` |
 
 Lo que **sí** puedes hacer en JotForm sin perder nada en GitHub: cambiar textos, diseño, añadir o quitar campos
@@ -64,7 +65,7 @@ La columna «Excepciones» indica lo que se sale de eso.
 | CONFIRMAR_FECHA_SALIDA | 260404957152355 | `input_378` | 3 | botón de envío input_408; fechas de Airtable convertidas a DD/MM/AAAA |
 | CONTACTO_PROPIEDAD | 253393126842358 | `input_306` | 1 | — |
 | DATOS_CONTRATO | 252986821301357 | `input_357` | 31 | — |
-| DATOS_RESERVA | 252701841871356 | `input_298` | 13 | botón de JotForm Sign |
+| DATOS_RESERVA | 252701841871356 | `input_298` | 13 | botón de JotForm Sign; bloque DH EXTRA (campos obligatorios completos + altura de los textos 1–5) |
 | DATOS_SUMINISTROS | 260874819333364 | `input_317` | 1 | — |
 | DEVOLUCION_DE_FIANZA | 261116538998369 | `input_455` | 10 | fechas de Airtable convertidas a DD/MM/AAAA |
 | DOCUMENTACION_CONTRATO | 253184377345362 | `input_345` | 1 | — |

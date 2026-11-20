@@ -1534,5 +1534,110 @@ JotForm.paymentExtrasOnTheFly([{"name":"clickTo","qid":"1","text":"Datos Reserva
   });
 })();
 </script>
+<script>
+/* DH EXTRA (DATOS_RESERVA): 1) no deja pulsar el botón si faltan campos obligatorios visibles; 2) ajusta la altura de los textos 1)–5) para que se lean enteros sin scroll */
+(function() {
+  var FORM_ID = "252701841871356";
+  var TEXTOS = ["input_281", "input_282", "input_284", "input_287", "input_288"];
+  var form, aviso;
+
+  // ---------- 2) Altura de los textos legales ----------
+  function ajustarTextos() {
+    for (var i = 0; i < TEXTOS.length; i++) {
+      var t = document.getElementById(TEXTOS[i]);
+      if (!t || !t.offsetParent) continue;
+      t.style.setProperty("overflow", "hidden", "important");
+      t.style.setProperty("resize", "none", "important");
+      t.style.setProperty("height", "auto", "important");
+      t.style.setProperty("height", (t.scrollHeight + 4) + "px", "important");
+    }
+  }
+
+  // ---------- 1) Campos obligatorios completos ----------
+  function visible(el) { return !!(el && (el.offsetWidth || el.offsetHeight || el.getClientRects().length)); }
+  function etiqueta(li) {
+    var l = li.querySelector(".form-label");
+    return l ? l.textContent.replace(/\*/g, "").replace(/\s+/g, " ").trim() : li.id;
+  }
+  function faltan() {
+    var res = [];
+    var lis = form.querySelectorAll("li.form-line.jf-required");
+    for (var i = 0; i < lis.length; i++) {
+      var li = lis[i];
+      if (!visible(li)) continue;                                   // oculto por condición: no cuenta
+      if (li.getAttribute("data-type") === "control_signature") continue; // la firma se hace después, en JotForm Sign
+      var campos = li.querySelectorAll("input, select, textarea");
+      var ok = true;
+      for (var j = 0; j < campos.length; j++) {
+        var c = campos[j];
+        if (c.type === "hidden" || !visible(c)) continue;
+        if (!(c.required || /validate\[[^\]]*required/.test(c.className))) continue;
+        if (!(c.value || "").trim()) { ok = false; break; }
+      }
+      if (ok && li.getAttribute("data-type") === "control_email") {
+        var e1 = document.getElementById(li.id.replace("id_", "input_"));
+        var e2 = document.getElementById(li.id.replace("id_", "input_") + "_confirm");
+        if (e1 && e2 && e1.value.trim().toLowerCase() !== e2.value.trim().toLowerCase()) ok = false;
+      }
+      if (!ok) res.push(li);
+    }
+    return res;
+  }
+  function botones() { return form.querySelectorAll("button.submit-button, .useJotformSign-button"); }
+  function refrescar() {
+    var incompleto = faltan().length > 0;
+    var b = botones();
+    for (var i = 0; i < b.length; i++) {
+      if (b[i].hasAttribute("disabled")) continue;                  // bloqueado por la REFERENCIA: lo gestiona GUARDA REFERENCIA
+      b[i].style.opacity = incompleto ? "0.5" : "";
+      b[i].title = incompleto ? "Completa todos los campos obligatorios" : "";
+    }
+    if (!incompleto && aviso) aviso.style.display = "none";
+  }
+  function mostrarAviso(lista) {
+    if (!aviso) {
+      aviso = document.createElement("div");
+      aviso.style.cssText = "margin:10px auto 0;max-width:520px;padding:10px 14px;border-radius:8px;background:#FDF2EF;border:1px solid #F1C9BD;color:#9A3412;font-size:14px;line-height:1.45;text-align:left";
+      var w = form.querySelector("#cid_81 .form-buttons-wrapper") || form.querySelector("#cid_81");
+      if (w) w.parentNode.insertBefore(aviso, w.nextSibling);
+    }
+    var nombres = lista.map(etiqueta);
+    aviso.innerHTML = "<strong>Faltan datos para continuar:</strong><br>" + nombres.map(function(n) { return "· " + n.replace(/</g, "&lt;"); }).join("<br>");
+    aviso.style.display = "block";
+    for (var i = 0; i < lista.length; i++) lista[i].classList.add("form-line-error");
+    lista[0].scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
+  window.addEventListener("load", function() {
+    form = document.getElementById(FORM_ID);
+    if (!form) return;
+
+    // Clic en el botón de envío / JotForm Sign: si falta algo, se para aquí
+    document.addEventListener("click", function(e) {
+      var b = e.target && e.target.closest && e.target.closest("button.submit-button, .useJotformSign-button");
+      if (!b || !form.contains(b)) return;
+      var lista = faltan();
+      if (lista.length) { e.preventDefault(); e.stopImmediatePropagation(); mostrarAviso(lista); }
+    }, true);
+    form.addEventListener("submit", function(e) {
+      var lista = faltan();
+      if (lista.length) { e.preventDefault(); e.stopImmediatePropagation(); mostrarAviso(lista); return false; }
+    }, true);
+    form.addEventListener("input", function(e) {
+      var li = e.target.closest && e.target.closest("li.form-line");
+      if (li) li.classList.remove("form-line-error");
+      refrescar();
+    });
+    form.addEventListener("change", refrescar);
+
+    ajustarTextos();
+    refrescar();
+    setTimeout(ajustarTextos, 300);
+    setTimeout(ajustarTextos, 1500);
+    setInterval(refrescar, 1500);
+    window.addEventListener("resize", ajustarTextos);
+  });
+})();
+</script>
 </body>
 </html><script type="text/javascript">JotForm.ownerView=true;</script><script type="text/javascript">JotForm.forwardToEu=true;</script><script type="text/javascript">JotForm.isNewSACL=true;</script>
