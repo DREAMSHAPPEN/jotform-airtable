@@ -72,13 +72,15 @@
 .form-all {
   font-size: 16px;
 }
-.jfDropdownV2 {
+.jfDropdownV2,
+.form-dropdown-wrapper > select.form-dropdown[data-ui-version="v2"] {
   --jfDropdownV2-background-image: none;
 }
 .jfDropdownV2 > .jfDropdownV2-header,
 .jfDropdownV2 > .jfDropdownV2-popup,
 .jfDropdownV2.jfDropdownV2--list,
-.jfDropdownV2.jfDropdownV2--list > .jfDropdownV2-optionList {
+.jfDropdownV2.jfDropdownV2--list > .jfDropdownV2-optionList,
+.form-dropdown-wrapper > select.form-dropdown[data-ui-version="v2"] {
   background-color: var(--jfDropdownV2-bg, #ffffff);
   background-image: var(--jfDropdownV2-background-image, none);
 }
@@ -150,197 +152,12 @@
   background-color: var(--jfDropdownV2-font, #2c3344);
 }
 /*PREFERENCES STYLE*/
-/* 17 - INPUT WIDTHS */
-/*  20 - FORM PADDING */
-@media screen and (min-width: 768px) {
-  ul.form-section {
-    padding: 0px 0px;
-  }
-}
-.form-textbox:not(#productSearch-input),
-.form-textarea,
-li[data-type=control_fileupload] .qq-upload-button,
-.signature-wrapper {
-  border-width: 1px;
-}
-/* Text input height */
-.form-textbox {
-  height: 21px;
-}
-/* Textarea height */
-.form-textarea {
-  height: 88px !important;
-}
-/* 11 - LINE PADDING */
-/* LABEL STYLE */
-.form-label {
-  font-weight: bold;
-}
-.form-checkbox-item label,
-.form-radio-item label {
-  font-weight: 500;
-}
 .form-dropdown:where(:not([data-ui-version="v2"])):not(.time-dropdown) {
-  border-radius: 0px;
-}
-li[data-type="control_dropdown"] > div.form-input:where(:not(:has(select[data-ui-version="v2"], .jfDropdownV2))):before,
-li[data-type="control_dropdown"] > div.form-input:where(:not(:has(select[data-ui-version="v2"], .jfDropdownV2))):after,
-li[data-type="control_dropdown"] > div.form-input-wide:where(:not(:has(select[data-ui-version="v2"], .jfDropdownV2))):before,
-li[data-type="control_dropdown"] > div.form-input-wide:where(:not(:has(select[data-ui-version="v2"], .jfDropdownV2))):after,
-li[data-type="control_dropdown"] .form-sub-label-container:where(:not(:has(select[data-ui-version="v2"], .jfDropdownV2))):before,
-li[data-type="control_dropdown"] .form-sub-label-container:where(:not(:has(select[data-ui-version="v2"], .jfDropdownV2))):after,
-li[data-type="control_dropdown"] > div > div.form-input-wide:where(:not(:has(select[data-ui-version="v2"], .jfDropdownV2))):before,
-li[data-type="control_dropdown"] > div > div.form-input-wide:where(:not(:has(select[data-ui-version="v2"], .jfDropdownV2))):after {
-  content: none;
-  display: none;
-  border: 0;
-  background-image: none;
-  border-radius: 0;
-  transform: none;
+  border-radius: 4px;
 }
 .form-dropdown:where(:not([data-ui-version="v2"])) {
   margin: 0;
-  border-color: #a6a6a6 !important;
-  appearance: menulist !important;
   border-width: 1px;
-}
-/* 12 - ROUNDED INPUTS */
-.form-textbox:not(#productSearch-input),
-.form-radio-other-input,
-.form-checkbox-other-input,
-.form-captcha input,
-.form-spinner input,
-.form-pagebreak-back,
-.form-pagebreak-next,
-.qq-upload-button,
-.signature-wrapper,
-.form-error-message {
-  border-radius: 0px;
-}
-.form-section li:not(:first-child) .form-header-group {
-  border-radius: 0px;
-}
-.form-textarea {
-  border-radius: 0px;
-}
-.supernova .form-all,
-.form-all {
-  border-radius: 0px;
-}
-.form-section:first-child {
-  border-radius: 0px 0px 0 0;
-}
-.form-section:last-child {
-  border-radius: 0 0 0px 0px;
-}
-.form-section li:first-child .form-header-group {
-  border-radius: 0px;
-}
-.form-section li:first-child .header-large {
-  border-radius: 0px 0px 0 0;
-}
-.form-radio-item,
-.form-checkbox-item {
-  padding-bottom: 0px;
-}
-.form-radio-item:last-child,
-.form-checkbox-item:last-child {
-  padding-bottom: 0;
-}
-.form-checkbox-item .form-checkbox + label,
-.form-checkbox-item .form-checkbox + span {
-  padding-left: 25px;
-}
-.form-radio-item .form-radio + label,
-.form-radio-item .form-radio + span {
-  padding-left: 25px;
-}
-.form-single-column .form-checkbox-item,
-.form-single-column .form-radio-item {
-  width: 100%;
-}
-.form-checkbox-item .editor-container div,
-.form-radio-item .editor-container div {
-  position: relative;
-}
-.form-checkbox-item .editor-container div:before,
-.form-radio-item .editor-container div:before {
-  display: inline-block;
-  vertical-align: middle;
-  left: 0;
-  width: 20px;
-  height: 20px;
-}
-.form-checkbox-item,
-.form-radio-item input {
-  margin-top: 2px;
-}
-.form-line .form-checkbox:checked + label:before,
-.form-line .form-checkbox:checked + span:before {
-  background-color: #8FBC8F;
-  border-color: #8FBC8F;
-}
-.form-line .form-radio:checked + label:before,
-.form-line .form-radio:checked + span:before {
-  border-color: #8FBC8F;
-}
-.form-line .form-radio:checked + label:after,
-.form-line .form-radio:checked + span:after {
-  background-color: #8FBC8F;
-}
-.form-line .form-checkbox:hover + label:before,
-.form-line .form-checkbox:hover + span:before,
-.form-line .form-radio:hover + label:before,
-.form-line .form-radio:hover + span:before {
-  border-color: rgba(143,188,143,0.5);
-  box-shadow: 0 0 0 2px rgba(143,188,143,0.25);
-}
-.form-line .form-checkbox:focus + label:before,
-.form-line .form-checkbox:focus + span:before,
-.form-line .form-radio:focus + label:before,
-.form-line .form-radio:focus + span:before {
-  border-color: rgba(143,188,143,1);
-  box-shadow: 0 0 0 3px rgba(143,188,143,0.25);
-}
-.submit-button {
-  font-size: 16px;
-  font-weight: normal;
-  font-family: inherit;
-  height: 40px;
-  width: 80px;
-}
-.form-submit-button,
-.form-submit-reset,
-.form-submit-print {
-  border-radius: 0px;
-}
-.form-pagebreak-back,
-.form-pagebreak-next {
-  border-radius: 0px;
-}
-.form-all .form-pagebreak-back-container,
-.form-all .form-pagebreak-next-container {
-  width: 80px;
-}
-.form-all .form-pagebreak-back,
-.form-all .form-pagebreak-next {
-  width: 100%;
-  height: 40px;
-  font-family: "Inter", sans-serif;
-  font-size: 16px;
-  font-weight: normal;
-}
-.form-all .form-pagebreak-back,
-.form-all .form-pagebreak-next {
-  min-width: 80px;
-}
-li[data-type="control_image"] div {
-  text-align: left;
-}
-li[data-type="control_image"] img {
-border-width: 0px !important;
-  border-style: solid !important;
-border-color: false !important;
 }
 .supernova {
   background: url("https://www.jotform.com/uploads/EltonCris/form_files/sunset-hair.jpg") fixed no-repeat center top;
@@ -349,143 +166,15 @@ border-color: false !important;
     background-size: cover;
 
 }
-.form-all {
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center top;
-  background-image: none;
-  background-size: cover;
-}
-.form-header-group:not(.has-bg-cover) {
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center top;
-}
-.form-header-group {
-  text-align: left;
-}
-div.form-header-group.header-large,
-div.form-header-group.header-task,
-div.form-header-group.hasImage {
-  margin: 12px 36px;
-}
-div.form-header-group.header-large,
-div.form-header-group.header-task,
-div.form-header-group.hasImage {
-  padding: 24px 0px;
-}
 .form-header-group:where(:not(.has-heading-color)) .form-header,
 .form-header-group:where(:not(.has-heading-color)) .form-subHeader {
   color: #2c3344;
 }
-.form-collapse-table {
-  border: 1px solid rgba(0,0,0,0.2);
-  box-shadow: 0 1px 0 rgba(255,255,255,0.5) inset, 0 1px 0 rgba(0,0,0,0.2);
-}
-.form-collapse-table .form-collapse-mid {
-  text-shadow: none;
-}
-.form-collapse-table {
-  background-color: #eeeeee;
-}
-.form-collapse-table {
-  color: rgb(85, 85, 85);
-}
-.form-collapse-table {
-  padding-left: 20px;
-  padding-right: 20px;
-}
-.form-collapse-table .form-collapse-mid {
-  margin-right: 0;
-  margin-left: 0;
-}
-.form-collapse-table {
-  padding-top: 16px;
-  padding-bottom: 16px;
-  height: auto;
-  max-height: 60px;
-  overflow: hidden;
-}
-.form-collapse-table .form-collapse-mid {
-  margin-top: 0;
-  margin-bottom: 0;
-}
-.form-collapse-table .form-collapse-right {
-  height: 24px;
-  top: 50%;
-}
-.form-collapse-table .form-collapse-right-show {
-  margin-top: -15px;
-}
-.form-collapse-table .form-collapse-right-hide {
-  margin-top: -12px;
-}
-.form-collapse-table {
-  margin-top: 0px;
-  margin-bottom: 0px;
-}
-.form-collapse-table {
-  margin-left: 36px;
-  margin-right: 36px;
-}
 .form-line-error {
-  overflow: hidden;
-  -webkit-transition-property: none;
-  -moz-transition-property: none;
-  -ms-transition-property: none;
-  -o-transition-property: none;
-  transition-property: none;
-  -webkit-transition-duration: 0.3s;
-  -moz-transition-duration: 0.3s;
-  -ms-transition-duration: 0.3s;
-  -o-transition-duration: 0.3s;
-  transition-duration: 0.3s;
-  -webkit-transition-timing-function: ease;
-  -moz-transition-timing-function: ease;
-  -ms-transition-timing-function: ease;
-  -o-transition-timing-function: ease;
-  transition-timing-function: ease;
   background-color: #ffd6d6;
 }
-.form-line-error .form-error-message {
-  background-color: #e15353;
-  clear: both;
-  float: none;
-}
-.form-line-error .form-error-message .form-error-arrow {
-  border-bottom-color: #e15353;
-}
-.form-line-error input:not(#coupon-input),
-.form-line-error textarea,
-.form-line-error .form-validation-error,
-.form-line-error .jfDropdownV2 > .jfDropdownV2-header,
-.form-line-error .jfDropdownV2.jfDropdownV2--list {
-  border: 1px solid #e15353;
-  box-shadow: 0 0 3px #e15353;
-}
-.form-line-error {
-  -webkit-transition-property: none;
-  -moz-transition-property: none;
-  -ms-transition-property: none;
-  -o-transition-property: none;
-  transition-property: none;
-  -webkit-transition-duration: 0.3s;
-  -moz-transition-duration: 0.3s;
-  -ms-transition-duration: 0.3s;
-  -o-transition-duration: 0.3s;
-  transition-duration: 0.3s;
-  -webkit-transition-timing-function: ease;
-  -moz-transition-timing-function: ease;
-  -ms-transition-timing-function: ease;
-  -o-transition-timing-function: ease;
-  transition-timing-function: ease;
-  background-color: #ffd6d6;
-}
-.form-line.form-line-active {
-  background-color: #FFFBEA;
-}
-li[data-type=control_fileupload] .qq-upload-button {
-  background-color: #ffffff;
+.form-header-group {
+  font-family: inherit;
 }
 .jfDropdownV2 > .jfDropdownV2-header,
 .jfDropdownV2.isOpen > .jfDropdownV2-header {
@@ -520,14 +209,16 @@ li[data-type=control_fileupload] .qq-upload-button {
   right: auto;
   left: 11.5px;
 }
-.jfDropdownV2 > .jfDropdownV2-header {
-  border-color: #a6a6a6 !important;
-  border-width: 1px;
-}
 .jfDropdownV2 > .jfDropdownV2-header,
 .jfDropdownV2 > .jfDropdownV2-popup,
 .jfDropdownV2.jfDropdownV2--list {
-  border-radius: 0px;
+  border-radius: 4px;
+}
+.form-line.form-line-error .jfDropdownV2 > .jfDropdownV2-header,
+.form-line.form-line-error .jfDropdownV2.isOpen > .jfDropdownV2-header,
+.form-line.form-line-error .jfDropdownV2.jfDropdownV2--list {
+  border-color: #F23A3C;
+  box-shadow: 0 0 0 1px #F23A3C;
 }
 
 /*FORM LAYOUT PRESETS*/
@@ -785,8 +476,7 @@ li[data-type=control_fileupload] .qq-upload-button {
 }
 /*FORM LAYOUT PRESETS*/
 
-/*__INSPECT_SEPERATOR__*/
-/* ===== DH DISEÑO RESERVA (DreamsHappen) ===== */
+/*__INSPECT_SEPERATOR__*//* ===== DH DISEÑO RESERVA (DreamsHappen) ===== */
 /* Fondo y tarjeta */
 html.supernova,.supernova{background:#F5EFE9 linear-gradient(180deg,#F8F3EE 0%,#EFE6DD 100%) fixed!important}
 .supernova body{background:transparent!important}
@@ -1043,7 +733,7 @@ JotForm.paymentExtrasOnTheFly([{"name":"clickTo","qid":"1","text":"Datos Reserva
 </script>
 </head>
 <body>
-<form class="jotform-form" onsubmit="return typeof testSubmitFunction !== 'undefined' && testSubmitFunction();" action="https://eu-submit.jotform.com/submit/252701841871356" method="post" name="form_252701841871356" id="252701841871356" accept-charset="utf-8" autocomplete="on"><input type="hidden" name="formID" value="252701841871356" /><input type="hidden" id="JWTContainer" value="" /><input type="hidden" id="cardinalOrderNumber" value="" /><input type="hidden" id="jsExecutionTracker" name="jsExecutionTracker" value="build-date-1795203049080" /><input type="hidden" id="submitSource" name="submitSource" value="unknown" /><input type="hidden" id="submitDate" name="submitDate" value="undefined" /><input type="hidden" id="buildDate" name="buildDate" value="1795203049080" /><input type="hidden" name="uploadServerUrl" value="https://upload.jotform.com/upload" /><input type="hidden" name="eventObserver" value="1" /><input type="hidden" name="eventObserverPayment" value="LEGACY" />
+<form class="jotform-form" onsubmit="return typeof testSubmitFunction !== 'undefined' && testSubmitFunction();" action="https://eu-submit.jotform.com/submit/252701841871356" method="post" name="form_252701841871356" id="252701841871356" accept-charset="utf-8" autocomplete="on"><input type="hidden" name="formID" value="252701841871356" /><input type="hidden" id="JWTContainer" value="" /><input type="hidden" id="cardinalOrderNumber" value="" /><input type="hidden" id="jsExecutionTracker" name="jsExecutionTracker" value="build-date-1795205561808" /><input type="hidden" id="submitSource" name="submitSource" value="unknown" /><input type="hidden" id="submitDate" name="submitDate" value="undefined" /><input type="hidden" id="buildDate" name="buildDate" value="1795205561808" /><input type="hidden" name="uploadServerUrl" value="https://upload.jotform.com/upload" /><input type="hidden" name="eventObserver" value="1" /><input type="hidden" name="eventObserverPayment" value="LEGACY" />
   <div id="formCoverLogo" style="margin-bottom:32px" class="form-cover-wrapper form-has-cover form-page-cover-image-align-center">
     <div class="form-page-cover-image-wrapper" style="max-width:752px"><img src="https://www.jotform.com/uploads/DreamsHappen/form_files/logo%20sin%20fondo.68d5727f0b15b1.19652169.png" class="form-page-cover-image" width="210" height="85" alt="" style="aspect-ratio:2.4705882352941178" /></div>
   </div>
