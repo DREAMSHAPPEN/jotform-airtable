@@ -148,14 +148,19 @@ var WEBHOOK_INFORME = 'https://hook.eu2.make.com/4l3d3yjpe759hmiex658k88yk7u6ckz
 var FECHA_INFORME = '';
 
 var EJEMPLO = {
-  q3_:"PD294", q4_:"Calle de Ejemplo 12, 3º B, 28010 Madrid", q7_:"10", q32_:"2",
+  q3_:"EJEMPLO", q4_:"Calle de Ejemplo 12, 3º B, 28010 Madrid", q7_:"10", q32_:"3",
   q17_:"🟢 APTO - Perfil de solvencia verificado",
   q34_:"✅ Verificado", q35_:"✅ Verificado", q36_:"✅ Verificado", q37_:"✅ Verificado", q38_:"✅ Verificado", q39_:"✅ Verificado",
+  /* Inquilino 1: estudios + avalista (padre) */
   q47_:"Laura Martínez García", q161_:"Estudios", q48_:"Universidad Complutense de Madrid", q49_:"Matrícula", q162_:"Avalista",
   q54_:"Antonio Martínez López", q55_:"Padre", q56_:"✅ Verificado", q57_:"✅ Verificado", q58_:"✅ Verificado",
-  q120_:"Marta Ruiz Sánchez", q163_:"Estudios", q121_:"Universidad Politécnica de Madrid", q122_:"Carta de aceptación", q164_:"Avalista",
+  /* Inquilino 2: trabajo / traslado profesional + avalista (madre) */
+  q120_:"Javier Ruiz Sánchez", q163_:"Trabajo o traslado profesional", q174_:"Consultora Iberia Digital S.L.", q122_:"N/A", q164_:"Avalista",
   q127_:"Carmen Sánchez Pérez", q128_:"Madre", q129_:"✅ Verificado", q130_:"✅ Verificado", q131_:"✅ Verificado",
-  q107_:"✅ Verificado", q109_:"✅ Verificado", q113_:"NO", q169_:"", q19_:""
+  /* Inquilino 3: otro motivo + solvencia propia */
+  q134_:"Sofía Navarro Gil", q165_:"Otro", q177_:"Reforma de su vivienda habitual", q136_:"N/A", q166_:"Propia",
+  q143_:"✅ Verificado", q144_:"✅ Verificado", q145_:"✅ Verificado",
+  q107_:"✅ Verificado", q109_:"✅ Verificado", q113_:"SÍ", q169_:"Seguro de impago de alquiler", q19_:""
 };
 
 /* ---------- lectura de respuestas por número de pregunta ---------- */
@@ -319,7 +324,14 @@ function aviso(titulo, texto){
 
 (function iniciar(){
   var qs = new URLSearchParams(location.search), id = qs.get('id');
-  if (qs.has('ejemplo')) { pintar(null); return; }          // ?ejemplo: datos de muestra
+  if (qs.has('ejemplo')) {                                  // ?ejemplo: datos de muestra
+    pintar(null);
+    var av = document.createElement('div');
+    av.textContent = 'Ejemplo ilustrativo · nombres y datos ficticios';
+    av.style.cssText = 'text-align:center;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#8a6d3b;background:#f7efe1;padding:8px;';
+    document.body.insertBefore(av, document.body.firstChild);
+    return;
+  }
   if (!id) { aviso('Informe no disponible', 'Acceda desde el enlace que le hemos enviado por email.'); return; }
   aviso('Cargando informe…', 'Un momento, por favor.');
   fetch(WEBHOOK_INFORME + '?id=' + encodeURIComponent(id))
