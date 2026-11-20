@@ -53,6 +53,7 @@ La columna «Excepciones» indica lo que se sale de eso.
 | AGENCIA_AL_PROPIETARIO | 260747140199360 | `input_416` | 8 | — |
 | ALBARAN_FINALIZACION_ALQUILER | 261296771911362 | `input_486` | 8 | — |
 | ALTA_PROPIEDAD | 253353585653363 | `input_135` | 0 | NO bloquea el envío (solo limpia la referencia) |
+| AUTORIZACION_COMERCIALIZACION | 263225564982061 | `input_2` | 14 | botón de JotForm Sign; el autorrelleno localiza los campos por ETIQUETA (no por input_XXX); oculta Propietario 2/3 si no existen; lee `?ref=` del enlace; diseño y orden en el CSS personalizado de JotForm (bloque «DH DISEÑO») |
 | CALCULAR_DEVOLUCION_FIANZA | 261166944755366 | `input_440` | 9 | — |
 | CAMBIO_SUMINISTROS | 261265033882356 | `input_317` | 3 | CUPS rellenados con retardo según el desplegable input_316 |
 | CHECK-IN | 253224147452351 | `input_351` | 18 | — |
@@ -137,6 +138,28 @@ La columna «Excepciones» indica lo que se sale de eso.
 ### ALTA_PROPIEDAD
 
 No rellena datos desde Airtable.
+
+### AUTORIZACION_COMERCIALIZACION
+
+El autorrelleno busca cada campo por su etiqueta, así que no se rompe si cambian los `input_XXX`; solo hay que mantener las etiquetas.
+El orden de los campos, los textos y el diseño están en JotForm (CSS personalizado, bloque «DH DISEÑO»). Enlace para el email: `AUTORIZACION_COMERCIALIZACION.html?ref=REFERENCIA`.
+
+| Columna de Airtable | Campo JotForm | Etiqueta en JotForm |
+|---|---|---|
+| DIRECCIÓN | `input_23` | DIRECCIÓN |
+| NOMBRE P1 | `input_26` | NOMBRE P1 |
+| DNI P1 | `input_27` | DNI P1 |
+| EMAIL P1 | `input_29` | EMAIL P1 |
+| NOMBRE P2 | `input_32` | NOMBRE P2 |
+| DNI P2 | `input_33` | DNI P2 |
+| EMAIL P2 | `input_35` | EMAIL P2 |
+| NOMBRE P3 | `input_38` | NOMBRE P3 |
+| DNI P3 | `input_39` | DNI P3 |
+| EMAIL P3 | `input_41` | EMAIL P3 |
+| TITULAR PROPIEDAD | `input_16` | TITULAR PROPIEDAD |
+| BANCO | `input_17` | BANCO |
+| IBAN | `input_18` | IBAN |
+| SWIFT/BIC | `input_19` | SWIFT/BIC |
 
 ### CALCULAR_DEVOLUCION_FIANZA
 
