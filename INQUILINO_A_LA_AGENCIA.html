@@ -753,5 +753,98 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"clickTo","qid":"1","text":"INFORMAR
   }
 })();
 </script>
+<script>
+/* GUARDA REFERENCIA (DH): limpia espacios, exige coincidencia EXACTA en Airtable y bloquea el envío si no */
+(function() {
+  var CFG = {"refId": "input_416", "formId": "260466528141355", "validar": true, "base": "appmY7jVeBehY5Mz7", "token": "patO4oUqCcfTLFuRm.c66b68adb436d3d2b7038ebda60664f9a5b964ce4d778f6fceebf0e886e85482", "limpiarCampos": ["input_135", "input_354", "input_355", "input_356", "input_357", "input_358", "input_359", "input_360"]};
+  var refConfirmada = "", peticion = 0, timeout = null, refInput, form, estado;
+
+  function limpiar(v) { return (v || "").replace(/\s+/g, "").toUpperCase(); }
+  function botones() { return form ? form.querySelectorAll('button[type="submit"], input[type="submit"], button.submit-button, .useJotformSign-button') : []; }
+  function setBotones(on) {
+    var b = botones();
+    for (var i = 0; i < b.length; i++) {
+      if (on) { b[i].removeAttribute("disabled"); b[i].style.opacity = ""; b[i].style.cursor = ""; }
+      else { b[i].setAttribute("disabled", "disabled"); b[i].style.opacity = "0.4"; b[i].style.cursor = "not-allowed"; }
+    }
+  }
+  function setEstado(t, c) { if (estado) { estado.textContent = t; estado.style.color = c; } }
+  function vaciar() {
+    for (var i = 0; i < CFG.limpiarCampos.length; i++) {
+      var el = document.getElementById(CFG.limpiarCampos[i]);
+      if (el && el.value) { el.value = ""; el.dispatchEvent(new Event("change", { bubbles: true })); }
+    }
+  }
+
+  // Fase de captura: se ejecuta ANTES que los demás scripts, que así leen ya el valor limpio
+  document.addEventListener("input", function(e) {
+    if (!e.target || e.target.id !== CFG.refId) return;
+    var l = limpiar(e.target.value);
+    if (e.target.value !== l) e.target.value = l;
+    if (!CFG.validar) return;
+    refConfirmada = "";
+    setBotones(false);
+    vaciar();
+    clearTimeout(timeout);
+    if (l.length < 2) { setEstado("", "#666"); return; }
+    timeout = setTimeout(function() { comprobar(l); }, 800);
+  }, true);
+
+  function comprobar(ref) {
+    var mia = ++peticion;
+    fetch("https://api.airtable.com/v0/" + CFG.base + "/" + encodeURIComponent("CARTERA INMUEBLES")
+        + "?filterByFormula=" + encodeURIComponent("{REFERENCIA}='" + ref.replace(/'/g, "") + "'")
+        + "&maxRecords=1&fields%5B%5D=REFERENCIA",
+      { headers: { "Authorization": "Bearer " + CFG.token } })
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      if (mia !== peticion || limpiar(refInput.value) !== ref) return;
+      var rec = d.records && d.records[0];
+      if (rec && (rec.fields["REFERENCIA"] || "") === ref) {
+        refConfirmada = ref; setBotones(true); setEstado("", "#666");
+      } else {
+        refConfirmada = ""; setBotones(false); vaciar();
+        setEstado("❌ Referencia no encontrada. No se puede enviar el formulario.", "#bb271a");
+      }
+    })
+    .catch(function() {
+      if (mia !== peticion) return;
+      refConfirmada = ""; setBotones(false);
+      setEstado("⚠️ Error de conexión al comprobar la referencia. Inténtalo de nuevo.", "#b8860b");
+    });
+  }
+
+  window.addEventListener("load", function() {
+    refInput = document.getElementById(CFG.refId);
+    form = document.getElementById(CFG.formId);
+    if (!refInput || !form) return;
+    refInput.addEventListener("blur", function() { var l = limpiar(refInput.value); if (refInput.value !== l) refInput.value = l; });
+    form.addEventListener("submit", function(e) {
+      refInput.value = limpiar(refInput.value);
+      if (CFG.validar && (!refConfirmada || refInput.value !== refConfirmada)) {
+        e.preventDefault(); e.stopImmediatePropagation(); setBotones(false);
+        setEstado("❌ Referencia no válida. No se puede enviar el formulario.", "#bb271a");
+        return false;
+      }
+    }, true);
+    if (!CFG.validar) return;
+    // Botones de JotForm Sign (type="button"): también se bloquean al hacer clic
+    document.addEventListener("click", function(e) {
+      var b = e.target && e.target.closest && e.target.closest("button.submit-button, .useJotformSign-button");
+      if (!b || !form.contains(b)) return;
+      refInput.value = limpiar(refInput.value);
+      if (!refConfirmada || refInput.value !== refConfirmada) {
+        e.preventDefault(); e.stopImmediatePropagation(); setBotones(false);
+        setEstado("❌ Referencia no válida. No se puede enviar el formulario.", "#bb271a");
+      }
+    }, true);
+    estado = document.createElement("div");
+    estado.style.cssText = "margin-top:6px;font-weight:bold;font-size:14px;";
+    refInput.parentNode.appendChild(estado);
+    setBotones(false);
+    if (limpiar(refInput.value).length >= 2) comprobar(limpiar(refInput.value));
+  });
+})();
+</script>
 </body>
 </html><script type="text/javascript">JotForm.ownerView=true;</script><script type="text/javascript">JotForm.forwardToEu=true;</script><script type="text/javascript">JotForm.isNewSACL=true;</script>

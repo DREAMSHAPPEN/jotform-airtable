@@ -603,7 +603,7 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"clickTo","qid":"1","text":"DATOS SU
   var refConfirmada = "", peticion = 0, timeout = null, refInput, form, estado;
 
   function limpiar(v) { return (v || "").replace(/\s+/g, "").toUpperCase(); }
-  function botones() { return form ? form.querySelectorAll('button[type="submit"], input[type="submit"]') : []; }
+  function botones() { return form ? form.querySelectorAll('button[type="submit"], input[type="submit"], button.submit-button, .useJotformSign-button') : []; }
   function setBotones(on) {
     var b = botones();
     for (var i = 0; i < b.length; i++) {
@@ -671,6 +671,16 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"clickTo","qid":"1","text":"DATOS SU
       }
     }, true);
     if (!CFG.validar) return;
+    // Botones de JotForm Sign (type="button"): también se bloquean al hacer clic
+    document.addEventListener("click", function(e) {
+      var b = e.target && e.target.closest && e.target.closest("button.submit-button, .useJotformSign-button");
+      if (!b || !form.contains(b)) return;
+      refInput.value = limpiar(refInput.value);
+      if (!refConfirmada || refInput.value !== refConfirmada) {
+        e.preventDefault(); e.stopImmediatePropagation(); setBotones(false);
+        setEstado("❌ Referencia no válida. No se puede enviar el formulario.", "#bb271a");
+      }
+    }, true);
     estado = document.createElement("div");
     estado.style.cssText = "margin-top:6px;font-weight:bold;font-size:14px;";
     refInput.parentNode.appendChild(estado);
