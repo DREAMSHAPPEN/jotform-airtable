@@ -14,7 +14,7 @@ saliendo tal cual de JotForm.
 | Bloque | Qué hace | Dónde está |
 |---|---|---|
 | **Autorrelleno Airtable** | Al escribir la REFERENCIA, busca en Airtable (base DH, tabla CARTERA INMUEBLES) y rellena los campos del formulario según una tabla «columna de Airtable → campo de JotForm» (sección 4). En la mayoría también bloquea el botón y los campos hasta confirmar la referencia y muestra ✅/❌. | Bloque con `AIRTABLE_TOKEN` |
-| **DH EXTRA** (solo algunos formularios) | Lógica propia de un formulario concreto. En DATOS_RESERVA: no deja pulsar «IR A PAGO RESERVA» si falta algún campo obligatorio visible (excepto la firma, que se hace después en JotForm Sign) y lista lo que falta; y ajusta la altura de los textos 1)–5) para que se lean enteros sin scroll. | Bloque que empieza por `/* DH EXTRA` |
+| **DH EXTRA** (solo algunos formularios) | Lógica propia de un formulario concreto (DATOS_RESERVA y PAGO_RESERVA). En DATOS_RESERVA: no deja pulsar «IR A PAGO RESERVA» si falta algún campo obligatorio visible (excepto la firma, que se hace después en JotForm Sign) y lista lo que falta; y ajusta la altura de los textos 1)–5) para que se lean enteros sin scroll. | Bloque que empieza por `/* DH EXTRA` |
 | **GUARDA REFERENCIA** | Quita todos los espacios y pone MAYÚSCULAS en la REFERENCIA mientras se escribe. Si no coincide **exactamente** con Airtable: vacía los datos rellenados, bloquea el envío y muestra ❌. Repite la comprobación al pulsar enviar. | Último bloque, empieza por `/* GUARDA REFERENCIA (DH)` |
 
 Lo que **sí** puedes hacer en JotForm sin perder nada en GitHub: cambiar textos, diseño, añadir o quitar campos
@@ -81,7 +81,7 @@ La columna «Excepciones» indica lo que se sale de eso.
 | INQUILINO_A_LA_AGENCIA | 260466528141355 | `input_416` | 8 | — |
 | LIQUIDACION | 253404784219359 | `input_368` | 8 | — |
 | MODIFICAR_DATOS | 260076834888370 | `input_135` | 0 | NO bloquea el envío (solo limpia la referencia) |
-| PAGO_RESERVA | 253172214183349 | `input_296` | 18 | — |
+| PAGO_RESERVA | 253172214183349 | `input_296` | 18 | bloque DH EXTRA (no deja enviar si faltan campos obligatorios visibles; el adjunto lo valida JotForm); diseño en el CSS personalizado de JotForm (bloque «DH DISEÑO PAGO RESERVA», copia en `herramientas/css/PAGO_RESERVA.css`) |
 | RESCISION | 253421851530349 | `input_408` | 14 | botón de JotForm Sign |
 | RESOLVEMOS_TUS_DUDAS | 261755783472367 | `input_416` | 2 | — |
 | RESOLVER_INCIDENCIA | 253336812383357 | `input_405` | 8 | — |
