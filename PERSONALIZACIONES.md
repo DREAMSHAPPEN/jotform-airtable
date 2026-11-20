@@ -536,3 +536,17 @@ No rellena datos desde Airtable.
 | EMAIL P3 | `input_358` | EMAIL P3 |
 | NAME P3 | `input_359` | NAME P3 |
 | NOMBRE AGENTE | `input_360` | NOMBRE AGENTE |
+
+## 6. INFORME_SOLVENCIA.html (informe para el propietario)
+
+No es un formulario de JotForm: es la página que ve el propietario con el informe de solvencia.
+
+- Flujo: la agencia envía el formulario **VERIFICACIÓN PERFIL DE SOLVENCIA** (JotForm 262793349901062) →
+  webhook de Make → escenario **20.- Enviar informe de solvencia** (carpeta CONTRATOS): busca los emails
+  P1/P2/P3 en CARTERA INMUEBLES por la REFERENCIA, guarda el envío en el Data Store **INFORMES SOLVENCIA**
+  con un código aleatorio y envía el email (desde reservas@) con el enlace `INFORME_SOLVENCIA.html?id=CÓDIGO`.
+- La página pide los datos al escenario **21.- Mostrar informe de solvencia** (webhook en `WEBHOOK_INFORME`),
+  que devuelve solo el registro de ese código. La página no lleva claves de JotForm ni de Airtable.
+- Lee las respuestas por número de pregunta (`q17_`, `q34_`…): si se cambian textos en JotForm no pasa nada;
+  si se borra y se recrea una pregunta, cambia su número y hay que actualizar la tabla `Q` del script.
+- `INFORME_SOLVENCIA.html?ejemplo` muestra el diseño con datos de muestra.
