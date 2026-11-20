@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Informe de Solvencia Verificada · DreamsHappen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1F2A3A; --navy2:#2C3344; --ink:#2C3344; --muted:#6B7280; --line:#E6E1DB;
+    --terra:#BD4B31; --gold:#C9A46A; --cream:#FBF6F1;
+    --ok:#1E7F4F; --ok-bg:#E8F5EE; --ok-line:#BFE3CF;
+    --ko:#B42318; --ko-bg:#FDECEA; --ko-line:#F4C7C2;
+    --na:#8A8F98; --na-bg:#F2F3F5;
+  }
+  *{box-sizing:border-box}
+  @page{size:A4;margin:0}
+  html,body{margin:0;background:#EEF0F2;font-family:Inter,Arial,sans-serif;color:var(--ink);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .page{width:210mm;min-height:297mm;margin:0 auto;background:#fff;position:relative;overflow:hidden}
+  @media screen{.page{margin:24px auto;box-shadow:0 12px 40px rgba(31,42,58,.12)}}
+  @media print{html,body{background:#fff}.page{margin:0;box-shadow:none;min-height:auto}}
+  .card,.result,.tenant,.concl,.foot{break-inside:avoid;page-break-inside:avoid}
+
+  /* CABECERA */
+  .hero{background:linear-gradient(120deg,var(--navy) 0%,var(--navy2) 70%,#3a4559 100%);color:#fff;padding:26px 34px 24px;display:flex;align-items:center;gap:26px;position:relative}
+  .hero:after{content:"";position:absolute;right:-60px;top:-60px;width:260px;height:260px;border-radius:50%;border:1px solid rgba(201,164,106,.25)}
+  .hero:before{content:"";position:absolute;right:30px;bottom:-90px;width:180px;height:180px;border-radius:50%;border:1px solid rgba(201,164,106,.18)}
+  .logo{background:#fff;border-radius:12px;padding:8px 12px;flex:0 0 auto}
+  .logo img{height:54px;display:block}
+  .hero .sep{width:1px;align-self:stretch;background:rgba(201,164,106,.6)}
+  .hero h1{font-family:"Playfair Display",Georgia,serif;font-size:30px;line-height:1.08;margin:0;font-weight:700;letter-spacing:.2px}
+  .hero .kicker{margin-top:8px;font-size:10.5px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:600}
+  .seal{margin-left:auto;text-align:center;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#d9dde4;z-index:1}
+  .seal .ring{width:64px;height:64px;border-radius:50%;border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;margin:0 auto 6px}
+  .seal svg{width:30px;height:30px}
+
+  .wrap{padding:22px 30px 26px}
+  .grid2{display:grid;grid-template-columns:1.15fr 1fr;gap:16px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 2px 10px rgba(31,42,58,.05);overflow:hidden}
+  .card-h{display:flex;align-items:center;gap:10px;padding:12px 16px;background:#F7F8FA;border-bottom:1px solid var(--line)}
+  .card-h svg{width:22px;height:22px;color:var(--navy)}
+  .card-h h2{margin:0;font-size:13px;letter-spacing:1.2px;text-transform:uppercase;font-weight:800;color:var(--navy)}
+  .card-h .count{margin-left:auto;font-size:11px;font-weight:700;color:var(--ok);background:var(--ok-bg);border:1px solid var(--ok-line);border-radius:20px;padding:3px 10px}
+  .card-b{padding:6px 16px 10px}
+
+  /* DATOS OPERACIÓN */
+  .kv{display:grid;grid-template-columns:120px 1fr;gap:0;font-size:12.5px}
+  .kv div{padding:8px 0;border-bottom:1px solid #EFEBE6}
+  .kv div:nth-last-child(-n+2){border-bottom:0}
+  .kv .k{font-weight:700;color:var(--navy)}
+  .kv .v{color:#3d4452}
+
+  /* RESULTADO */
+  .result{border-radius:14px;padding:18px 18px 16px;text-align:center;display:flex;flex-direction:column;justify-content:center;border:2px solid}
+  .result.ok{background:linear-gradient(180deg,#EFF9F3,#E2F3E9);border-color:var(--ok-line)}
+  .result.ko{background:linear-gradient(180deg,#FEF3F2,#FBE4E1);border-color:var(--ko-line)}
+  .result .lbl{font-size:11.5px;letter-spacing:1.6px;font-weight:800;text-transform:uppercase;color:var(--navy)}
+  .result .big{display:flex;align-items:center;justify-content:center;gap:14px;margin:10px 0 8px}
+  .result .icon{width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(0,0,0,.12)}
+  .result.ok .icon{background:var(--ok)} .result.ko .icon{background:var(--ko)}
+  .result .icon svg{width:34px;height:34px;color:#fff}
+  .result .word{font-size:52px;font-weight:800;letter-spacing:1px;line-height:1;white-space:nowrap}
+  .result.ko .word{font-size:40px}
+  .result.ok .word{color:var(--ok)} .result.ko .word{color:var(--ko)}
+  .result hr{border:0;border-top:1px solid rgba(31,42,58,.15);margin:6px 18px 10px}
+  .result p{margin:0;font-size:12.5px;line-height:1.45;color:#3d4452}
+
+  /* VERIFICACIONES */
+  .checks{list-style:none;margin:0;padding:0}
+  .checks li{display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid #EFEBE6}
+  .checks li:last-child{border-bottom:0}
+  .ic{flex:0 0 34px;height:34px;border-radius:9px;background:#F3F4F7;display:flex;align-items:center;justify-content:center;color:var(--navy)}
+  .ic svg{width:19px;height:19px}
+  .ct{flex:1;min-width:0}
+  .ct b{display:block;font-size:12.5px;color:var(--navy)}
+  .ct span{font-size:11px;color:var(--muted)}
+  .badge{flex:0 0 auto;display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;border-radius:20px;padding:4px 10px 4px 5px}
+  .badge i{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-style:normal}
+  .badge i svg{width:11px;height:11px;color:#fff}
+  .b-ok{color:var(--ok);background:var(--ok-bg)} .b-ok i{background:var(--ok)}
+  .b-ko{color:var(--ko);background:var(--ko-bg)} .b-ko i{background:var(--ko)}
+  .b-na{color:var(--na);background:var(--na-bg)} .b-na i{background:var(--na)}
+
+  /* PUNTUACIÓN */
+  .score{display:flex;align-items:center;gap:14px;padding:14px 16px 16px}
+  .bar{flex:1;height:14px;border-radius:10px;background:#E9ECEF;overflow:hidden}
+  .bar div{height:100%;border-radius:10px;background:linear-gradient(90deg,#155E3A,#1E7F4F 60%,#36A26B)}
+  .score .num{font-size:26px;font-weight:800;color:var(--navy)} .score .num small{font-size:14px;color:var(--muted);font-weight:600}
+  .score-note{padding:0 16px 14px;font-size:11px;color:var(--muted)}
+
+  /* INQUILINOS */
+  .sec-title{display:flex;align-items:center;gap:10px;margin:20px 2px 10px}
+  .sec-title h3{margin:0;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:var(--navy);font-weight:800}
+  .sec-title .ln{flex:1;height:1px;background:linear-gradient(90deg,var(--gold),transparent)}
+  .tenants{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .tenants.one{grid-template-columns:1fr}
+  .tenant{border:1px solid var(--line);border-radius:14px;overflow:hidden;break-inside:avoid}
+  .tenant-h{background:var(--navy);color:#fff;padding:10px 14px;display:flex;align-items:center;gap:10px}
+  .avatar{width:30px;height:30px;border-radius:50%;background:rgba(201,164,106,.2);border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--gold)}
+  .tenant-h b{font-size:13px} .tenant-h span{display:block;font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:#cfd5de}
+  .tenant-b{padding:8px 14px 10px}
+  .mini{display:grid;grid-template-columns:96px 1fr;font-size:11.5px}
+  .mini div{padding:5px 0;border-bottom:1px dashed #ECE7E1}
+  .mini .k{color:var(--muted);font-weight:600}
+  .mini .v{color:var(--ink);font-weight:600}
+  .sub{margin:10px 0 4px;font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--terra);font-weight:800}
+  .tenant .checks li{padding:6px 0}
+  .tenant .ct b{font-size:11.5px}
+  .tenant .badge{font-size:10.5px}
+
+  /* TEMPORALIDAD + GARANTÍAS */
+  .grid2b{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+
+  /* CONCLUSIÓN */
+  .concl{margin-top:18px;border-radius:14px;padding:16px 20px;display:flex;align-items:center;gap:16px;background:linear-gradient(90deg,#F8EFE4,#FBF6F1);border:1px solid #EADBC8}
+  .concl .tgt{width:46px;height:46px;flex:0 0 46px;color:var(--terra)}
+  .concl h4{margin:0;font-size:17px;letter-spacing:1.5px;font-weight:800;color:var(--navy);text-transform:uppercase;padding-right:16px;border-right:2px solid var(--gold)}
+  .concl p{margin:0;font-size:13px;line-height:1.5;color:#2f3644}
+  .concl.ko{background:linear-gradient(90deg,#FBE7E4,#FDF3F1);border-color:var(--ko-line)}
+
+  .exp{margin-top:12px;font-size:11.5px;color:var(--muted);text-align:center}
+  .exp a{color:var(--terra);font-weight:700;text-decoration:none}
+
+  /* PIE */
+  .foot{margin-top:18px;display:grid;grid-template-columns:1fr 1fr auto;gap:0;border-top:1px solid var(--line);padding-top:14px}
+  .foot > div{padding:0 16px;border-right:1px solid var(--line)} .foot > div:first-child{padding-left:2px} .foot > div:last-child{border-right:0;padding-right:2px;display:flex;align-items:center}
+  .foot h5{margin:0 0 6px;font-size:11.5px;letter-spacing:1px;text-transform:uppercase;color:var(--navy);font-weight:800;display:flex;align-items:center;gap:7px}
+  .foot h5 svg{width:17px;height:17px;color:var(--gold)}
+  .foot p,.foot li{font-size:11px;line-height:1.5;color:#4b5261;margin:0}
+  .foot ul{list-style:none;padding:0;margin:0} .foot li:before{content:"✓ ";color:var(--gold);font-weight:700}
+  .foot img{height:46px}
+  .legal{margin-top:12px;font-size:9px;color:#9aa0a8;text-align:center;line-height:1.4}
+</style>
+</head>
+<body>
+<div class="page" id="informe"></div>
+
+<script>
+/* ============================================================================
+   DATOS DEL INFORME
+   El propietario recibe un enlace del tipo  INFORME_SOLVENCIA.html?id=CODIGO
+   La página pide los datos de ESE informe a un webhook de Make (que los guarda
+   en un Data Store al enviar el formulario). Aquí no hay ninguna clave de
+   JotForm ni de Airtable. Con ?ejemplo se muestra un EJEMPLO para ver el diseño.
+   ========================================================================= */
+var WEBHOOK_INFORME = 'https://hook.eu2.make.com/4l3d3yjpe759hmiex658k88yk7u6ckzg';  // Make: 21.- Mostrar informe de solvencia
+var FECHA_INFORME = '';
+
+var EJEMPLO = {
+  q3_:"PD294", q4_:"Calle de Ejemplo 12, 3º B, 28010 Madrid", q7_:"10", q32_:"2",
+  q17_:"🟢 APTO - Perfil de solvencia verificado",
+  q34_:"✅ Verificado", q35_:"✅ Verificado", q36_:"✅ Verificado", q37_:"✅ Verificado", q38_:"✅ Verificado", q39_:"✅ Verificado",
+  q47_:"Laura Martínez García", q161_:"Estudios", q48_:"Universidad Complutense de Madrid", q49_:"Matrícula", q162_:"Avalista",
+  q54_:"Antonio Martínez López", q55_:"Padre", q56_:"✅ Verificado", q57_:"✅ Verificado", q58_:"✅ Verificado",
+  q120_:"Marta Ruiz Sánchez", q163_:"Estudios", q121_:"Universidad Politécnica de Madrid", q122_:"Carta de aceptación", q164_:"Avalista",
+  q127_:"Carmen Sánchez Pérez", q128_:"Madre", q129_:"✅ Verificado", q130_:"✅ Verificado", q131_:"✅ Verificado",
+  q107_:"✅ Verificado", q109_:"✅ Verificado", q113_:"NO", q169_:"", q19_:""
+};
+
+/* ---------- lectura de respuestas por número de pregunta ---------- */
+function cargar(d){
+  if (typeof d === 'string') { try { d = JSON.parse(d); } catch(e) { d = null; } }
+  if (!d) d = EJEMPLO;
+  if (d.datos) d = d.datos;
+  if (typeof d === 'string') { try { d = JSON.parse(d); } catch(e) {} }
+  if (d.rawRequest) { try { d = JSON.parse(d.rawRequest); } catch(e) {} }
+  if (d.fecha) FECHA_INFORME = d.fecha;
+  var porQid = {};
+  Object.keys(d).forEach(function(k){
+    var m = k.match(/^q(\d+)_/); if (!m) return;
+    var v = d[k];
+    if (v && typeof v === 'object') v = v.answer !== undefined ? v.answer : Object.values(v).join(' ');
+    porQid[m[1]] = (v == null ? '' : String(v)).trim();
+  });
+  return porQid;
+}
+var A = {};
+function q(n){ return A[String(n)] || ''; }
+function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+function estado(v){ v = (v||'').toLowerCase(); if (v.indexOf('no verificado')>=0 || v.indexOf('❌')>=0) return 'ko'; if (v.indexOf('verificado')>=0 || v.indexOf('✅')>=0) return 'ok'; if (!v) return ''; return 'na'; }
+
+/* ---------- iconos ---------- */
+var I = {
+  check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
+  cross:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>',
+  dash:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><path d="M6 12h12"/></svg>',
+  id:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2.2"/><path d="M5.8 16c.6-1.6 1.8-2.4 3.2-2.4s2.6.8 3.2 2.4M14.5 10h4M14.5 13h3"/></svg>',
+  doc:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4M9.5 12h6M9.5 15h6M9.5 18h4"/></svg>',
+  bank:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 9l9-5 9 5M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20h18"/></svg>',
+  video:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10.5l5-3v9l-5-3"/></svg>',
+  globe:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.8 5.6 3.8 9s-1.2 6.4-3.8 9c-2.6-2.6-3.8-5.6-3.8-9S9.4 5.6 12 3z"/></svg>',
+  link:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M9 15l6-6M10.5 6.5l1.8-1.8a4 4 0 015.7 5.7l-1.8 1.8M13.5 17.5l-1.8 1.8a4 4 0 01-5.7-5.7l1.8-1.8"/></svg>',
+  coins:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><ellipse cx="12" cy="6" rx="7" ry="2.6"/><path d="M5 6v4c0 1.4 3.1 2.6 7 2.6s7-1.2 7-2.6V6M5 10v4c0 1.4 3.1 2.6 7 2.6s7-1.2 7-2.6v-4M5 14v4c0 1.4 3.1 2.6 7 2.6s7-1.2 7-2.6v-4"/></svg>',
+  brief:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8.5 7V5a1.5 1.5 0 011.5-1.5h4A1.5 1.5 0 0115.5 5v2M3 12.5h18"/></svg>',
+  scale:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 4v16M7 20h10M5 7h14M7 7l-3 6a3 3 0 006 0zM17 7l-3 6a3 3 0 006 0z"/></svg>',
+  cal:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>',
+  shield:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3l8 3v6c0 4.5-3.4 8.2-8 9-4.6-.8-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>',
+  clip:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v3H9zM8.5 11l1.5 1.5 2.5-2.5M8.5 16l1.5 1.5 2.5-2.5M14 11.5h2M14 16.5h2"/></svg>',
+  home:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 11l9-7 9 7M5 9.5V20h14V9.5"/><path d="M10 20v-5h4v5"/></svg>',
+  chart:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 20V10M10 20V6M16 20v-8M22 20H2"/></svg>',
+  target:'<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6"><circle cx="22" cy="26" r="16"/><circle cx="22" cy="26" r="9"/><circle cx="22" cy="26" r="2.5" fill="currentColor"/><path d="M22 26L40 8M34 8h6v6"/></svg>',
+  users:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c.5-3.4 3-5.3 6-5.3s5.5 1.9 6 5.3"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14.6c2.6.1 4.4 1.8 5 4.9"/></svg>',
+  medal:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="14" r="6"/><path d="M8.5 3l2.5 5M15.5 3L13 8M12 11l1 2 2.2.3-1.6 1.5.4 2.2-2-1-2 1 .4-2.2-1.6-1.5L11 13z"/></svg>'
+};
+function badge(v){
+  var s = estado(v);
+  if (s === 'ok') return '<span class="badge b-ok"><i>'+I.check+'</i>Verificado</span>';
+  if (s === 'ko') return '<span class="badge b-ko"><i>'+I.cross+'</i>No verificado</span>';
+  if (s === 'na') return '<span class="badge b-na"><i>'+I.dash+'</i>No aplica</span>';
+  return '<span class="badge b-na"><i>'+I.dash+'</i>Pendiente</span>';
+}
+var total = 0, superadas = 0;
+function fila(icon, titulo, desc, v){
+  var s = estado(v);
+  if (s === 'ok' || s === 'ko' || s === '') { total++; if (s === 'ok') superadas++; }
+  return '<li><div class="ic">'+icon+'</div><div class="ct"><b>'+titulo+'</b><span>'+desc+'</span></div>'+badge(v)+'</li>';
+}
+
+/* ---------- construcción ---------- */
+function pintar(datos){
+A = cargar(datos); total = 0; superadas = 0;
+
+var apto = /APTO/i.test(q(17)) && !/NO\s*APTO/i.test(q(17));
+var nInq = parseInt(q(32), 10) || 1;
+var fecha = FECHA_INFORME ? FECHA_INFORME :
+  new Date().toLocaleDateString('es-ES', { day:'numeric', month:'long', year:'numeric' });
+
+var vg = ''
+ + fila(I.id,   'Identidad de los intervinientes', 'DNI / NIE / Pasaporte de inquilinos y avalistas', q(34))
+ + fila(I.doc,  'Autenticidad documental', 'Documentos sin indicios de manipulación', q(35))
+ + fila(I.bank, 'Ficheros de morosidad', 'Sin incidencias registradas', q(36))
+ + fila(I.video,'Entrevista personal', 'Entrevista presencial o por videollamada', q(37))
+ + fila(I.globe,'Perfiles públicos', 'Identidad contrastada en fuentes públicas', q(38))
+ + fila(I.link, 'Coherencia de la información', 'Datos aportados consistentes entre sí', q(39));
+
+var Q = [
+  {nom:47, mot:161, cen:48, emp:172, otro:173, doc:49, sol:162, an:54, ar:55, s1:56, s2:57, s3:58},
+  {nom:120,mot:163, cen:121,emp:174, otro:175, doc:122,sol:164, an:127,ar:128,s1:129,s2:130,s3:131},
+  {nom:134,mot:165, cen:135,emp:176, otro:177, doc:136,sol:166, an:141,ar:142,s1:143,s2:144,s3:145},
+  {nom:148,mot:167, cen:149,emp:178, otro:179, doc:150,sol:168, an:155,ar:156,s1:157,s2:158,s3:159}
+];
+var tenants = '';
+for (var i = 0; i < Math.min(nInq, 4); i++) {
+  var t = Q[i], nombre = q(t.nom) || ('Inquilino ' + (i+1));
+  var ini = nombre.split(/\s+/).filter(Boolean).slice(0,2).map(function(w){ return w[0]; }).join('').toUpperCase();
+  var motivo = q(t.mot), detalle = motivo === 'Estudios' ? q(t.cen) : (/Trabajo/.test(motivo) ? q(t.emp) : q(t.otro));
+  var avalista = /Avalista/i.test(q(t.sol));
+  var mini = '<div class="k">Motivo</div><div class="v">'+esc(motivo || '—')+'</div>';
+  if (detalle) mini += '<div class="k">'+(motivo === 'Estudios' ? 'Centro' : (/Trabajo/.test(motivo) ? 'Empresa' : 'Detalle'))+'</div><div class="v">'+esc(detalle)+'</div>';
+  if (q(t.doc) && q(t.doc) !== 'N/A') mini += '<div class="k">Acreditación</div><div class="v">'+esc(q(t.doc))+'</div>';
+  mini += '<div class="k">Solvencia</div><div class="v">'+(avalista ? 'Avalada' : 'Propia')+'</div>';
+  if (avalista && q(t.an)) mini += '<div class="k">Avalista</div><div class="v">'+esc(q(t.an))+(q(t.ar) && q(t.ar) !== 'N/A' ? ' · '+esc(q(t.ar)) : '')+'</div>';
+  var quien = avalista ? 'del avalista' : 'del inquilino';
+  tenants += '<div class="tenant"><div class="tenant-h"><div class="avatar">'+esc(ini)+'</div><div><span>Inquilino '+(i+1)+'</span><b>'+esc(nombre)+'</b></div></div>'
+    + '<div class="tenant-b"><div class="mini">'+mini+'</div>'
+    + '<div class="sub">Solvencia económica</div><ul class="checks">'
+    + fila(I.coins, 'Documentación económica', 'Nóminas, IRPF o equivalente '+quien, q(t.s1))
+    + fila(I.brief, 'Situación laboral', 'Contrato o actividad acreditada', q(t.s2))
+    + fila(I.scale, 'Capacidad de pago', 'Ingresos suficientes para la renta', q(t.s3))
+    + '</ul></div></div>';
+}
+
+var temp = fila(I.cal, 'Causa de temporalidad', 'Motivo del alquiler temporal acreditado', q(107))
+         + fila(I.link, 'Coherencia motivo / duración', 'Duración ajustada a la causa', q(109));
+var garSi = /S[IÍ]/i.test(q(113));
+var gar = '<li><div class="ic">'+I.shield+'</div><div class="ct"><b>Garantía adicional</b><span>'
+        + (garSi ? esc(q(169) || 'Garantía adicional aportada') : 'No se requiere garantía adicional')
+        + '</span></div>' + (garSi ? '<span class="badge b-ok"><i>'+I.check+'</i>Aportada</span>' : '<span class="badge b-na"><i>'+I.dash+'</i>No necesaria</span>') + '</li>';
+
+var pct = total ? Math.round(superadas / total * 100) : 0;
+var concl = apto
+  ? 'Candidatura <b>APTA</b> para el alquiler: identidad, documentación y solvencia económica verificadas, sin incidencias que indiquen riesgo de impago.'
+  : 'Candidatura <b>NO APTA</b>: no se han podido verificar todos los requisitos de solvencia y fiabilidad exigidos por DreamsHappen.';
+
+document.getElementById('informe').innerHTML = ''
+ + '<div class="hero"><div class="logo"><img src="https://www.jotform.com/uploads/DreamsHappen/form_files/logo%20sin%20fondo.68d5727f0b15b1.19652169.png" alt="DreamsHappen"></div><div class="sep"></div>'
+ + '<div><h1>Informe de<br>Solvencia Verificada</h1><div class="kicker">Evaluación de candidatos a inquilino</div></div>'
+ + '<div class="seal"><div class="ring"><svg viewBox="0 0 24 24" fill="none" stroke="#C9A46A" stroke-width="1.8"><path d="M12 3l8 3v6c0 4.5-3.4 8.2-8 9-4.6-.8-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg></div>Verificación<br>documental</div></div>'
+ + '<div class="wrap">'
+ +   '<div class="grid2">'
+ +     '<div class="card"><div class="card-h">'+I.home+'<h2>Datos de la operación</h2></div><div class="card-b"><div class="kv">'
+ +       '<div class="k">Referencia</div><div class="v">'+esc(q(3)||'—')+'</div>'
+ +       '<div class="k">Inmueble</div><div class="v">'+esc(q(4)||'—')+'</div>'
+ +       '<div class="k">Duración</div><div class="v">'+(q(7) ? esc(q(7))+' meses' : '—')+'</div>'
+ +       '<div class="k">Inquilinos</div><div class="v">'+nInq+'</div>'
+ +       '<div class="k">Fecha del informe</div><div class="v">'+esc(fecha)+'</div>'
+ +     '</div></div></div>'
+ +     '<div class="result '+(apto?'ok':'ko')+'"><div class="lbl">Resultado de la evaluación</div>'
+ +       '<div class="big"><div class="icon">'+(apto?I.check:I.cross)+'</div><div class="word">'+(apto?'APTO':'NO APTO')+'</div></div><hr>'
+ +       '<p>'+(apto ? 'La candidatura cumple los criterios de solvencia y fiabilidad establecidos por DreamsHappen.' : 'La candidatura no cumple todos los criterios de solvencia y fiabilidad establecidos por DreamsHappen.')+'</p></div>'
+ +   '</div>'
+ +   '<div class="grid2" style="margin-top:16px">'
+ +     '<div class="card"><div class="card-h">'+I.clip+'<h2>Verificación del expediente</h2></div><div class="card-b"><ul class="checks">'+vg+'</ul></div></div>'
+ +     '<div style="display:flex;flex-direction:column;gap:16px">'
+ +       '<div class="card"><div class="card-h">'+I.cal+'<h2>Temporalidad</h2></div><div class="card-b"><ul class="checks">'+temp+'</ul></div></div>'
+ +       '<div class="card"><div class="card-h">'+I.shield+'<h2>Garantías</h2></div><div class="card-b"><ul class="checks">'+gar+'</ul></div></div>'
+ +       '<div class="card"><div class="card-h">'+I.medal+'<h2>Comprobaciones superadas</h2></div><div class="score"><div class="bar"><div id="barfill" style="width:'+pct+'%"></div></div><div class="num">'+superadas+' <small>/ '+total+'</small></div></div>'
+ +       '<div class="score-note">Cada comprobación se realiza sobre la documentación original aportada.</div></div>'
+ +     '</div>'
+ +   '</div>'
+ +   '<div class="sec-title"><h3>Perfil de los inquilinos</h3><div class="ln"></div></div>'
+ +   '<div class="tenants'+(nInq===1?' one':'')+'">'+tenants+'</div>'
+ +   '<div class="concl'+(apto?'':' ko')+'"><div class="tgt">'+I.target+'</div><h4>Conclusión</h4><p>'+concl+'</p></div>'
+ +   (q(19) ? '<div class="exp">📁 Expediente documental: <a href="'+esc(q(19))+'">consultar documentación</a></div>' : '')
+ +   '<div class="foot">'
+ +     '<div><h5>'+I.shield+'Nuestro compromiso</h5><p>Revisamos personalmente cada expediente antes de presentarle una candidatura, para que decida con información contrastada.</p></div>'
+ +     '<div><h5>'+I.users+'Qué aporta este informe</h5><ul><li>Mayor seguridad para el propietario.</li><li>Evaluación objetiva y documentada.</li><li>Selección de inquilinos más fiable.</li></ul></div>'
+ +     '<div><img src="https://www.jotform.com/uploads/DreamsHappen/form_files/logo%20sin%20fondo.68d5727f0b15b1.19652169.png" alt="DreamsHappen"></div>'
+ +   '</div>'
+ +   '<div class="legal">Informe elaborado por DreamsHappen a partir de la documentación aportada por los candidatos. Uso exclusivo del propietario para la valoración de la candidatura; no debe difundirse a terceros.</div>'
+ + '</div>';
+}
+
+function aviso(titulo, texto){
+  document.getElementById('informe').innerHTML = '<div class="hero"><div class="logo"><img src="https://www.jotform.com/uploads/DreamsHappen/form_files/logo%20sin%20fondo.68d5727f0b15b1.19652169.png" alt="DreamsHappen"></div><div class="sep"></div><div><h1>Informe de<br>Solvencia Verificada</h1><div class="kicker">Evaluación de candidatos a inquilino</div></div></div>'
+    + '<div class="wrap" style="text-align:center;padding:70px 40px"><h2 style="color:var(--navy);margin:0 0 10px">'+titulo+'</h2><p style="color:var(--muted);margin:0">'+texto+'</p></div>';
+}
+
+(function iniciar(){
+  var qs = new URLSearchParams(location.search), id = qs.get('id');
+  if (qs.has('ejemplo')) { pintar(null); return; }          // ?ejemplo: datos de muestra
+  if (!id) { aviso('Informe no disponible', 'Acceda desde el enlace que le hemos enviado por email.'); return; }
+  aviso('Cargando informe…', 'Un momento, por favor.');
+  fetch(WEBHOOK_INFORME + '?id=' + encodeURIComponent(id))
+    .then(function(r){ return r.text(); })
+    .then(function(t){
+      var d = null; try { d = JSON.parse(t); } catch(e) {}
+      if (!d || (!d.datos && !d.rawRequest && !Object.keys(d).some(function(k){ return /^q\d+_/.test(k); }))) {
+        aviso('Informe no disponible', 'El enlace no es válido o el informe ya no está disponible. Contacte con DreamsHappen.'); return;
+      }
+      pintar(d);
+    })
+    .catch(function(){ aviso('No se ha podido cargar el informe', 'Compruebe su conexión e inténtelo de nuevo.'); });
+})();
+</script>
+</body>
+</html>
