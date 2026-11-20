@@ -53,6 +53,11 @@ html.supernova .form-all ul.form-section>li#cid_1{margin:0 -28px 8px!important;w
 #id_298{background:#FBF4F0!important;border:1px solid #F1DCD2!important;border-radius:14px;padding:18px 20px!important;margin:8px 0 6px!important}
 #label_298{font-size:14px!important;color:#BD4B31!important;letter-spacing:.06em}
 #input_298{font-size:18px!important;font-weight:600!important;letter-spacing:.08em;height:50px!important;border-color:#E7C9BC!important}
+#id_298 .form-label{width:100%!important;text-align:center!important;display:block}
+#cid_298 .form-sub-label-container{display:flex!important;flex-direction:column;align-items:center;text-align:center}
+.form-all li.form-line #input_298{width:50%!important;min-width:240px!important;text-align:center}
+#ref-status{display:block;margin:6px 0 0!important;text-align:center}
+#cid_298 .form-sub-label{text-align:center!important;max-width:440px}
 /* Columnas */
 .form-all ul.form-section>li#id_188,.form-all ul.form-section>li#id_189,.form-all ul.form-section>li#id_260,.form-all ul.form-section>li#id_261,.form-all ul.form-section>li#id_138,.form-all ul.form-section>li#id_302,.form-all ul.form-section>li#id_139,.form-all ul.form-section>li#id_259,.form-all ul.form-section>li#id_208,.form-all ul.form-section>li#id_276,.form-all ul.form-section>li#id_263,.form-all ul.form-section>li#id_198,.form-all ul.form-section>li#id_209,.form-all ul.form-section>li#id_277,.form-all ul.form-section>li#id_264,.form-all ul.form-section>li#id_201,.form-all ul.form-section>li#id_217,.form-all ul.form-section>li#id_278,.form-all ul.form-section>li#id_265,.form-all ul.form-section>li#id_218,.form-all ul.form-section>li#id_234,.form-all ul.form-section>li#id_279,.form-all ul.form-section>li#id_266,.form-all ul.form-section>li#id_235{width:50%!important;max-width:none!important;flex:0 0 50%!important}
 /* Avisos y separadores */
@@ -106,6 +111,7 @@ html.supernova .form-all ul.form-section>li#cid_1{margin:0 -28px 8px!important;w
   html.supernova .form-all ul.form-section>li#cid_1{margin:0 -14px 8px!important;width:calc(100% + 28px)!important;flex:0 0 calc(100% + 28px)!important}
   #cid_1 .form-header-group{padding:26px 18px 20px!important}
   #header_1{font-size:24px!important}
+  .form-all li.form-line #input_298{width:100%!important;min-width:0!important}
   #cid_1 .form-header-group::after{content:"🔒 Datos protegidos · ✔ Agencia autorizada";font-size:11.5px}
   .form-all ul.form-section>li#id_188,.form-all ul.form-section>li#id_189,.form-all ul.form-section>li#id_260,.form-all ul.form-section>li#id_261,.form-all ul.form-section>li#id_138,.form-all ul.form-section>li#id_302,.form-all ul.form-section>li#id_139,.form-all ul.form-section>li#id_259,.form-all ul.form-section>li#id_208,.form-all ul.form-section>li#id_276,.form-all ul.form-section>li#id_263,.form-all ul.form-section>li#id_198,.form-all ul.form-section>li#id_209,.form-all ul.form-section>li#id_277,.form-all ul.form-section>li#id_264,.form-all ul.form-section>li#id_201,.form-all ul.form-section>li#id_217,.form-all ul.form-section>li#id_278,.form-all ul.form-section>li#id_265,.form-all ul.form-section>li#id_218,.form-all ul.form-section>li#id_234,.form-all ul.form-section>li#id_279,.form-all ul.form-section>li#id_266,.form-all ul.form-section>li#id_235{width:100%!important;flex:0 0 100%!important}
   #id_138,#id_139,#id_302,#id_259{padding-left:16px!important;padding-right:16px!important}
