@@ -546,6 +546,8 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"clickTo","qid":"1","text":"Instrucc
   var AIRTABLE_TOKEN = "patO4oUqCcfTLFuRm.c66b68adb436d3d2b7038ebda60664f9a5b964ce4d778f6fceebf0e886e85482";
   var AIRTABLE_BASE  = "appmY7jVeBehY5Mz7";
   var AIRTABLE_TABLE = "CARTERA INMUEBLES";
+  var REF_ID    = "input_455";
+  var SUBMIT_ID = "input_81";
 
   var FIELD_MAP = {
     "DIRECCIÓN":       "input_415",
@@ -560,55 +562,111 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"clickTo","qid":"1","text":"Instrucc
     "Fecha CHECK OUT": "input_453"
   };
 
-  var lastRef = "";
+  var refConfirmada = "";   // referencia EXACTA validada en Airtable
   var timeout = null;
+  var peticion = 0;
+  var refInput, btn, estado;
+
+  // Quita TODOS los espacios (inicio, final y en medio) y pasa a MAYÚSCULAS
+  function limpiar(v) { return (v || "").replace(/\s+/g, "").toUpperCase(); }
+
+  function setEstado(icono, texto, color) {
+    estado.textContent = icono + " " + texto;
+    estado.style.color = color;
+  }
+
+  function bloquear() {
+    refConfirmada = "";
+    btn.setAttribute("disabled", "disabled");
+    btn.style.opacity = "0.4";
+    btn.style.cursor = "not-allowed";
+  }
+
+  function desbloquear(ref) {
+    refConfirmada = ref;
+    btn.removeAttribute("disabled");
+    btn.style.opacity = "";
+    btn.style.cursor = "";
+  }
+
+  function vaciarCampos() { rellenarCampos({}); }
 
   window.addEventListener("load", function() {
-    var refInput = document.getElementById("input_455");
-    if (!refInput) return;
+    refInput = document.getElementById(REF_ID);
+    btn      = document.getElementById(SUBMIT_ID);
+    if (!refInput || !btn) return;
+
+    estado = document.createElement("div");
+    estado.style.cssText = "margin-top:6px;font-weight:bold;font-size:14px;";
+    refInput.parentNode.appendChild(estado);
+    bloquear();
+    setEstado("🔍", "Introduce la REFERENCIA", "#666");
+
     refInput.addEventListener("input", function() {
+      var limpia = limpiar(refInput.value);
+      if (refInput.value !== limpia) refInput.value = limpia;   // el campo se envía ya limpio
       clearTimeout(timeout);
-      var ref = refInput.value.trim().toUpperCase();
-      if (ref.length < 2) return;
-      timeout = setTimeout(function() {
-        if (ref !== lastRef) {
-          lastRef = ref;
-          buscarReferencia(ref);
-        }
-      }, 800);
+      bloquear();
+      vaciarCampos();
+      if (limpia.length < 2) { setEstado("🔍", "Introduce la REFERENCIA", "#666"); return; }
+      setEstado("⏳", "Comprobando referencia...", "#666");
+      timeout = setTimeout(function() { buscarReferencia(limpia); }, 800);
     });
+
+    // Última barrera: si la referencia del campo no es exactamente la validada, NO se envía
+    document.getElementById("261116538998369").addEventListener("submit", function(e) {
+      refInput.value = limpiar(refInput.value);
+      if (!refConfirmada || refInput.value !== refConfirmada) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        bloquear();
+        setEstado("❌", "Referencia no válida. No se puede enviar el formulario.", "#bb271a");
+        return false;
+      }
+    }, true);
   });
 
   function buscarReferencia(referencia) {
+    var miPeticion = ++peticion;
     var url = "https://api.airtable.com/v0/"
             + AIRTABLE_BASE + "/"
             + encodeURIComponent(AIRTABLE_TABLE)
-            + "?filterByFormula=" + encodeURIComponent("REFERENCIA='" + referencia + "'")
+            + "?filterByFormula=" + encodeURIComponent("{REFERENCIA}='" + referencia.replace(/'/g, "") + "'")
             + "&maxRecords=1";
-    fetch(url, {
-      headers: { "Authorization": "Bearer " + AIRTABLE_TOKEN }
-    })
+    fetch(url, { headers: { "Authorization": "Bearer " + AIRTABLE_TOKEN } })
     .then(function(res) { return res.json(); })
     .then(function(data) {
-      if (data.records && data.records.length > 0) {
-        rellenarCampos(data.records[0].fields);
+      if (miPeticion !== peticion) return;              // respuesta antigua: se ignora
+      if (limpiar(refInput.value) !== referencia) return; // el usuario ya cambió el texto
+      var rec = data.records && data.records[0];
+      // Exige coincidencia EXACTA con el valor guardado en Airtable
+      if (rec && (rec.fields["REFERENCIA"] || "") === referencia) {
+        rellenarCampos(rec.fields);
+        desbloquear(referencia);
+        setEstado("✅", "Referencia confirmada: " + (rec.fields["DIRECCIÓN"] || ""), "#1a7f37");
+      } else {
+        vaciarCampos();
+        bloquear();
+        setEstado("❌", "Referencia no encontrada. Revísala en nuestra web.", "#bb271a");
       }
     })
-    .catch(function(err) { console.error(err); });
+    .catch(function(err) {
+      console.error(err);
+      if (miPeticion !== peticion) return;
+      vaciarCampos();
+      bloquear();
+      setEstado("⚠️", "Error de conexión. Inténtalo de nuevo.", "#b8860b");
+    });
   }
 
   function rellenarCampos(fields) {
     for (var columna in FIELD_MAP) {
-      var inputId = FIELD_MAP[columna];
       var valor = fields[columna] || "";
-
-      // Formatear fecha de YYYY-MM-DD a DD/MM/YYYY
-      if (columna === "Fecha CHECK OUT" && valor) {
+      if (columna === "Fecha CHECK OUT" && valor) {   // YYYY-MM-DD -> DD/MM/YYYY
         var p = valor.split("-");
         if (p.length === 3) valor = p[2] + "/" + p[1] + "/" + p[0];
       }
-
-      var el = document.getElementById(inputId);
+      var el = document.getElementById(FIELD_MAP[columna]);
       if (el) {
         el.value = valor;
         el.dispatchEvent(new Event("input",  { bubbles: true }));
