@@ -168,7 +168,7 @@ Al escribir la REFERENCIA (o con `?ref=`):
 |---|---|
 | DIRECCIÓN (`input_4`) | CARTERA INMUEBLES · DIRECCIÓN |
 | Nº de inquilinos (`input_32`) | nº de inquilinos distintos en DOCUMENTACION INQUILINOS (máx. 4) |
-| Inquilino N – Nombre / Motivo del alquiler / Centro / Empresa / Especificar / Documento aportado / Solvencia / Avalista nombre y relación | DOCUMENTACION INQUILINOS: filas con esa REFERENCIA y sin «USADO EN INFORME», orden FECHA ENVÍO; si un inquilino envió varias veces, su último envío |
+| Inquilino N – Nombre / Motivo del alquiler / Centro / Empresa / Especificar / Documento aportado / Solvencia / Avalista nombre y relación | DOCUMENTACION INQUILINOS: filas con esa REFERENCIA, enviadas en los últimos 60 días (variable DIAS del script) y sin «USADO EN INFORME», orden FECHA ENVÍO; si un inquilino envió varias veces, su último envío |
 Si no hay documentación recibida solo carga la dirección y lo avisa. Todo queda editable.
 
 ### CALCULAR_DEVOLUCION_FIANZA
