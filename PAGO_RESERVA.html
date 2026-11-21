@@ -1223,16 +1223,16 @@ JotForm.paymentExtrasOnTheFly([{"name":"clickTo","qid":"1","text":"Envianos just
     if (cacheFicha[ref]) return pintarFoto(ui, cacheFicha[ref]);
     fetch("https://api.airtable.com/v0/appmY7jVeBehY5Mz7/" + encodeURIComponent("CARTERA INMUEBLES")
       + "?filterByFormula=" + encodeURIComponent("{REFERENCIA}='" + ref.replace(/'/g, "") + "'")
-      + "&maxRecords=1&fields%5B%5D=FOTO%20ANUNCIO&fields%5B%5D=URL%20ANUNCIO&fields%5B%5D=CERTIFICADO%20TITULARIDAD&fields%5B%5D=AUTORIZACION%20FIRMADA", { headers: { "Authorization": "Bearer " + token } })
+      + "&maxRecords=1&fields%5B%5D=FOTO%20ANUNCIO&fields%5B%5D=URL%20ANUNCIO&fields%5B%5D=CERTIFICADO%20TITULARIDAD&fields%5B%5D=AUTORIZACION%20FIRMADA&fields%5B%5D=FIRMANTE%20AUTORIZACION", { headers: { "Authorization": "Bearer " + token } })
       .then(function(r) { return r.json(); })
-      .then(function(d) { var fl = (d.records && d.records[0] && d.records[0].fields) || {}; var adj = function(n) { return (fl[n] && fl[n][0] && fl[n][0].url) || ""; }; cacheFicha[ref] = { foto: fl["FOTO ANUNCIO"] || "", url: fl["URL ANUNCIO"] || "", cert: adj("CERTIFICADO TITULARIDAD"), autoriz: adj("AUTORIZACION FIRMADA") }; if (refFicha === ref) pintarFoto(ui, cacheFicha[ref]); })
+      .then(function(d) { var fl = (d.records && d.records[0] && d.records[0].fields) || {}; var adj = function(n) { return (fl[n] && fl[n][0] && fl[n][0].url) || ""; }; cacheFicha[ref] = { foto: fl["FOTO ANUNCIO"] || "", url: fl["URL ANUNCIO"] || "", cert: adj("CERTIFICADO TITULARIDAD"), autoriz: adj("AUTORIZACION FIRMADA"), firmante: (fl["FIRMANTE AUTORIZACION"] || "").trim() }; if (refFicha === ref) pintarFoto(ui, cacheFicha[ref]); })
       .catch(function() {});
   }
   function pintarFoto(ui, d) {
     if (d.foto && /^https:\/\//.test(d.foto)) { ui.foto.src = d.foto; ui.foto.style.display = ""; } else ui.foto.style.display = "none";
     var url = /^https:\/\//.test(d.url || "") ? d.url : WEB + "/viviendas-de-alquiler/";
     ui.enlace.href = url; ui.enlace.style.display = "";
-    if (/^https:\/\//.test(d.autoriz || "")) { ui.autoriz.href = d.autoriz; ui.autoriz.style.display = ""; } else ui.autoriz.style.display = "none";
+    if (/^https:\/\//.test(d.autoriz || "")) { ui.autoriz.href = d.autoriz; ui.autoriz.textContent = d.firmante ? "Ver la autorización firmada por " + d.firmante + ", titular de la cuenta →" : "Ver la autorización firmada por el propietario →"; ui.autoriz.style.display = ""; } else ui.autoriz.style.display = "none";
     if (/^https:\/\//.test(d.cert || "")) ui.cert.href = d.cert; else ui.cert.removeAttribute("href");
   }
 
