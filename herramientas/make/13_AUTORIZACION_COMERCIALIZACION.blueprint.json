@@ -1,0 +1,577 @@
+{
+ "name": "13.JF-AT. AUTORIZACIÓN COMERCIALIZACIÓN. Autorización firmada (titular) y certificado de titularidad a CARTERA INMUEBLES",
+ "flow": [
+  {
+   "id": 1,
+   "module": "jotform:watchForSubmissions",
+   "version": 1,
+   "parameters": {
+    "__IMTHOOK__": 4532416
+   },
+   "mapper": {},
+   "metadata": {
+    "designer": {
+     "x": 0,
+     "y": 0
+    }
+   }
+  },
+  {
+   "id": 2,
+   "module": "airtable:ActionSearchRecords",
+   "version": 3,
+   "parameters": {
+    "__IMTCONN__": 14169312
+   },
+   "mapper": {
+    "base": "appmY7jVeBehY5Mz7",
+    "table": "tbl9wuiEnrJ6lUFDz",
+    "formula": "{REFERENCIA} = \"{{trim(upper(ifempty(1.request.q2_q2_textbox0; 1.request.q2_q2)))}}\"",
+    "maxRecords": "1",
+    "useColumnId": false
+   },
+   "metadata": {
+    "designer": {
+     "x": 300,
+     "y": 0
+    }
+   }
+  },
+  {
+   "id": 5,
+   "module": "builtin:BasicRouter",
+   "version": 1,
+   "mapper": null,
+   "metadata": {
+    "designer": {
+     "x": 600,
+     "y": 0
+    }
+   },
+   "routes": [
+    {
+     "flow": [
+      {
+       "id": 10,
+       "module": "util:FunctionSleep",
+       "version": 1,
+       "parameters": {},
+       "mapper": {
+        "duration": "30"
+       },
+       "filter": {
+        "name": "Firma P1 ≈ titular de la cuenta",
+        "conditions": [
+         [
+          {
+           "a": "{{2.id}}",
+           "o": "exist"
+          },
+          {
+           "a": "{{1.request.q43_firmaPropietario}}",
+           "o": "exist"
+          },
+          {
+           "a": "{{1.request.q26_nombreP1}}",
+           "o": "exist"
+          },
+          {
+           "a": "{{lower(trim(replace(ascii(1.request.q16_titularPropiedad; true); \"/\\s+/g\"; \" \")))}}",
+           "b": "{{lower(trim(replace(ascii(1.request.q26_nombreP1; true); \"/\\s+/g\"; \" \")))}}",
+           "o": "text:contain"
+          }
+         ],
+         [
+          {
+           "a": "{{2.id}}",
+           "o": "exist"
+          },
+          {
+           "a": "{{1.request.q43_firmaPropietario}}",
+           "o": "exist"
+          },
+          {
+           "a": "{{1.request.q26_nombreP1}}",
+           "o": "exist"
+          },
+          {
+           "a": "{{lower(trim(replace(ascii(1.request.q26_nombreP1; true); \"/\\s+/g\"; \" \")))}}",
+           "b": "{{lower(trim(replace(ascii(1.request.q16_titularPropiedad; true); \"/\\s+/g\"; \" \")))}}",
+           "o": "text:contain"
+          }
+         ],
+         [
+          {
+           "a": "{{2.id}}",
+           "o": "exist"
+          },
+          {
+           "a": "{{1.request.q43_firmaPropietario}}",
+           "o": "exist"
+          },
+          {
+           "a": "{{1.request.q26_nombreP1}}",
+           "o": "exist"
+          },
+          {
+           "a": "{{lower(trim(replace(ascii(1.request.q16_titularPropiedad; true); \"/\\s+/g\"; \" \")))}}",
+           "b": "{{get(split(lower(trim(replace(ascii(1.request.q26_nombreP1; true); \"/\\s+/g\"; \" \"))); \" \"); 1)}}",
+           "o": "text:contain"
+          },
+          {
+           "a": "{{get(split(lower(trim(replace(ascii(1.request.q26_nombreP1; true); \"/\\s+/g\"; \" \"))); \" \"); 2)}}",
+           "o": "exist"
+          },
+          {
+           "a": "{{lower(trim(replace(ascii(1.request.q16_titularPropiedad; true); \"/\\s+/g\"; \" \")))}}",
+           "b": "{{get(split(lower(trim(replace(ascii(1.request.q26_nombreP1; true); \"/\\s+/g\"; \" \"))); \" \"); 2)}}",
+           "o": "text:contain"
+          }
+         ],
+         [
+          {
+           "a": "{{2.id}}",
+           "o": "exist"
+          },
+          {
+           "a": "{{1.request.q43_firmaPropietario}}",
+           "o": "exist"
+          },
+          {
+           "a": "{{1.request.q26_nombreP1}}",
+           "o": "exist"
+          },
+          {
+           "a": "{{get(split(lower(trim(replace(ascii(1.request.q26_nombreP1; true); \"/\\s+/g\"; \" \"))); \" \"); 2)}}",
+           "o": "exist"
+          },
+          {
+           "a": "{{get(split(lower(trim(replace(ascii(1.request.q26_nombreP1; true); \"/\\s+/g\"; \" \"))); \" \"); 3)}}",
+           "o": "exist"
+          },
+          {
+           "a": "{{lower(trim(replace(ascii(1.request.q16_titularPropiedad; true); \"/\\s+/g\"; \" \")))}}",
+           "b": "{{get(split(lower(trim(replace(ascii(1.request.q26_nombreP1; true); \"/\\s+/g\"; \" \"))); \" \"); 2)}}",
+           "o": "text:contain"
+          },
+          {
+           "a": "{{lower(trim(replace(ascii(1.request.q16_titularPropiedad; true); \"/\\s+/g\"; \" \")))}}",
+           "b": "{{get(split(lower(trim(replace(ascii(1.request.q26_nombreP1; true); \"/\\s+/g\"; \" \"))); \" \"); 3)}}",
+           "o": "text:contain"
+          }
+         ]
+        ]
+       },
+       "metadata": {
+        "designer": {
+         "x": 900,
+         "y": -300
+        }
+       }
+      },
+      {
+       "id": 11,
+       "module": "airtable:ActionUpdateRecords",
+       "version": 3,
+       "parameters": {
+        "__IMTCONN__": 14169312
+       },
+       "mapper": {
+        "id": "{{2.id}}",
+        "base": "appmY7jVeBehY5Mz7",
+        "table": "tbl9wuiEnrJ6lUFDz",
+        "record": {
+         "fldx1YiGwhExPJyZ8": [
+          {
+           "url": "https://eu.jotform.com/server.php?action=getSubmissionPDF&sid={{1.submissionID}}&formID=263225564982061",
+           "filename": "AUTORIZACION {{2.REFERENCIA}}.pdf"
+          }
+         ],
+         "fldFwzWTe947bTcNc": "{{trim(1.request.q26_nombreP1)}}"
+        },
+        "typecast": false,
+        "useColumnId": false
+       },
+       "metadata": {
+        "designer": {
+         "x": 1200,
+         "y": -300
+        }
+       }
+      }
+     ]
+    },
+    {
+     "flow": [
+      {
+       "id": 12,
+       "module": "util:FunctionSleep",
+       "version": 1,
+       "parameters": {},
+       "mapper": {
+        "duration": "30"
+       },
+       "filter": {
+        "name": "Firma P2 ≈ titular de la cuenta",
+        "conditions": [
+         [
+          {
+           "a": "{{2.id}}",
+           "o": "exist"
+          },
+          {
+           "a": "{{1.request.q44_firmaPropietario44}}",
+           "o": "exist"
+          },
+          {
+           "a": "{{1.request.q32_nombreY32}}",
+           "o": "exist"
+          },
+          {
+           "a": "{{lower(trim(replace(ascii(1.request.q16_titularPropiedad; true); \"/\\s+/g\"; \" \")))}}",
+           "b": "{{lower(trim(replace(ascii(1.request.q32_nombreY32; true); \"/\\s+/g\"; \" \")))}}",
+           "o": "text:contain"
+          }
+         ],
+         [
+          {
+           "a": "{{2.id}}",
+           "o": "exist"
+          },
+          {
+           "a": "{{1.request.q44_firmaPropietario44}}",
+           "o": "exist"
+          },
+          {
+           "a": "{{1.request.q32_nombreY32}}",
+           "o": "exist"
+          },
+          {
+           "a": "{{lower(trim(replace(ascii(1.request.q32_nombreY32; true); \"/\\s+/g\"; \" \")))}}",
+           "b": "{{lower(trim(replace(ascii(1.request.q16_titularPropiedad; true); \"/\\s+/g\"; \" \")))}}",
+           "o": "text:contain"
+          }
+         ],
+         [
+          {
+           "a": "{{2.id}}",
+           "o": "exist"
+          },
+          {
+           "a": "{{1.request.q44_firmaPropietario44}}",
+           "o": "exist"
+          },
+          {
+           "a": "{{1.request.q32_nombreY32}}",
+           "o": "exist"
+          },
+          {
+           "a": "{{lower(trim(replace(ascii(1.request.q16_titularPropiedad; true); \"/\\s+/g\"; \" \")))}}",
+           "b": "{{get(split(lower(trim(replace(ascii(1.request.q32_nombreY32; true); \"/\\s+/g\"; \" \"))); \" \"); 1)}}",
+           "o": "text:contain"
+          },
+          {
+           "a": "{{get(split(lower(trim(replace(ascii(1.request.q32_nombreY32; true); \"/\\s+/g\"; \" \"))); \" \"); 2)}}",
+           "o": "exist"
+          },
+          {
+           "a": "{{lower(trim(replace(ascii(1.request.q16_titularPropiedad; true); \"/\\s+/g\"; \" \")))}}",
+           "b": "{{get(split(lower(trim(replace(ascii(1.request.q32_nombreY32; true); \"/\\s+/g\"; \" \"))); \" \"); 2)}}",
+           "o": "text:contain"
+          }
+         ],
+         [
+          {
+           "a": "{{2.id}}",
+           "o": "exist"
+          },
+          {
+           "a": "{{1.request.q44_firmaPropietario44}}",
+           "o": "exist"
+          },
+          {
+           "a": "{{1.request.q32_nombreY32}}",
+           "o": "exist"
+          },
+          {
+           "a": "{{get(split(lower(trim(replace(ascii(1.request.q32_nombreY32; true); \"/\\s+/g\"; \" \"))); \" \"); 2)}}",
+           "o": "exist"
+          },
+          {
+           "a": "{{get(split(lower(trim(replace(ascii(1.request.q32_nombreY32; true); \"/\\s+/g\"; \" \"))); \" \"); 3)}}",
+           "o": "exist"
+          },
+          {
+           "a": "{{lower(trim(replace(ascii(1.request.q16_titularPropiedad; true); \"/\\s+/g\"; \" \")))}}",
+           "b": "{{get(split(lower(trim(replace(ascii(1.request.q32_nombreY32; true); \"/\\s+/g\"; \" \"))); \" \"); 2)}}",
+           "o": "text:contain"
+          },
+          {
+           "a": "{{lower(trim(replace(ascii(1.request.q16_titularPropiedad; true); \"/\\s+/g\"; \" \")))}}",
+           "b": "{{get(split(lower(trim(replace(ascii(1.request.q32_nombreY32; true); \"/\\s+/g\"; \" \"))); \" \"); 3)}}",
+           "o": "text:contain"
+          }
+         ]
+        ]
+       },
+       "metadata": {
+        "designer": {
+         "x": 900,
+         "y": -150
+        }
+       }
+      },
+      {
+       "id": 13,
+       "module": "airtable:ActionUpdateRecords",
+       "version": 3,
+       "parameters": {
+        "__IMTCONN__": 14169312
+       },
+       "mapper": {
+        "id": "{{2.id}}",
+        "base": "appmY7jVeBehY5Mz7",
+        "table": "tbl9wuiEnrJ6lUFDz",
+        "record": {
+         "fldx1YiGwhExPJyZ8": [
+          {
+           "url": "https://eu.jotform.com/server.php?action=getSubmissionPDF&sid={{1.submissionID}}&formID=263225564982061",
+           "filename": "AUTORIZACION {{2.REFERENCIA}}.pdf"
+          }
+         ],
+         "fldFwzWTe947bTcNc": "{{trim(1.request.q32_nombreY32)}}"
+        },
+        "typecast": false,
+        "useColumnId": false
+       },
+       "metadata": {
+        "designer": {
+         "x": 1200,
+         "y": -150
+        }
+       }
+      }
+     ]
+    },
+    {
+     "flow": [
+      {
+       "id": 14,
+       "module": "util:FunctionSleep",
+       "version": 1,
+       "parameters": {},
+       "mapper": {
+        "duration": "30"
+       },
+       "filter": {
+        "name": "Firma P3 ≈ titular de la cuenta",
+        "conditions": [
+         [
+          {
+           "a": "{{2.id}}",
+           "o": "exist"
+          },
+          {
+           "a": "{{1.request.q45_firmaPropietario45}}",
+           "o": "exist"
+          },
+          {
+           "a": "{{1.request.q38_nombreY38}}",
+           "o": "exist"
+          },
+          {
+           "a": "{{lower(trim(replace(ascii(1.request.q16_titularPropiedad; true); \"/\\s+/g\"; \" \")))}}",
+           "b": "{{lower(trim(replace(ascii(1.request.q38_nombreY38; true); \"/\\s+/g\"; \" \")))}}",
+           "o": "text:contain"
+          }
+         ],
+         [
+          {
+           "a": "{{2.id}}",
+           "o": "exist"
+          },
+          {
+           "a": "{{1.request.q45_firmaPropietario45}}",
+           "o": "exist"
+          },
+          {
+           "a": "{{1.request.q38_nombreY38}}",
+           "o": "exist"
+          },
+          {
+           "a": "{{lower(trim(replace(ascii(1.request.q38_nombreY38; true); \"/\\s+/g\"; \" \")))}}",
+           "b": "{{lower(trim(replace(ascii(1.request.q16_titularPropiedad; true); \"/\\s+/g\"; \" \")))}}",
+           "o": "text:contain"
+          }
+         ],
+         [
+          {
+           "a": "{{2.id}}",
+           "o": "exist"
+          },
+          {
+           "a": "{{1.request.q45_firmaPropietario45}}",
+           "o": "exist"
+          },
+          {
+           "a": "{{1.request.q38_nombreY38}}",
+           "o": "exist"
+          },
+          {
+           "a": "{{lower(trim(replace(ascii(1.request.q16_titularPropiedad; true); \"/\\s+/g\"; \" \")))}}",
+           "b": "{{get(split(lower(trim(replace(ascii(1.request.q38_nombreY38; true); \"/\\s+/g\"; \" \"))); \" \"); 1)}}",
+           "o": "text:contain"
+          },
+          {
+           "a": "{{get(split(lower(trim(replace(ascii(1.request.q38_nombreY38; true); \"/\\s+/g\"; \" \"))); \" \"); 2)}}",
+           "o": "exist"
+          },
+          {
+           "a": "{{lower(trim(replace(ascii(1.request.q16_titularPropiedad; true); \"/\\s+/g\"; \" \")))}}",
+           "b": "{{get(split(lower(trim(replace(ascii(1.request.q38_nombreY38; true); \"/\\s+/g\"; \" \"))); \" \"); 2)}}",
+           "o": "text:contain"
+          }
+         ],
+         [
+          {
+           "a": "{{2.id}}",
+           "o": "exist"
+          },
+          {
+           "a": "{{1.request.q45_firmaPropietario45}}",
+           "o": "exist"
+          },
+          {
+           "a": "{{1.request.q38_nombreY38}}",
+           "o": "exist"
+          },
+          {
+           "a": "{{get(split(lower(trim(replace(ascii(1.request.q38_nombreY38; true); \"/\\s+/g\"; \" \"))); \" \"); 2)}}",
+           "o": "exist"
+          },
+          {
+           "a": "{{get(split(lower(trim(replace(ascii(1.request.q38_nombreY38; true); \"/\\s+/g\"; \" \"))); \" \"); 3)}}",
+           "o": "exist"
+          },
+          {
+           "a": "{{lower(trim(replace(ascii(1.request.q16_titularPropiedad; true); \"/\\s+/g\"; \" \")))}}",
+           "b": "{{get(split(lower(trim(replace(ascii(1.request.q38_nombreY38; true); \"/\\s+/g\"; \" \"))); \" \"); 2)}}",
+           "o": "text:contain"
+          },
+          {
+           "a": "{{lower(trim(replace(ascii(1.request.q16_titularPropiedad; true); \"/\\s+/g\"; \" \")))}}",
+           "b": "{{get(split(lower(trim(replace(ascii(1.request.q38_nombreY38; true); \"/\\s+/g\"; \" \"))); \" \"); 3)}}",
+           "o": "text:contain"
+          }
+         ]
+        ]
+       },
+       "metadata": {
+        "designer": {
+         "x": 900,
+         "y": 0
+        }
+       }
+      },
+      {
+       "id": 15,
+       "module": "airtable:ActionUpdateRecords",
+       "version": 3,
+       "parameters": {
+        "__IMTCONN__": 14169312
+       },
+       "mapper": {
+        "id": "{{2.id}}",
+        "base": "appmY7jVeBehY5Mz7",
+        "table": "tbl9wuiEnrJ6lUFDz",
+        "record": {
+         "fldx1YiGwhExPJyZ8": [
+          {
+           "url": "https://eu.jotform.com/server.php?action=getSubmissionPDF&sid={{1.submissionID}}&formID=263225564982061",
+           "filename": "AUTORIZACION {{2.REFERENCIA}}.pdf"
+          }
+         ],
+         "fldFwzWTe947bTcNc": "{{trim(1.request.q38_nombreY38)}}"
+        },
+        "typecast": false,
+        "useColumnId": false
+       },
+       "metadata": {
+        "designer": {
+         "x": 1200,
+         "y": 0
+        }
+       }
+      }
+     ]
+    },
+    {
+     "flow": [
+      {
+       "id": 3,
+       "module": "airtable:ActionUpdateRecords",
+       "version": 3,
+       "parameters": {
+        "__IMTCONN__": 14169312
+       },
+       "filter": {
+        "name": "Piso encontrado y hay certificado",
+        "conditions": [
+         [
+          {
+           "a": "{{2.id}}",
+           "o": "exist"
+          },
+          {
+           "a": "{{1.request.certificadoDe[]}}",
+           "o": "exist"
+          }
+         ]
+        ]
+       },
+       "mapper": {
+        "id": "{{2.id}}",
+        "base": "appmY7jVeBehY5Mz7",
+        "table": "tbl9wuiEnrJ6lUFDz",
+        "record": {
+         "fld3ODAceonAv1FRm": [
+          {
+           "url": "{{1.request.certificadoDe[]}}"
+          }
+         ]
+        },
+        "typecast": false,
+        "useColumnId": false
+       },
+       "metadata": {
+        "designer": {
+         "x": 900,
+         "y": 200
+        }
+       }
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "metadata": {
+  "instant": true,
+  "version": 1,
+  "scenario": {
+   "dlq": false,
+   "slots": null,
+   "dataloss": false,
+   "maxErrors": 3,
+   "autoCommit": true,
+   "roundtrips": 1,
+   "sequential": false,
+   "confidential": false,
+   "freshVariables": false,
+   "autoCommitTriggerLast": true
+  },
+  "designer": {
+   "orphans": []
+  }
+ }
+}
