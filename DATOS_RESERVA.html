@@ -566,9 +566,6 @@ html.supernova .form-all ul.form-section>li#cid_1{margin:0 -28px 8px!important;w
 /* Datos bancarios */
 #id_138::before{content:"Cuenta del propietario para el depósito";display:block;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#8A8178;margin:4px 0 10px}
 #id_302::before{content:"\0000a0";display:block;font-size:12px;margin:4px 0 10px}
-.form-all ul.form-section>li#dh-certificado{width:100%!important;flex:0 0 100%!important;background:#FBF8F5!important;padding:0 24px 14px!important;margin:0!important}
-a.dh-cert{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;color:#A8402A!important;text-decoration:none;border-bottom:1px solid #E2C6B9}
-a.dh-cert::before{content:"📄";font-size:15px}
 #input_138{font-family:"SFMono-Regular",Menlo,Consolas,monospace!important;letter-spacing:.04em;font-size:14px!important}
 /* Firma */
 #id_289{text-align:center;padding-top:18px!important}
@@ -629,7 +626,6 @@ p.dh-pie{margin:6px 0 0;text-align:center;font-size:12.5px;color:#6B6259}p.dh-pi
   #id_138,#id_139,#id_302,#id_259{padding-left:16px!important;padding-right:16px!important}
   #id_281,#id_282,#id_283,#id_284,#id_287,#id_288,#id_280{padding-left:16px!important;padding-right:16px!important}
   #id_302::before{display:none}
-  .form-all ul.form-section>li#dh-certificado{padding:0 16px 14px!important}
   .dh-ficha{flex-direction:column;gap:0}
   .dh-foto{width:100%;max-width:none;height:190px}
   .dh-ficha-cuerpo{padding:14px 16px}
@@ -1494,7 +1490,7 @@ JotForm.paymentExtrasOnTheFly([{"name":"clickTo","qid":"1","text":"Datos Reserva
 })();
 </script>
 <script>
-/* DH EXTRA (DATOS_RESERVA) — CONFIANZA: pasos, ficha del piso (foto y anuncio desde Airtable), enlace al certificado de titularidad, agente con WhatsApp/llamar y pie, igual que PAGO_RESERVA. Textos editables en TXT. */
+/* DH EXTRA (DATOS_RESERVA) — CONFIANZA: pasos, ficha del piso (foto y anuncio desde Airtable), agente con WhatsApp/llamar y pie, igual que PAGO_RESERVA. Textos editables en TXT. */
 (function() {
   var FORM_ID = "252701841871356";
   var TEL = "+34 604 20 50 83", TEL_LINK = "tel:+34604205083", WA = "34604205083", EMAIL = "info@dreamshappen.es", WEB = "https://www.dreamshappen.es";
@@ -1544,11 +1540,6 @@ JotForm.paymentExtrasOnTheFly([{"name":"clickTo","qid":"1","text":"Datos Reserva
     card.appendChild(foto); card.appendChild(cuerpo); f.appendChild(card);
     despues("id_298", f);
 
-    // 2b) Certificado de titularidad de la cuenta del propietario (campo CERTIFICADO TITULARIDAD de Airtable)
-    var ce = li("dh-certificado"); ce.style.display = "none";
-    var cert = el("a", "dh-cert", "Ver certificado de titularidad de la cuenta →"); cert.target = "_blank"; cert.rel = "noopener";
-    ce.appendChild(cert); despues("id_259", ce);
-
     // 3) Después del botón: agente, confianza y pie
     var ct = li("dh-contacto");
     var ctb = el("div", "dh-caja dh-contacto");
@@ -1567,7 +1558,7 @@ JotForm.paymentExtrasOnTheFly([{"name":"clickTo","qid":"1","text":"Datos Reserva
     var w = el("a", "", "dreamshappen.es"); w.href = WEB; w.target = "_blank"; w.rel = "noopener"; pp.appendChild(w); pie.appendChild(pp);
 
     despues("id_81", pie); despues("id_81", ct);
-    return { f: f, foto: foto, enlace: enlace, wa: wa, nom: nom, ce: ce, cert: cert };
+    return { f: f, foto: foto, enlace: enlace, wa: wa, nom: nom };
   }
 
   function formatoEuros(v) { var n = parseFloat(String(v).replace(/[^\d,.]/g, "").replace(",", ".")); if (isNaN(n)) return v; var p = n.toFixed(n % 1 ? 2 : 0).split("."); return p[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".") + (p[1] ? "," + p[1] : "") + " € / mes"; }
@@ -1577,16 +1568,15 @@ JotForm.paymentExtrasOnTheFly([{"name":"clickTo","qid":"1","text":"Datos Reserva
     if (cacheFicha[ref]) return pintarFoto(ui, cacheFicha[ref]);
     fetch("https://api.airtable.com/v0/appmY7jVeBehY5Mz7/" + encodeURIComponent("CARTERA INMUEBLES")
       + "?filterByFormula=" + encodeURIComponent("{REFERENCIA}='" + ref.replace(/'/g, "") + "'")
-      + "&maxRecords=1&fields%5B%5D=FOTO%20ANUNCIO&fields%5B%5D=URL%20ANUNCIO&fields%5B%5D=CERTIFICADO%20TITULARIDAD", { headers: { "Authorization": "Bearer " + token } })
+      + "&maxRecords=1&fields%5B%5D=FOTO%20ANUNCIO&fields%5B%5D=URL%20ANUNCIO", { headers: { "Authorization": "Bearer " + token } })
       .then(function(r) { return r.json(); })
-      .then(function(d) { var fl = (d.records && d.records[0] && d.records[0].fields) || {}; cacheFicha[ref] = { foto: fl["FOTO ANUNCIO"] || "", url: fl["URL ANUNCIO"] || "", cert: (fl["CERTIFICADO TITULARIDAD"] && fl["CERTIFICADO TITULARIDAD"][0] && fl["CERTIFICADO TITULARIDAD"][0].url) || "" }; if (refFicha === ref) pintarFoto(ui, cacheFicha[ref]); })
+      .then(function(d) { var fl = (d.records && d.records[0] && d.records[0].fields) || {}; cacheFicha[ref] = { foto: fl["FOTO ANUNCIO"] || "", url: fl["URL ANUNCIO"] || "" }; if (refFicha === ref) pintarFoto(ui, cacheFicha[ref]); })
       .catch(function() {});
   }
   function pintarFoto(ui, d) {
     if (d.foto && /^https:\/\//.test(d.foto)) { ui.foto.src = d.foto; ui.foto.style.display = ""; } else ui.foto.style.display = "none";
     ui.enlace.href = /^https:\/\//.test(d.url || "") ? d.url : WEB + "/viviendas-de-alquiler/";
     ui.enlace.style.display = "";
-    if (/^https:\/\//.test(d.cert || "")) { ui.cert.href = d.cert; ui.ce.style.display = ""; } else ui.ce.style.display = "none";
   }
 
   function refrescar(ui) {
@@ -1598,8 +1588,8 @@ JotForm.paymentExtrasOnTheFly([{"name":"clickTo","qid":"1","text":"Datos Reserva
       ui.f.querySelector(".dh-salida").textContent = val("lite_mode_261") || "—";
       ui.f.querySelector(".dh-alquiler").textContent = val("input_140") ? formatoEuros(val("input_140")) : "—";
       ui.f.querySelector(".dh-etiqueta").textContent = "TU RESERVA · " + ref;
-      if (refFicha !== ref) { refFicha = ref; ui.foto.style.display = "none"; ui.enlace.style.display = "none"; ui.ce.style.display = "none"; cargarFoto(ui, ref); }
-    } else { ui.f.style.display = "none"; ui.ce.style.display = "none"; refFicha = ""; }
+      if (refFicha !== ref) { refFicha = ref; ui.foto.style.display = "none"; ui.enlace.style.display = "none"; cargarFoto(ui, ref); }
+    } else { ui.f.style.display = "none"; refFicha = ""; }
     ui.wa.href = "https://wa.me/" + WA + "?text=" + encodeURIComponent("Hola, tengo una duda sobre la reserva" + (ref ? " " + ref : ""));
   }
 

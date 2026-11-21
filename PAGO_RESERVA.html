@@ -278,6 +278,10 @@ ol.dh-pasos .dh-actual .dh-barra{background:#A8402A}ol.dh-pasos .dh-actual .dh-p
 .dh-datos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;font-size:14px}
 .dh-datos div{display:flex;flex-direction:column}.dh-datos span{font-size:12px;color:#6B6259}.dh-datos strong{color:#2C3344}
 a.dh-anuncio{font-size:14px;font-weight:600;color:#A8402A!important;text-decoration:none}
+a.dh-autoriz{color:#2C3344!important}a.dh-autoriz::before{content:"✍\0000a0";color:#1F7A4A}
+.form-all ul.form-section>li#dh-certificado{width:100%!important;flex:0 0 100%!important;background:#FBF8F5!important;padding:0 22px 12px!important;margin:0!important}
+a.dh-cert{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;color:#A8402A!important;text-decoration:none;border-bottom:1px solid #E2C6B9}
+a.dh-cert::before{content:"📄";font-size:15px}
 .dh-aviso{display:flex;gap:12px;align-items:flex-start;border-radius:12px;padding:14px 16px;font-size:14px;line-height:1.5}
 .dh-aviso>div{display:flex;flex-direction:column;gap:2px}.dh-aviso strong{font-size:15px}
 .dh-ok{background:#EEF6F1;border:1px solid #CFE6D8;color:#2F5A43}.dh-ok strong,.dh-ok .dh-ico{color:#17603A}
@@ -328,6 +332,7 @@ p.dh-pie{margin:6px 0 0;text-align:center;font-size:12.5px;color:#6B6259}p.dh-pi
   ol.dh-pasos .dh-paso{font-size:12px}
   ol.dh-pasos .dh-paso-txt{font-size:12.5px}
   li#dh-concepto{padding-left:16px!important;padding-right:16px!important}
+  .form-all ul.form-section>li#dh-certificado{padding:0 16px 12px!important}
   .dh-datos{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media print{.supernova{background:#fff!important}.form-all{box-shadow:none!important}}
@@ -1082,7 +1087,7 @@ JotForm.paymentExtrasOnTheFly([{"name":"clickTo","qid":"1","text":"Envianos just
 })();
 </script>
 <script>
-/* DH EXTRA (PAGO_RESERVA) — CONFIANZA: pasos, ficha del piso (foto y anuncio desde Airtable), a quién pagas, botones Copiar, aviso antiestafa, contacto y pie. Textos editables en TXT. */
+/* DH EXTRA (PAGO_RESERVA) — CONFIANZA: pasos, ficha del piso (foto, anuncio y autorización firmada desde Airtable), a quién pagas, certificado de titularidad, botones Copiar, aviso antiestafa, contacto y pie. Textos editables en TXT. */
 (function() {
   var FORM_ID = "253172214183349";
   var TEL = "+34 604 20 50 83", TEL_LINK = "tel:+34604205083", WA = "34604205083", EMAIL = "info@dreamshappen.es", WEB = "https://www.dreamshappen.es";
@@ -1157,6 +1162,8 @@ JotForm.paymentExtrasOnTheFly([{"name":"clickTo","qid":"1","text":"Envianos just
     cuerpo.appendChild(datos);
     var enlace = el("a", "dh-anuncio", "Ver el anuncio y las fotos →"); enlace.target = "_blank"; enlace.rel = "noopener"; enlace.style.display = "none";
     cuerpo.appendChild(enlace);
+    var autoriz = el("a", "dh-anuncio dh-autoriz", "Ver la autorización firmada por el propietario →"); autoriz.target = "_blank"; autoriz.rel = "noopener"; autoriz.style.display = "none";
+    cuerpo.appendChild(autoriz);
     card.appendChild(foto); card.appendChild(cuerpo); f.appendChild(card);
     despues("id_296", f);
 
@@ -1167,6 +1174,11 @@ JotForm.paymentExtrasOnTheFly([{"name":"clickTo","qid":"1","text":"Envianos just
     var ba = li("dh-paga-ag"); ba.style.display = "none";
     var bad = el("div", "dh-aviso dh-info"); bad.appendChild(icono(ICO_ESCUDO)); var bat = el("div"); bat.appendChild(el("strong", "", TXT.agTitulo)); bat.appendChild(el("span", "", TXT.agTexto)); bad.appendChild(bat); ba.appendChild(bad);
     antes("id_289", ba);
+
+    // 3b) Certificado de titularidad de la cuenta del propietario (CERTIFICADO TITULARIDAD en Airtable)
+    var ce = li("dh-certificado"); ce.style.display = "none";
+    var cert = el("a", "dh-cert", "Ver certificado de titularidad de la cuenta →"); cert.target = "_blank"; cert.rel = "noopener";
+    ce.appendChild(cert); despues("id_139", ce);
 
     // 4) Concepto con botón copiar
     var cc = li("dh-concepto"); cc.style.display = "none";
@@ -1201,7 +1213,7 @@ JotForm.paymentExtrasOnTheFly([{"name":"clickTo","qid":"1","text":"Envianos just
     var w = el("a", "", "dreamshappen.es"); w.href = WEB; w.target = "_blank"; w.rel = "noopener"; pp.appendChild(w); pie.appendChild(pp);
 
     despues("id_81", pie); despues("id_81", ct);
-    return { f: f, foto: foto, enlace: enlace, bp: bp, ba: ba, cc: cc, wa: wa, nom: nom };
+    return { f: f, foto: foto, enlace: enlace, autoriz: autoriz, ce: ce, cert: cert, bp: bp, ba: ba, cc: cc, wa: wa, nom: nom };
   }
 
   function formatoEuros(v) { var n = parseFloat(String(v).replace(",", ".")); if (isNaN(n)) return v; var p = n.toFixed(n % 1 ? 2 : 0).split("."); return p[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".") + (p[1] ? "," + p[1] : "") + " € / mes"; }
@@ -1211,15 +1223,17 @@ JotForm.paymentExtrasOnTheFly([{"name":"clickTo","qid":"1","text":"Envianos just
     if (cacheFicha[ref]) return pintarFoto(ui, cacheFicha[ref]);
     fetch("https://api.airtable.com/v0/appmY7jVeBehY5Mz7/" + encodeURIComponent("CARTERA INMUEBLES")
       + "?filterByFormula=" + encodeURIComponent("{REFERENCIA}='" + ref.replace(/'/g, "") + "'")
-      + "&maxRecords=1&fields%5B%5D=FOTO%20ANUNCIO&fields%5B%5D=URL%20ANUNCIO", { headers: { "Authorization": "Bearer " + token } })
+      + "&maxRecords=1&fields%5B%5D=FOTO%20ANUNCIO&fields%5B%5D=URL%20ANUNCIO&fields%5B%5D=CERTIFICADO%20TITULARIDAD&fields%5B%5D=AUTORIZACION%20FIRMADA", { headers: { "Authorization": "Bearer " + token } })
       .then(function(r) { return r.json(); })
-      .then(function(d) { var fl = (d.records && d.records[0] && d.records[0].fields) || {}; cacheFicha[ref] = { foto: fl["FOTO ANUNCIO"] || "", url: fl["URL ANUNCIO"] || "" }; if (refFicha === ref) pintarFoto(ui, cacheFicha[ref]); })
+      .then(function(d) { var fl = (d.records && d.records[0] && d.records[0].fields) || {}; var adj = function(n) { return (fl[n] && fl[n][0] && fl[n][0].url) || ""; }; cacheFicha[ref] = { foto: fl["FOTO ANUNCIO"] || "", url: fl["URL ANUNCIO"] || "", cert: adj("CERTIFICADO TITULARIDAD"), autoriz: adj("AUTORIZACION FIRMADA") }; if (refFicha === ref) pintarFoto(ui, cacheFicha[ref]); })
       .catch(function() {});
   }
   function pintarFoto(ui, d) {
     if (d.foto && /^https:\/\//.test(d.foto)) { ui.foto.src = d.foto; ui.foto.style.display = ""; } else ui.foto.style.display = "none";
     var url = /^https:\/\//.test(d.url || "") ? d.url : WEB + "/viviendas-de-alquiler/";
     ui.enlace.href = url; ui.enlace.style.display = "";
+    if (/^https:\/\//.test(d.autoriz || "")) { ui.autoriz.href = d.autoriz; ui.autoriz.style.display = ""; } else ui.autoriz.style.display = "none";
+    if (/^https:\/\//.test(d.cert || "")) ui.cert.href = d.cert; else ui.cert.removeAttribute("href");
   }
 
   function refrescar(ui) {
@@ -1232,11 +1246,12 @@ JotForm.paymentExtrasOnTheFly([{"name":"clickTo","qid":"1","text":"Envianos just
       ui.f.querySelector(".dh-salida").textContent = val("lite_mode_299") || "—";
       ui.f.querySelector(".dh-alquiler").textContent = val("input_285") ? formatoEuros(val("input_285")) : "—";
       ui.f.querySelector(".dh-etiqueta").textContent = "TU RESERVA · " + ref;
-      if (refFicha !== ref) { refFicha = ref; ui.foto.style.display = "none"; ui.enlace.style.display = "none"; cargarFoto(ui, ref); }
-    } else { ui.f.style.display = "none"; refFicha = ""; }
+      if (refFicha !== ref) { refFicha = ref; ui.foto.style.display = "none"; ui.enlace.style.display = "none"; ui.autoriz.style.display = "none"; ui.cert.removeAttribute("href"); cargarFoto(ui, ref); }
+    } else { ui.f.style.display = "none"; ui.cert.removeAttribute("href"); refFicha = ""; }
     // A quién pagas
     var prop = visible($("id_308")) || visible($("id_138")), ag = visible($("id_289")) || visible($("id_290"));
     ui.bp.style.display = prop ? "" : "none";
+    ui.ce.style.display = (prop && ui.cert.getAttribute("href")) ? "" : "none";
     ui.ba.style.display = ag ? "" : "none";
     var tit = val("input_308");
     ui.bp.querySelector(".dh-paga-prop-txt").textContent = TXT.propTexto.replace("{TITULAR}", tit || "el propietario");

@@ -106,6 +106,10 @@ ol.dh-pasos .dh-actual .dh-barra{background:#A8402A}ol.dh-pasos .dh-actual .dh-p
 .dh-datos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;font-size:14px}
 .dh-datos div{display:flex;flex-direction:column}.dh-datos span{font-size:12px;color:#6B6259}.dh-datos strong{color:#2C3344}
 a.dh-anuncio{font-size:14px;font-weight:600;color:#A8402A!important;text-decoration:none}
+a.dh-autoriz{color:#2C3344!important}a.dh-autoriz::before{content:"✍\0000a0";color:#1F7A4A}
+.form-all ul.form-section>li#dh-certificado{width:100%!important;flex:0 0 100%!important;background:#FBF8F5!important;padding:0 22px 12px!important;margin:0!important}
+a.dh-cert{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;color:#A8402A!important;text-decoration:none;border-bottom:1px solid #E2C6B9}
+a.dh-cert::before{content:"📄";font-size:15px}
 .dh-aviso{display:flex;gap:12px;align-items:flex-start;border-radius:12px;padding:14px 16px;font-size:14px;line-height:1.5}
 .dh-aviso>div{display:flex;flex-direction:column;gap:2px}.dh-aviso strong{font-size:15px}
 .dh-ok{background:#EEF6F1;border:1px solid #CFE6D8;color:#2F5A43}.dh-ok strong,.dh-ok .dh-ico{color:#17603A}
@@ -156,6 +160,7 @@ p.dh-pie{margin:6px 0 0;text-align:center;font-size:12.5px;color:#6B6259}p.dh-pi
   ol.dh-pasos .dh-paso{font-size:12px}
   ol.dh-pasos .dh-paso-txt{font-size:12.5px}
   li#dh-concepto{padding-left:16px!important;padding-right:16px!important}
+  .form-all ul.form-section>li#dh-certificado{padding:0 16px 12px!important}
   .dh-datos{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media print{.supernova{background:#fff!important}.form-all{box-shadow:none!important}}
