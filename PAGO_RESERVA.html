@@ -241,7 +241,7 @@ html.supernova .form-all ul.form-section>li#cid_261{margin-top:18px!important;pa
 #id_138::before{content:"\0000a0";display:block;font-size:12px;margin:8px 0 10px}
 #id_289::before{content:"Cuenta de la agencia";display:block;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#8A8178;margin:8px 0 10px}
 #id_290::before{content:"\0000a0";display:block;font-size:12px;margin:8px 0 10px}
-#input_138,#input_290{font-family:"SFMono-Regular",Menlo,Consolas,monospace!important;letter-spacing:.04em;font-size:14px!important}
+#input_138,#input_290{font-family:"SFMono-Regular",Menlo,Consolas,monospace!important;letter-spacing:0;font-size:12.5px!important;padding:0 8px!important}
 /* Importes destacados */
 #cid_140,#cid_295,#cid_300{display:flex!important;align-items:center;gap:8px}
 .form-all li.form-line #input_140,.form-all li.form-line #input_295,.form-all li.form-line #input_300{width:200px!important;flex:0 0 200px;height:52px!important;font-size:24px!important;font-weight:700!important;color:#BD4B31!important;background:#fff!important;border:1px solid #EAD2C7!important;text-align:center}
@@ -1207,7 +1207,7 @@ JotForm.paymentExtrasOnTheFly([{"name":"clickTo","qid":"1","text":"Envianos just
     return { f: f, foto: foto, enlace: enlace, bp: bp, ba: ba, cc: cc, dp: dp, wa: wa, nom: nom };
   }
 
-  function formatoEuros(v) { var n = parseFloat(String(v).replace(",", ".")); return isNaN(n) ? v : n.toLocaleString("es-ES", { maximumFractionDigits: 2 }) + " € / mes"; }
+  function formatoEuros(v) { var n = parseFloat(String(v).replace(",", ".")); if (isNaN(n)) return v; var p = n.toFixed(n % 1 ? 2 : 0).split("."); return p[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".") + (p[1] ? "," + p[1] : "") + " € / mes"; }
 
   function cargarFoto(ui, ref) {
     if (!token || !ref) return;
