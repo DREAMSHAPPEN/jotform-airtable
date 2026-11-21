@@ -88,6 +88,9 @@ html.supernova .form-all ul.form-section>li#cid_1{margin:0 -28px 8px!important;w
 /* Datos bancarios */
 #id_138::before{content:"Cuenta del propietario para el depósito";display:block;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#8A8178;margin:4px 0 10px}
 #id_302::before{content:"\0000a0";display:block;font-size:12px;margin:4px 0 10px}
+.form-all ul.form-section>li#dh-certificado{width:100%!important;flex:0 0 100%!important;background:#FBF8F5!important;padding:0 24px 14px!important;margin:0!important}
+a.dh-cert{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;color:#A8402A!important;text-decoration:none;border-bottom:1px solid #E2C6B9}
+a.dh-cert::before{content:"📄";font-size:15px}
 #input_138{font-family:"SFMono-Regular",Menlo,Consolas,monospace!important;letter-spacing:.04em;font-size:14px!important}
 /* Firma */
 #id_289{text-align:center;padding-top:18px!important}
@@ -127,7 +130,7 @@ a.dh-anuncio{font-size:14px;font-weight:600;color:#A8402A!important;text-decorat
 .dh-caja{background:#FFFFFF;border:1px solid #E8DFD6;border-radius:14px;padding:20px}
 .dh-contacto{display:flex;flex-direction:column;gap:14px}
 .dh-agente{display:flex;gap:14px;align-items:center}.dh-agente>div{display:flex;flex-direction:column;font-size:14px;color:#5A524B}.dh-agente strong{font-size:16px;color:#2C3344}
-.dh-avatar{flex:0 0 48px;height:48px;border-radius:50%;background:#2C3344;color:#FFFFFF;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:15px}
+img.dh-avatar{flex:0 0 56px;width:56px;height:56px;border-radius:50%;background:#FFFFFF;border:1px solid #E8DFD6;object-fit:contain;padding:4px;box-sizing:border-box}
 .dh-botones{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
 a.dh-btn{display:flex;align-items:center;justify-content:center;min-height:46px;border-radius:10px;border:1px solid #DDD4CC;color:#2C3344!important;text-decoration:none;font-weight:600;font-size:14px}
 a.dh-btn.dh-wa{background:#1F7A4A;border-color:#1F7A4A;color:#FFFFFF!important}
@@ -148,6 +151,7 @@ p.dh-pie{margin:6px 0 0;text-align:center;font-size:12.5px;color:#6B6259}p.dh-pi
   #id_138,#id_139,#id_302,#id_259{padding-left:16px!important;padding-right:16px!important}
   #id_281,#id_282,#id_283,#id_284,#id_287,#id_288,#id_280{padding-left:16px!important;padding-right:16px!important}
   #id_302::before{display:none}
+  .form-all ul.form-section>li#dh-certificado{padding:0 16px 14px!important}
   .dh-ficha{flex-direction:column;gap:0}
   .dh-foto{width:100%;max-width:none;height:190px}
   .dh-ficha-cuerpo{padding:14px 16px}

@@ -127,7 +127,7 @@ ol.dh-lista li>div{display:flex;flex-direction:column;font-size:14px;color:#5A52
 .dh-num{flex:0 0 28px;height:28px;border-radius:50%;background:#FBEFE9;color:#A8402A;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px}
 .dh-contacto{display:flex;flex-direction:column;gap:14px}
 .dh-agente{display:flex;gap:14px;align-items:center}.dh-agente>div{display:flex;flex-direction:column;font-size:14px;color:#5A524B}.dh-agente strong{font-size:16px;color:#2C3344}
-.dh-avatar{flex:0 0 48px;height:48px;border-radius:50%;background:#2C3344;color:#FFFFFF;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:15px}
+img.dh-avatar{flex:0 0 56px;width:56px;height:56px;border-radius:50%;background:#FFFFFF;border:1px solid #E8DFD6;object-fit:contain;padding:4px;box-sizing:border-box}
 .dh-botones{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
 a.dh-btn{display:flex;align-items:center;justify-content:center;min-height:46px;border-radius:10px;border:1px solid #DDD4CC;color:#2C3344!important;text-decoration:none;font-weight:600;font-size:14px}
 a.dh-btn.dh-wa{background:#1F7A4A;border-color:#1F7A4A;color:#FFFFFF!important}

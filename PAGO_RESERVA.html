@@ -299,7 +299,7 @@ ol.dh-lista li>div{display:flex;flex-direction:column;font-size:14px;color:#5A52
 .dh-num{flex:0 0 28px;height:28px;border-radius:50%;background:#FBEFE9;color:#A8402A;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px}
 .dh-contacto{display:flex;flex-direction:column;gap:14px}
 .dh-agente{display:flex;gap:14px;align-items:center}.dh-agente>div{display:flex;flex-direction:column;font-size:14px;color:#5A524B}.dh-agente strong{font-size:16px;color:#2C3344}
-.dh-avatar{flex:0 0 48px;height:48px;border-radius:50%;background:#2C3344;color:#FFFFFF;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:15px}
+img.dh-avatar{flex:0 0 56px;width:56px;height:56px;border-radius:50%;background:#FFFFFF;border:1px solid #E8DFD6;object-fit:contain;padding:4px;box-sizing:border-box}
 .dh-botones{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
 a.dh-btn{display:flex;align-items:center;justify-content:center;min-height:46px;border-radius:10px;border:1px solid #DDD4CC;color:#2C3344!important;text-decoration:none;font-weight:600;font-size:14px}
 a.dh-btn.dh-wa{background:#1F7A4A;border-color:#1F7A4A;color:#FFFFFF!important}
@@ -1082,7 +1082,7 @@ JotForm.paymentExtrasOnTheFly([{"name":"clickTo","qid":"1","text":"Envianos just
 })();
 </script>
 <script>
-/* DH EXTRA (PAGO_RESERVA) — CONFIANZA: pasos, ficha del piso (foto y anuncio desde Airtable), a quién pagas, botones Copiar, aviso antiestafa, qué pasa después, contacto y pie. Textos editables en TXT. */
+/* DH EXTRA (PAGO_RESERVA) — CONFIANZA: pasos, ficha del piso (foto y anuncio desde Airtable), a quién pagas, botones Copiar, aviso antiestafa, contacto y pie. Textos editables en TXT. */
 (function() {
   var FORM_ID = "253172214183349";
   var TEL = "+34 604 20 50 83", TEL_LINK = "tel:+34604205083", WA = "34604205083", EMAIL = "info@dreamshappen.es", WEB = "https://www.dreamshappen.es";
@@ -1100,13 +1100,6 @@ JotForm.paymentExtrasOnTheFly([{"name":"clickTo","qid":"1","text":"Envianos just
     concepto: "Concepto de la transferencia",
     antiTitulo: "Nunca te pediremos pagar en otra cuenta",
     antiTexto: "Si alguien te envía un número de cuenta distinto por email, WhatsApp o teléfono, no pagues y llámanos al {TEL}, el teléfono que aparece en dreamshappen.es.",
-    despuesTitulo: "¿Qué pasa después?",
-    despues: [
-      ["El piso queda reservado para ti", "Con tu justificante bloqueamos el piso para tus fechas y lo retiramos de los anuncios."],
-      ["Firmas el contrato", "Te pediremos la documentación y te enviaremos el contrato para firmarlo de forma digital."],
-      ["Entrada y entrega de llaves", "El día de entrada abonas los honorarios de agencia y la primera mensualidad, y recibes las llaves."],
-      ["Tal y como lo has visto", "Si la vivienda no está como en las fotos y vídeos publicados, te devolvemos el depósito completo."]
-    ],
     agenteTexto: "¿Quieres comprobar algo antes de pagar? Escríbenos o llámanos, sin compromiso.",
     confianza: [["Colaboramos con universidades y escuelas de negocio", WEB + "/universidades/"], ["Nos has podido ver en Madrid Directo (Telemadrid)", WEB + "/medios-de-comunicacion/"]]
   };
@@ -1191,16 +1184,10 @@ JotForm.paymentExtrasOnTheFly([{"name":"clickTo","qid":"1","text":"Envianos just
     antes("id_259", an);
 
     // 7) Después del botón: qué pasa después, contacto, confianza y pie
-    var dp = li("dh-despues"); dp.style.display = "none";
-    var dpb = el("div", "dh-caja"); dpb.appendChild(el("h2", "dh-h2", TXT.despuesTitulo));
-    var dol = el("ol", "dh-lista");
-    TXT.despues.forEach(function(d, i) { var x = el("li"); x.appendChild(el("span", "dh-num", String(i + 1))); var t = el("div"); t.appendChild(el("strong", "", d[0])); t.appendChild(el("span", "", d[1])); x.appendChild(t); dol.appendChild(x); });
-    dpb.appendChild(dol); dp.appendChild(dpb);
-
     var ct = li("dh-contacto");
     var ctb = el("div", "dh-caja dh-contacto");
-    var cab = el("div", "dh-agente"); var av = el("span", "dh-avatar", "DH"); cab.appendChild(av);
-    var nom = el("div"); nom.appendChild(el("strong", "dh-agente-nombre", "Dreams Happen Homes")); nom.appendChild(el("span", "", TXT.agenteTexto)); cab.appendChild(nom); ctb.appendChild(cab);
+    var cab = el("div", "dh-agente"); var av = el("img", "dh-avatar"); av.src = "https://dreamshappen.github.io/jotform-airtable/img/logo-dh.png"; av.alt = "Dreams Happen Homes"; cab.appendChild(av);
+    var nom = el("div"); nom.appendChild(el("strong", "dh-agente-nombre", "Tu agente")); nom.appendChild(el("span", "", TXT.agenteTexto)); cab.appendChild(nom); ctb.appendChild(cab);
     var bots = el("div", "dh-botones");
     var wa = el("a", "dh-btn dh-wa", "WhatsApp"); wa.target = "_blank"; wa.rel = "noopener"; wa.href = "https://wa.me/" + WA;
     var tl = el("a", "dh-btn", "Llamar " + TEL); tl.href = TEL_LINK;
@@ -1213,8 +1200,8 @@ JotForm.paymentExtrasOnTheFly([{"name":"clickTo","qid":"1","text":"Envianos just
     pp.appendChild(el("strong", "", "Dreams Happen Homes")); pp.appendChild(document.createTextNode(" · " + EMAIL + " · " + TEL + " · "));
     var w = el("a", "", "dreamshappen.es"); w.href = WEB; w.target = "_blank"; w.rel = "noopener"; pp.appendChild(w); pie.appendChild(pp);
 
-    despues("id_81", pie); despues("id_81", ct); despues("id_81", dp);
-    return { f: f, foto: foto, enlace: enlace, bp: bp, ba: ba, cc: cc, dp: dp, wa: wa, nom: nom };
+    despues("id_81", pie); despues("id_81", ct);
+    return { f: f, foto: foto, enlace: enlace, bp: bp, ba: ba, cc: cc, wa: wa, nom: nom };
   }
 
   function formatoEuros(v) { var n = parseFloat(String(v).replace(",", ".")); if (isNaN(n)) return v; var p = n.toFixed(n % 1 ? 2 : 0).split("."); return p[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".") + (p[1] ? "," + p[1] : "") + " € / mes"; }
@@ -1258,11 +1245,7 @@ JotForm.paymentExtrasOnTheFly([{"name":"clickTo","qid":"1","text":"Envianos just
     ui.cc.querySelector(".dh-concepto-txt").textContent = dir;
     var destino = prop ? $("id_140") : ($("id_295") && visible($("id_295")) ? $("id_295") : $("id_300"));
     if (destino && ui.cc.nextSibling !== destino) destino.parentNode.insertBefore(ui.cc, destino);
-    // Qué pasa después: solo primera vez
-    ui.dp.style.display = prop ? "" : "none";
     // Agente y WhatsApp con la referencia
-    var agente = val("input_284");
-    ui.nom.querySelector(".dh-agente-nombre").textContent = agente ? "Tu agente: " + agente : "Dreams Happen Homes";
     ui.wa.href = "https://wa.me/" + WA + "?text=" + encodeURIComponent("Hola, tengo una duda sobre la reserva" + (ref ? " " + ref : ""));
   }
 

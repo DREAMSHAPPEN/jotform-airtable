@@ -569,3 +569,8 @@ No es un formulario de JotForm: es la página que ve el propietario con el infor
 
 ### DATOS_RESERVA — DH EXTRA CONFIANZA
 Igual que en PAGO_RESERVA: barra de pasos (paso 1 activo), ficha del piso debajo de la REFERENCIA (foto y anuncio desde Airtable: FOTO ANUNCIO / URL ANUNCIO; dirección input_135, entrada lite_mode_260, salida lite_mode_261, alquiler input_140), caja del agente (input_210) con WhatsApp/llamar, universidades y Telemadrid, y pie. Estilos en la sección «Bloque de confianza» de herramientas/css/DATOS_RESERVA.css.
+
+### Cambios 21/11/2026
+- Caja del agente (DATOS y PAGO): título fijo «Tu agente» y logo DH Homes (`img/logo-dh.png`, servido desde GitHub Pages).
+- PAGO_RESERVA: quitada la caja «¿Qué pasa después?» (ya está en la barra de pasos).
+- DATOS_RESERVA: enlace «Ver certificado de titularidad de la cuenta» debajo de la cuenta del propietario; sale solo si el campo URL **CERTIFICADO TITULARIDAD** de CARTERA INMUEBLES tiene un enlace https.
