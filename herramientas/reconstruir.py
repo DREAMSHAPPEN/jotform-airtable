@@ -17,6 +17,7 @@ Qué hace:
      lo avisa y NO escribe nada.
   4. Si todo cuadra, sobrescribe NOMBRE_FORMULARIO.html con la versión nueva.
 """
+import os
 import re
 import sys
 from pathlib import Path
@@ -72,6 +73,17 @@ def main():
     for m in re.finditer(r"/\* ===== (DH DISEÑO[^=]*?) ===== \*/", actual):
         if m.group(1) not in nuevo:
             errores.append(f"El HTML nuevo NO trae el diseño «{m.group(1).strip()}». Pégalo en JotForm (Diseñador → Estilos → Inyectar CSS) desde herramientas/css/ y vuelve a exportar.")
+        else:
+            # ¿Es la misma versión que la copia guardada en herramientas/css/?
+            ruta_css = os.path.join(os.path.dirname(os.path.abspath(__file__)), "css", nombre + ".css")
+            if os.path.exists(ruta_css):
+                norm = lambda t: re.sub(r"\s+", "", t)
+                guardado = open(ruta_css, encoding="utf-8").read()
+                ini = nuevo.find(m.group(0))
+                fin = nuevo.find("/* ===== FIN", ini)
+                fin = nuevo.find("*/", fin) + 2 if fin >= 0 else -1
+                if ini >= 0 and fin > 1 and norm(guardado) != norm(nuevo[ini:fin]):
+                    errores.append(f"El diseño «{m.group(1).strip()}» del HTML nuevo NO coincide con herramientas/css/{nombre}.css (el CSS de JotForm está desactualizado). Pega ese archivo en JotForm (Diseño → CSS) y vuelve a exportar.")
 
     for a in avisos:
         print("AVISO:", a)
