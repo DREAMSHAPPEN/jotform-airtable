@@ -1674,5 +1674,19 @@ JotForm.paymentExtrasOnTheFly([{"name":"q1_header","qid":"1","text":"AUTORIZACIO
   });
 })();
 </script>
+<script>
+/* DH EXTRA (AUTORIZACION_COMERCIALIZACION): si la REFERENCIA llega rellena desde la URL (?referencia=XXX, p. ej. al redirigir desde DATOS RESERVA), lanza la comprobación y el autorrelleno */
+(function() {
+  var REF_ID = "input_2";
+  window.addEventListener("load", function() {
+    var intentos = 0, hecho = "";
+    var t = setInterval(function() {
+      var r = document.getElementById(REF_ID); intentos++;
+      if (r && r.value && r.value !== hecho) { hecho = r.value; r.dispatchEvent(new Event("input", { bubbles: true })); r.dispatchEvent(new Event("change", { bubbles: true })); }
+      if (intentos >= 12) clearInterval(t);
+    }, 500);
+  });
+})();
+</script>
 </body>
 </html><script type="text/javascript">JotForm.ownerView=true;</script><script type="text/javascript">JotForm.forwardToEu=true;</script><script type="text/javascript">JotForm.isNewSACL=true;</script>

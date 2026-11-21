@@ -578,3 +578,6 @@ Igual que en PAGO_RESERVA: barra de pasos (paso 1 activo), ficha del piso debajo
 ### AUTORIZACION_COMERCIALIZACION — DH EXTRA firmas
 Cada propietario firma por separado en su casilla. «Firma Propietario 1» ya no es obligatoria (también en JotForm, q43 required=No) y el script DH EXTRA no deja enviar si no hay al menos una de las tres firmas (input_43/44/45), mostrando un aviso junto a la firma 1.
 El PDF que guarda Make (getSubmissionPDF) sale del documento del Editor de PDF de JotForm (id 10263242863509057), editado para el inquilino: sin textos de ayuda, sin DNI/email de propietarios y sin datos bancarios; título «AUTORIZACIÓN DE COMERCIALIZACIÓN».
+
+### DH EXTRA — referencia desde la URL (DATOS, PAGO, AUTORIZACION)
+JotForm rellena la REFERENCIA desde la URL (?referencia=XXX) después de que carguen nuestros scripts, así que un pequeño DH EXTRA lanza el evento input sobre el campo REFERENCIA durante los primeros segundos para que GUARDA REFERENCIA y el autorrelleno funcionen. La redirección de DATOS RESERVA a PAGO RESERVA (JotForm → Ajustes → Página de agradecimiento → URL) incluye `&referencia={referencia}`.
