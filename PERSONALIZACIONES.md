@@ -573,4 +573,4 @@ Igual que en PAGO_RESERVA: barra de pasos (paso 1 activo), ficha del piso debajo
 ### Cambios 21/11/2026
 - Caja del agente (DATOS y PAGO): título fijo «Tu agente» y logo DH Homes (`img/logo-dh.png`, servido desde GitHub Pages).
 - PAGO_RESERVA: quitada la caja «¿Qué pasa después?» (ya está en la barra de pasos).
-- DATOS_RESERVA: enlace «Ver certificado de titularidad de la cuenta» debajo de la cuenta del propietario; sale solo si el campo URL **CERTIFICADO TITULARIDAD** de CARTERA INMUEBLES tiene un enlace https.
+- DATOS_RESERVA: enlace «Ver certificado de titularidad de la cuenta» debajo de la cuenta del propietario; sale solo si el campo **CERTIFICADO TITULARIDAD** (archivo adjunto) de CARTERA INMUEBLES tiene un PDF; se abre el primer archivo (la URL de Airtable es temporal pero se pide de nuevo cada vez que se carga el formulario). El PDF llega desde AUTORIZACIÓN COMERCIALIZACIÓN (q20 «Certificado de titularidad de la cuenta»).

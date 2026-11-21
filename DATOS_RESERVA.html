@@ -1579,7 +1579,7 @@ JotForm.paymentExtrasOnTheFly([{"name":"clickTo","qid":"1","text":"Datos Reserva
       + "?filterByFormula=" + encodeURIComponent("{REFERENCIA}='" + ref.replace(/'/g, "") + "'")
       + "&maxRecords=1&fields%5B%5D=FOTO%20ANUNCIO&fields%5B%5D=URL%20ANUNCIO&fields%5B%5D=CERTIFICADO%20TITULARIDAD", { headers: { "Authorization": "Bearer " + token } })
       .then(function(r) { return r.json(); })
-      .then(function(d) { var fl = (d.records && d.records[0] && d.records[0].fields) || {}; cacheFicha[ref] = { foto: fl["FOTO ANUNCIO"] || "", url: fl["URL ANUNCIO"] || "", cert: fl["CERTIFICADO TITULARIDAD"] || "" }; if (refFicha === ref) pintarFoto(ui, cacheFicha[ref]); })
+      .then(function(d) { var fl = (d.records && d.records[0] && d.records[0].fields) || {}; cacheFicha[ref] = { foto: fl["FOTO ANUNCIO"] || "", url: fl["URL ANUNCIO"] || "", cert: (fl["CERTIFICADO TITULARIDAD"] && fl["CERTIFICADO TITULARIDAD"][0] && fl["CERTIFICADO TITULARIDAD"][0].url) || "" }; if (refFicha === ref) pintarFoto(ui, cacheFicha[ref]); })
       .catch(function() {});
   }
   function pintarFoto(ui, d) {
