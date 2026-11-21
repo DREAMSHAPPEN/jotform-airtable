@@ -565,3 +565,7 @@ No es un formulario de JotForm: es la página que ve el propietario con el infor
 - Lee las respuestas por número de pregunta (`q17_`, `q34_`…): si se cambian textos en JotForm no pasa nada;
   si se borra y se recrea una pregunta, cambia su número y hay que actualizar la tabla `Q` del script.
 - `INFORME_SOLVENCIA.html?ejemplo` muestra el diseño con datos de muestra.
+
+
+### DATOS_RESERVA — DH EXTRA CONFIANZA
+Igual que en PAGO_RESERVA: barra de pasos (paso 1 activo), ficha del piso debajo de la REFERENCIA (foto y anuncio desde Airtable: FOTO ANUNCIO / URL ANUNCIO; dirección input_135, entrada lite_mode_260, salida lite_mode_261, alquiler input_140), caja del agente (input_210) con WhatsApp/llamar, universidades y Telemadrid, y pie. Estilos en la sección «Bloque de confianza» de herramientas/css/DATOS_RESERVA.css.

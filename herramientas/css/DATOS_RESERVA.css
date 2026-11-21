@@ -105,6 +105,33 @@ html.supernova .form-all ul.form-section>li#cid_1{margin:0 -28px 8px!important;w
 /* Errores */
 .form-line-error{background:#FFF6F3!important;border-radius:10px}
 .form-line-error .form-textbox,.form-line-error .form-dropdown{border-color:#D9603F!important;box-shadow:0 0 0 3px rgba(217,96,63,.12)!important}
+/* ---- Bloque de confianza (pasos, ficha, contacto) — igual que PAGO_RESERVA ---- */
+.dh-ico{width:22px;height:22px;flex:0 0 22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;margin-top:1px}
+ol.dh-pasos{list-style:none;margin:6px 0 4px;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+ol.dh-pasos li{display:flex;flex-direction:column;gap:6px}
+ol.dh-pasos .dh-barra{height:4px;border-radius:4px;background:#DDD3C9}
+ol.dh-pasos .dh-paso{font-size:12.5px;color:#6B6259;line-height:1.3}
+ol.dh-pasos .dh-hecho .dh-barra{background:#1F7A4A}ol.dh-pasos .dh-hecho .dh-paso{color:#1F7A4A;font-weight:600}
+ol.dh-pasos .dh-actual .dh-barra{background:#A8402A}ol.dh-pasos .dh-actual .dh-paso{color:#A8402A;font-weight:700}
+.dh-ficha{display:flex;gap:16px;align-items:stretch;background:#FFFFFF;border:1px solid #E8DFD6;border-radius:14px;overflow:hidden;margin-top:4px}
+.dh-foto{width:42%;max-width:300px;min-height:150px;object-fit:cover;display:block;background:#E7DDD3}
+.dh-ficha-cuerpo{flex:1;min-width:0;padding:14px 16px 14px 0;display:flex;flex-direction:column;gap:8px}
+.dh-etiqueta{font-size:11.5px;font-weight:700;letter-spacing:.1em;color:#A8402A}
+.dh-dir{font-size:16px;line-height:1.3;color:#2C3344}
+.dh-datos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;font-size:14px}
+.dh-datos div{display:flex;flex-direction:column}.dh-datos span{font-size:12px;color:#6B6259}.dh-datos strong{color:#2C3344}
+a.dh-anuncio{font-size:14px;font-weight:600;color:#A8402A!important;text-decoration:none}
+.dh-caja{background:#FFFFFF;border:1px solid #E8DFD6;border-radius:14px;padding:20px}
+.dh-contacto{display:flex;flex-direction:column;gap:14px}
+.dh-agente{display:flex;gap:14px;align-items:center}.dh-agente>div{display:flex;flex-direction:column;font-size:14px;color:#5A524B}.dh-agente strong{font-size:16px;color:#2C3344}
+.dh-avatar{flex:0 0 48px;height:48px;border-radius:50%;background:#2C3344;color:#FFFFFF;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:15px}
+.dh-botones{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+a.dh-btn{display:flex;align-items:center;justify-content:center;min-height:46px;border-radius:10px;border:1px solid #DDD4CC;color:#2C3344!important;text-decoration:none;font-weight:600;font-size:14px}
+a.dh-btn.dh-wa{background:#1F7A4A;border-color:#1F7A4A;color:#FFFFFF!important}
+ul.dh-confianza{list-style:none;margin:0;padding:12px 0 0;border-top:1px solid #F0E9E2;display:flex;flex-direction:column;gap:6px}
+ul.dh-confianza li::before{content:"✔\0000a0";color:#1F7A4A;font-weight:700}
+ul.dh-confianza a{font-size:14px;color:#2C3344!important;text-decoration:none;border-bottom:1px solid #E2D8CE}
+p.dh-pie{margin:6px 0 0;text-align:center;font-size:12.5px;color:#6B6259}p.dh-pie a{color:#A8402A!important}
 /* Móvil */
 @media (max-width:640px){
   .form-all{border-radius:0!important;margin-bottom:0!important}
@@ -118,6 +145,11 @@ html.supernova .form-all ul.form-section>li#cid_1{margin:0 -28px 8px!important;w
   #id_138,#id_139,#id_302,#id_259{padding-left:16px!important;padding-right:16px!important}
   #id_281,#id_282,#id_283,#id_284,#id_287,#id_288,#id_280{padding-left:16px!important;padding-right:16px!important}
   #id_302::before{display:none}
+  .dh-ficha{flex-direction:column;gap:0}
+  .dh-foto{width:100%;max-width:none;height:190px}
+  .dh-ficha-cuerpo{padding:14px 16px}
+  ol.dh-pasos .dh-paso{font-size:11px}
+  .dh-datos{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media print{.supernova{background:#fff!important}.form-all{box-shadow:none!important}}
 /* ===== FIN DH DISEÑO RESERVA ===== */
