@@ -188,7 +188,7 @@ html.supernova .form-all ul.form-section>li#cid_1{margin:0 -28px 8px!important;w
 #cid_1 .header-logo{display:none!important}
 #cid_1 .header-text{text-align:center!important;width:100%}
 #header_1{color:#fff!important;font-size:30px!important;font-weight:700!important;letter-spacing:-.01em;margin:0 0 6px!important}
-#cid_1 .form-header-group::after{content:"🔒\0000a0Datos\0000a0protegidos   ·   ✔\0000a0Agencia\0000a0autorizada   ·   ✉\0000a0Confirmación\0000a0por\0000a0email";display:block;margin-top:16px;font-size:12.5px;line-height:1.7;letter-spacing:.02em;color:#F3D9CF;white-space:pre-wrap}
+#cid_1 .form-header-group::after{content:"🔒\0000a0Datos\0000a0protegidos   ·   ✔\0000a0Agencia\0000a0autorizada   ·   ✆\0000a0Atención\0000a0por\0000a0WhatsApp";display:block;margin-top:16px;font-size:12.5px;line-height:1.7;letter-spacing:.02em;color:#F3D9CF;white-space:pre-wrap}
 /* Etiquetas y campos */
 .form-label.form-label-top{font-size:13px!important;font-weight:600!important;color:#2C3344!important;letter-spacing:.01em;margin-bottom:6px!important}
 .form-label.form-label-auto{width:100%}
@@ -259,6 +259,51 @@ html.supernova .form-all ul.form-section>li#cid_261{margin-top:18px!important;pa
 /* Errores */
 .form-line-error{background:#FFF6F3!important;border-radius:10px}
 .form-line-error .form-textbox,.form-line-error .form-dropdown{border-color:#D9603F!important;box-shadow:0 0 0 3px rgba(217,96,63,.12)!important}
+/* ---- Bloque de confianza (ficha, avisos, contacto) ---- */
+.dh-ico{width:22px;height:22px;flex:0 0 22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;margin-top:1px}
+ol.dh-pasos{list-style:none;margin:6px 0 4px;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+ol.dh-pasos li{display:flex;flex-direction:column;gap:6px}
+ol.dh-pasos .dh-barra{height:4px;border-radius:4px;background:#DDD3C9}
+ol.dh-pasos .dh-paso{font-size:12.5px;color:#6B6259;line-height:1.3}
+ol.dh-pasos .dh-hecho .dh-barra{background:#1F7A4A}ol.dh-pasos .dh-hecho .dh-paso{color:#1F7A4A;font-weight:600}
+ol.dh-pasos .dh-actual .dh-barra{background:#A8402A}ol.dh-pasos .dh-actual .dh-paso{color:#A8402A;font-weight:700}
+.dh-ficha{display:flex;gap:16px;align-items:stretch;background:#FFFFFF;border:1px solid #E8DFD6;border-radius:14px;overflow:hidden;margin-top:4px}
+.dh-foto{width:42%;max-width:300px;min-height:150px;object-fit:cover;display:block;background:#E7DDD3}
+.dh-ficha-cuerpo{flex:1;min-width:0;padding:14px 16px 14px 0;display:flex;flex-direction:column;gap:8px}
+.dh-etiqueta{font-size:11.5px;font-weight:700;letter-spacing:.1em;color:#A8402A}
+.dh-dir{font-size:16px;line-height:1.3;color:#2C3344}
+.dh-datos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;font-size:14px}
+.dh-datos div{display:flex;flex-direction:column}.dh-datos span{font-size:12px;color:#6B6259}.dh-datos strong{color:#2C3344}
+a.dh-anuncio{font-size:14px;font-weight:600;color:#A8402A!important;text-decoration:none}
+.dh-aviso{display:flex;gap:12px;align-items:flex-start;border-radius:12px;padding:14px 16px;font-size:14px;line-height:1.5}
+.dh-aviso>div{display:flex;flex-direction:column;gap:2px}.dh-aviso strong{font-size:15px}
+.dh-ok{background:#EEF6F1;border:1px solid #CFE6D8;color:#2F5A43}.dh-ok strong,.dh-ok .dh-ico{color:#17603A}
+.dh-info{background:#F1F4F9;border:1px solid #DCE3EE;color:#3E4555}.dh-info strong,.dh-info .dh-ico{color:#2C3344}
+.dh-alerta{background:#FFF6EC;border:1px solid #F2D9BC;color:#6E4A22}.dh-alerta strong,.dh-alerta .dh-ico{color:#7A4410}
+li#dh-concepto{background:#FBF8F5!important;padding-left:22px!important;padding-right:22px!important}
+.dh-concepto{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.dh-concepto>div{display:flex;flex-direction:column;min-width:0}
+.dh-etq{font-size:12px;font-weight:600;letter-spacing:.06em;color:#6B6259}
+.dh-concepto-txt{font-size:15px;color:#2C3344}
+.dh-copiable{display:flex!important;align-items:center;gap:8px}
+button.dh-copiar{flex:0 0 auto;min-height:44px;padding:0 14px;border-radius:10px;border:1px solid #E2C6B9;background:#FFFFFF;color:#A8402A;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit}
+button.dh-copiar.dh-copiado{background:#1F7A4A;border-color:#1F7A4A;color:#FFFFFF}
+.dh-caja{background:#FFFFFF;border:1px solid #E8DFD6;border-radius:14px;padding:20px}
+.dh-h2{margin:0 0 12px;font-family:Georgia,"Times New Roman",serif;font-size:20px;font-weight:700;color:#2C3344}
+ol.dh-lista{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+ol.dh-lista li{display:flex;gap:12px;align-items:flex-start}
+ol.dh-lista li>div{display:flex;flex-direction:column;font-size:14px;color:#5A524B}ol.dh-lista strong{font-size:15px;color:#2C3344}
+.dh-num{flex:0 0 28px;height:28px;border-radius:50%;background:#FBEFE9;color:#A8402A;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px}
+.dh-contacto{display:flex;flex-direction:column;gap:14px}
+.dh-agente{display:flex;gap:14px;align-items:center}.dh-agente>div{display:flex;flex-direction:column;font-size:14px;color:#5A524B}.dh-agente strong{font-size:16px;color:#2C3344}
+.dh-avatar{flex:0 0 48px;height:48px;border-radius:50%;background:#2C3344;color:#FFFFFF;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:15px}
+.dh-botones{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+a.dh-btn{display:flex;align-items:center;justify-content:center;min-height:46px;border-radius:10px;border:1px solid #DDD4CC;color:#2C3344!important;text-decoration:none;font-weight:600;font-size:14px}
+a.dh-btn.dh-wa{background:#1F7A4A;border-color:#1F7A4A;color:#FFFFFF!important}
+ul.dh-confianza{list-style:none;margin:0;padding:12px 0 0;border-top:1px solid #F0E9E2;display:flex;flex-direction:column;gap:6px}
+ul.dh-confianza li::before{content:"✔\0000a0";color:#1F7A4A;font-weight:700}
+ul.dh-confianza a{font-size:14px;color:#2C3344!important;text-decoration:none;border-bottom:1px solid #E2D8CE}
+p.dh-pie{margin:6px 0 0;text-align:center;font-size:12.5px;color:#6B6259}p.dh-pie a{color:#A8402A!important}
 /* Móvil */
 @media (max-width:640px){
   .form-all{border-radius:0!important;margin-bottom:0!important}
@@ -273,6 +318,12 @@ html.supernova .form-all ul.form-section>li#cid_261{margin-top:18px!important;pa
   #id_308,#id_289{border-radius:14px 14px 0 0}
   #id_140,#id_295,#id_300{border-radius:0 0 14px 14px}
   #id_138::before,#id_290::before{display:none}
+  .dh-ficha{flex-direction:column;gap:0}
+  .dh-foto{width:100%;max-width:none;height:190px}
+  .dh-ficha-cuerpo{padding:14px 16px}
+  ol.dh-pasos .dh-paso{font-size:11px}
+  li#dh-concepto{padding-left:16px!important;padding-right:16px!important}
+  .dh-datos{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media print{.supernova{background:#fff!important}.form-all{box-shadow:none!important}}
 /* ===== FIN DH DISEÑO PAGO RESERVA ===== */
@@ -1022,6 +1073,197 @@ JotForm.paymentExtrasOnTheFly([{"name":"clickTo","qid":"1","text":"Envianos just
     setTimeout(ajustarTextos, 1500);
     setInterval(refrescar, 1500);
     window.addEventListener("resize", ajustarTextos);
+  });
+})();
+</script>
+<script>
+/* DH EXTRA (PAGO_RESERVA) — CONFIANZA: pasos, ficha del piso (foto y anuncio desde Airtable), a quién pagas, botones Copiar, aviso antiestafa, qué pasa después, contacto y pie. Textos editables en TXT. */
+(function() {
+  var FORM_ID = "253172214183349";
+  var TEL = "+34 604 20 50 83", TEL_LINK = "tel:+34604205083", WA = "34604205083", EMAIL = "info@dreamshappen.es", WEB = "https://www.dreamshappen.es";
+  var TXT = {
+    pasos: ["Datos enviados", "Pago de la reserva", "Firma del contrato", "Entrega de llaves"],
+    propTitulo: "Pagas directamente al propietario del inmueble",
+    propTexto: "La cuenta está a nombre de {TITULAR}. Este importe es la fianza de tu contrato: Dreams Happen Homes no recibe este dinero.",
+    agTitulo: "Pagas a la cuenta de la agencia",
+    agTexto: "La cuenta es de Dreams Happen Homes, la agencia que gestiona tu contrato.",
+    concepto: "Concepto de la transferencia",
+    antiTitulo: "Nunca te pediremos pagar en otra cuenta",
+    antiTexto: "Si alguien te envía un número de cuenta distinto por email, WhatsApp o teléfono, no pagues y llámanos al {TEL}, el teléfono que aparece en dreamshappen.es.",
+    despuesTitulo: "¿Qué pasa después?",
+    despues: [
+      ["El piso queda reservado para ti", "Con tu justificante bloqueamos el piso para tus fechas y lo retiramos de los anuncios."],
+      ["Firmas el contrato", "Te pediremos la documentación y te enviaremos el contrato para firmarlo de forma digital."],
+      ["Entrada y entrega de llaves", "El día de entrada abonas los honorarios de agencia y la primera mensualidad, y recibes las llaves."],
+      ["Tal y como lo has visto", "Si la vivienda no está como en las fotos y vídeos publicados, te devolvemos el depósito completo."]
+    ],
+    agenteTexto: "¿Quieres comprobar algo antes de pagar? Escríbenos o llámanos, sin compromiso.",
+    confianza: [["Colaboramos con universidades y escuelas de negocio", WEB + "/universidades/"], ["Nos has podido ver en Madrid Directo (Telemadrid)", WEB + "/medios-de-comunicacion/"]]
+  };
+
+  var form, token = null, cacheFicha = {}, refFicha = "";
+  function $(id) { return document.getElementById(id); }
+  function val(id) { var e = $(id); return e ? (e.value || "").trim() : ""; }
+  function visible(el) { return !!(el && (el.offsetWidth || el.offsetHeight || el.getClientRects().length)); }
+  function el(tag, cls, txt) { var e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
+  function li(id) { var l = el("li", "dh-li"); l.id = id; return l; }
+  function antes(ref, nodo) { var r = $(ref); if (r && r.parentNode) r.parentNode.insertBefore(nodo, r); }
+  function despues(ref, nodo) { var r = $(ref); if (r && r.parentNode) r.parentNode.insertBefore(nodo, r.nextSibling); }
+  function icono(path) { var s = document.createElementNS("http://www.w3.org/2000/svg", "svg"); s.setAttribute("viewBox", "0 0 24 24"); s.setAttribute("aria-hidden", "true"); s.setAttribute("class", "dh-ico"); s.innerHTML = path; return s; }
+  var ICO_ESCUDO = '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path>';
+  var ICO_AVISO = '<path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path>';
+
+  function leerToken() {
+    var ss = document.querySelectorAll("script");
+    for (var i = 0; i < ss.length; i++) { var m = ss[i].textContent.indexOf("GUARDA REFERENCIA") >= 0 && ss[i].textContent.match(/"token":\s*"([^"]+)"/); if (m) return m[1]; }
+    return null;
+  }
+  function copiar(btn, getText) {
+    btn.addEventListener("click", function(e) {
+      e.preventDefault();
+      var t = getText(); if (!t) return;
+      var ok = function() { btn.textContent = "Copiado ✓"; btn.classList.add("dh-copiado"); setTimeout(function() { btn.textContent = "Copiar"; btn.classList.remove("dh-copiado"); }, 1600); };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t).then(ok, ok);
+      else { var ta = document.createElement("textarea"); ta.value = t; document.body.appendChild(ta); ta.select(); try { document.execCommand("copy"); } catch (x) {} ta.remove(); ok(); }
+    });
+  }
+  function botonCopiar(cid, inputId) {
+    var c = $(cid); if (!c || c.querySelector(".dh-copiar")) return;
+    var b = el("button", "dh-copiar", "Copiar"); b.type = "button";
+    c.classList.add("dh-copiable"); c.appendChild(b);
+    copiar(b, function() { return val(inputId); });
+  }
+
+  // ---------- Construcción ----------
+  function construir() {
+    // 1) Pasos del proceso
+    var p = li("dh-pasos"); var ol = el("ol", "dh-pasos");
+    TXT.pasos.forEach(function(t, i) { var x = el("li", i === 0 ? "dh-hecho" : (i === 1 ? "dh-actual" : "")); x.appendChild(el("span", "dh-barra")); x.appendChild(el("span", "dh-paso", (i + 1) + " · " + t + (i === 0 ? " ✓" : ""))); ol.appendChild(x); });
+    p.appendChild(ol); despues("cid_1", p);
+
+    // 2) Ficha del piso (debajo de la referencia)
+    var f = li("dh-ficha"); f.style.display = "none";
+    var card = el("div", "dh-ficha");
+    var foto = el("img", "dh-foto"); foto.alt = "Foto del inmueble"; foto.loading = "lazy"; foto.style.display = "none";
+    foto.addEventListener("error", function() { foto.style.display = "none"; });
+    var cuerpo = el("div", "dh-ficha-cuerpo");
+    cuerpo.appendChild(el("span", "dh-etiqueta", "TU RESERVA"));
+    cuerpo.appendChild(el("strong", "dh-dir"));
+    var datos = el("div", "dh-datos");
+    [["Entrada", "dh-entrada"], ["Salida", "dh-salida"], ["Alquiler", "dh-alquiler"]].forEach(function(d) { var b = el("div"); b.appendChild(el("span", "", d[0])); var s = el("strong", d[1], "—"); b.appendChild(s); datos.appendChild(b); });
+    cuerpo.appendChild(datos);
+    var enlace = el("a", "dh-anuncio", "Ver el anuncio y las fotos →"); enlace.target = "_blank"; enlace.rel = "noopener"; enlace.style.display = "none";
+    cuerpo.appendChild(enlace);
+    card.appendChild(foto); card.appendChild(cuerpo); f.appendChild(card);
+    despues("id_296", f);
+
+    // 3) A quién pagas (propietario / agencia)
+    var bp = li("dh-paga-prop"); bp.style.display = "none";
+    var bpd = el("div", "dh-aviso dh-ok"); bpd.appendChild(icono(ICO_ESCUDO)); var bpt = el("div"); bpt.appendChild(el("strong", "", TXT.propTitulo)); bpt.appendChild(el("span", "dh-paga-prop-txt")); bpd.appendChild(bpt); bp.appendChild(bpd);
+    antes("id_308", bp);
+    var ba = li("dh-paga-ag"); ba.style.display = "none";
+    var bad = el("div", "dh-aviso dh-info"); bad.appendChild(icono(ICO_ESCUDO)); var bat = el("div"); bat.appendChild(el("strong", "", TXT.agTitulo)); bat.appendChild(el("span", "", TXT.agTexto)); bad.appendChild(bat); ba.appendChild(bad);
+    antes("id_289", ba);
+
+    // 4) Concepto con botón copiar
+    var cc = li("dh-concepto"); cc.style.display = "none";
+    var cl = el("div", "dh-concepto"); var cv = el("div"); cv.appendChild(el("span", "dh-etq", TXT.concepto.toUpperCase())); cv.appendChild(el("strong", "dh-concepto-txt")); cl.appendChild(cv);
+    var cb = el("button", "dh-copiar", "Copiar"); cb.type = "button"; cl.appendChild(cb); cc.appendChild(cl);
+    copiar(cb, function() { return val("input_135"); });
+    antes("id_140", cc);
+
+    // 5) Botones copiar en titular e IBAN
+    botonCopiar("cid_308", "input_308"); botonCopiar("cid_138", "input_138"); botonCopiar("cid_290", "input_290");
+
+    // 6) Aviso antiestafa (antes del justificante)
+    var an = li("dh-antiestafa");
+    var and = el("div", "dh-aviso dh-alerta"); and.appendChild(icono(ICO_AVISO)); var ant = el("div"); ant.appendChild(el("strong", "", TXT.antiTitulo)); ant.appendChild(el("span", "", TXT.antiTexto.replace("{TEL}", TEL))); and.appendChild(ant); an.appendChild(and);
+    antes("id_259", an);
+
+    // 7) Después del botón: qué pasa después, contacto, confianza y pie
+    var dp = li("dh-despues"); dp.style.display = "none";
+    var dpb = el("div", "dh-caja"); dpb.appendChild(el("h2", "dh-h2", TXT.despuesTitulo));
+    var dol = el("ol", "dh-lista");
+    TXT.despues.forEach(function(d, i) { var x = el("li"); x.appendChild(el("span", "dh-num", String(i + 1))); var t = el("div"); t.appendChild(el("strong", "", d[0])); t.appendChild(el("span", "", d[1])); x.appendChild(t); dol.appendChild(x); });
+    dpb.appendChild(dol); dp.appendChild(dpb);
+
+    var ct = li("dh-contacto");
+    var ctb = el("div", "dh-caja dh-contacto");
+    var cab = el("div", "dh-agente"); var av = el("span", "dh-avatar", "DH"); cab.appendChild(av);
+    var nom = el("div"); nom.appendChild(el("strong", "dh-agente-nombre", "Dreams Happen Homes")); nom.appendChild(el("span", "", TXT.agenteTexto)); cab.appendChild(nom); ctb.appendChild(cab);
+    var bots = el("div", "dh-botones");
+    var wa = el("a", "dh-btn dh-wa", "WhatsApp"); wa.target = "_blank"; wa.rel = "noopener"; wa.href = "https://wa.me/" + WA;
+    var tl = el("a", "dh-btn", "Llamar " + TEL); tl.href = TEL_LINK;
+    bots.appendChild(wa); bots.appendChild(tl); ctb.appendChild(bots);
+    var conf = el("ul", "dh-confianza");
+    TXT.confianza.forEach(function(c) { var x = el("li"); var a = el("a", "", c[0]); a.href = c[1]; a.target = "_blank"; a.rel = "noopener"; x.appendChild(a); conf.appendChild(x); });
+    ctb.appendChild(conf); ct.appendChild(ctb);
+
+    var pie = li("dh-pie"); var pp = el("p", "dh-pie");
+    pp.appendChild(el("strong", "", "Dreams Happen Homes")); pp.appendChild(document.createTextNode(" · " + EMAIL + " · " + TEL + " · "));
+    var w = el("a", "", "dreamshappen.es"); w.href = WEB; w.target = "_blank"; w.rel = "noopener"; pp.appendChild(w); pie.appendChild(pp);
+
+    despues("id_81", pie); despues("id_81", ct); despues("id_81", dp);
+    return { f: f, foto: foto, enlace: enlace, bp: bp, ba: ba, cc: cc, dp: dp, wa: wa, nom: nom };
+  }
+
+  function formatoEuros(v) { var n = parseFloat(String(v).replace(",", ".")); return isNaN(n) ? v : n.toLocaleString("es-ES", { maximumFractionDigits: 2 }) + " € / mes"; }
+
+  function cargarFoto(ui, ref) {
+    if (!token || !ref) return;
+    if (cacheFicha[ref]) return pintarFoto(ui, cacheFicha[ref]);
+    fetch("https://api.airtable.com/v0/appmY7jVeBehY5Mz7/" + encodeURIComponent("CARTERA INMUEBLES")
+      + "?filterByFormula=" + encodeURIComponent("{REFERENCIA}='" + ref.replace(/'/g, "") + "'")
+      + "&maxRecords=1&fields%5B%5D=FOTO%20ANUNCIO&fields%5B%5D=URL%20ANUNCIO", { headers: { "Authorization": "Bearer " + token } })
+      .then(function(r) { return r.json(); })
+      .then(function(d) { var fl = (d.records && d.records[0] && d.records[0].fields) || {}; cacheFicha[ref] = { foto: fl["FOTO ANUNCIO"] || "", url: fl["URL ANUNCIO"] || "" }; if (refFicha === ref) pintarFoto(ui, cacheFicha[ref]); })
+      .catch(function() {});
+  }
+  function pintarFoto(ui, d) {
+    if (d.foto && /^https:\/\//.test(d.foto)) { ui.foto.src = d.foto; ui.foto.style.display = ""; } else ui.foto.style.display = "none";
+    var url = /^https:\/\//.test(d.url || "") ? d.url : WEB + "/viviendas-de-alquiler/";
+    ui.enlace.href = url; ui.enlace.style.display = "";
+  }
+
+  function refrescar(ui) {
+    var ref = val("input_296"), dir = val("input_135");
+    // Ficha
+    if (dir && ref) {
+      ui.f.style.display = "";
+      ui.f.querySelector(".dh-dir").textContent = dir;
+      ui.f.querySelector(".dh-entrada").textContent = val("lite_mode_271") || "—";
+      ui.f.querySelector(".dh-salida").textContent = val("lite_mode_299") || "—";
+      ui.f.querySelector(".dh-alquiler").textContent = val("input_285") ? formatoEuros(val("input_285")) : "—";
+      ui.f.querySelector(".dh-etiqueta").textContent = "TU RESERVA · " + ref;
+      if (refFicha !== ref) { refFicha = ref; ui.foto.style.display = "none"; ui.enlace.style.display = "none"; cargarFoto(ui, ref); }
+    } else { ui.f.style.display = "none"; refFicha = ""; }
+    // A quién pagas
+    var prop = visible($("id_308")) || visible($("id_138")), ag = visible($("id_289")) || visible($("id_290"));
+    ui.bp.style.display = prop ? "" : "none";
+    ui.ba.style.display = ag ? "" : "none";
+    var tit = val("input_308");
+    ui.bp.querySelector(".dh-paga-prop-txt").textContent = TXT.propTexto.replace("{TITULAR}", tit || "el propietario");
+    // Concepto: dentro del bloque visible (propietario o agencia)
+    ui.cc.style.display = (dir && (prop || ag)) ? "" : "none";
+    ui.cc.querySelector(".dh-concepto-txt").textContent = dir;
+    var destino = prop ? $("id_140") : ($("id_295") && visible($("id_295")) ? $("id_295") : $("id_300"));
+    if (destino && ui.cc.nextSibling !== destino) destino.parentNode.insertBefore(ui.cc, destino);
+    // Qué pasa después: solo primera vez
+    ui.dp.style.display = prop ? "" : "none";
+    // Agente y WhatsApp con la referencia
+    var agente = val("input_284");
+    ui.nom.querySelector(".dh-agente-nombre").textContent = agente ? "Tu agente: " + agente : "Dreams Happen Homes";
+    ui.wa.href = "https://wa.me/" + WA + "?text=" + encodeURIComponent("Hola, tengo una duda sobre la reserva" + (ref ? " " + ref : ""));
+  }
+
+  window.addEventListener("load", function() {
+    form = $(FORM_ID); if (!form || !$("id_296")) return;
+    token = leerToken();
+    var ui = construir();
+    refrescar(ui);
+    form.addEventListener("input", function() { refrescar(ui); });
+    form.addEventListener("change", function() { refrescar(ui); });
+    setInterval(function() { refrescar(ui); }, 700);
   });
 })();
 </script>

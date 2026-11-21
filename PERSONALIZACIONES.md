@@ -81,7 +81,7 @@ La columna «Excepciones» indica lo que se sale de eso.
 | INQUILINO_A_LA_AGENCIA | 260466528141355 | `input_416` | 8 | — |
 | LIQUIDACION | 253404784219359 | `input_368` | 8 | — |
 | MODIFICAR_DATOS | 260076834888370 | `input_135` | 0 | NO bloquea el envío (solo limpia la referencia) |
-| PAGO_RESERVA | 253172214183349 | `input_296` | 18 | bloque DH EXTRA (no deja enviar si faltan campos obligatorios visibles; el adjunto lo valida JotForm); diseño en el CSS personalizado de JotForm (bloque «DH DISEÑO PAGO RESERVA», copia en `herramientas/css/PAGO_RESERVA.css`) |
+| PAGO_RESERVA | 253172214183349 | `input_296` | 18 | bloque DH EXTRA (no deja enviar si faltan campos obligatorios visibles; el adjunto lo valida JotForm); bloque DH EXTRA CONFIANZA (pasos, ficha del piso con FOTO ANUNCIO y URL ANUNCIO de Airtable, a quién pagas, botones Copiar, aviso antiestafa, qué pasa después, contacto y pie; textos editables en el objeto `TXT` al principio del bloque); diseño en el CSS personalizado de JotForm (bloque «DH DISEÑO PAGO RESERVA», copia en `herramientas/css/PAGO_RESERVA.css`) |
 | RESCISION | 253421851530349 | `input_408` | 14 | botón de JotForm Sign |
 | RESOLVEMOS_TUS_DUDAS | 261755783472367 | `input_416` | 2 | — |
 | RESOLVER_INCIDENCIA | 253336812383357 | `input_405` | 8 | — |
