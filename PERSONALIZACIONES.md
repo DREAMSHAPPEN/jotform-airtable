@@ -574,3 +574,7 @@ Igual que en PAGO_RESERVA: barra de pasos (paso 1 activo), ficha del piso debajo
 - Caja del agente (DATOS y PAGO): título fijo «Tu agente» y logo DH Homes (`img/logo-dh.png`, servido desde GitHub Pages).
 - PAGO_RESERVA: quitada la caja «¿Qué pasa después?» (ya está en la barra de pasos).
 - PAGO_RESERVA: «📄 Ver certificado de titularidad de la cuenta» debajo de la cuenta del propietario (solo si se ve la cuenta del propietario y CERTIFICADO TITULARIDAD tiene archivo) y «✍ Ver la autorización firmada por X, titular de la cuenta» en la ficha del piso (campos AUTORIZACION FIRMADA y FIRMANTE AUTORIZACION; Make solo guarda la autorización del propietario P1/P2/P3 cuyo nombre coincide con TITULAR PROPIEDAD). Ambos son adjuntos de Airtable que rellena el escenario de Make «20.JF-AT. AUTORIZACIÓN COMERCIALIZACIÓN» (el PDF de la autorización lo genera JotForm con getSubmissionPDF). Se abren en el navegador.
+
+### AUTORIZACION_COMERCIALIZACION — DH EXTRA firmas
+Cada propietario firma por separado en su casilla. «Firma Propietario 1» ya no es obligatoria (también en JotForm, q43 required=No) y el script DH EXTRA no deja enviar si no hay al menos una de las tres firmas (input_43/44/45), mostrando un aviso junto a la firma 1.
+El PDF que guarda Make (getSubmissionPDF) sale del documento del Editor de PDF de JotForm (id 10263242863509057), editado para el inquilino: sin textos de ayuda, sin DNI/email de propietarios y sin datos bancarios; título «AUTORIZACIÓN DE COMERCIALIZACIÓN».

@@ -1136,10 +1136,10 @@ JotForm.paymentExtrasOnTheFly([{"name":"q1_header","qid":"1","text":"AUTORIZACIO
       <li class="form-line jf-required" data-type="control_textbox" id="id_29"><label class="form-label form-label-top form-label-auto" id="label_29" for="input_29"> EMAIL P1<span class="form-required" aria-hidden="true">*</span> </label>
         <div id="cid_29" class="form-input-wide jf-required" data-layout="half"> <input type="text" id="input_29" name="q29_emailP1" data-type="input-textbox" class="form-textbox validate[required, Email]" data-defaultvalue="" style="width:310px" size="310" data-component="textbox" aria-labelledby="label_29" required="" value="" /> </div>
       </li>
-      <li class="form-line jf-required" data-type="control_signature" id="id_43" data-signature-draw="Yes" data-signature-typed="No" data-signature-color="No" data-signature-font="No" data-use-jotform-sign="Yes"><label class="form-label form-label-top form-label-auto" id="label_43" for="input_43"> Firma Propietario 1<span class="form-required" aria-hidden="true">*</span> </label>
-        <div id="cid_43" class="form-input-wide jf-required" data-layout="half">
+      <li class="form-line" data-type="control_signature" id="id_43" data-signature-draw="Yes" data-signature-typed="No" data-signature-color="No" data-signature-font="No" data-use-jotform-sign="Yes"><label class="form-label form-label-top form-label-auto" id="label_43" for="input_43"> Firma Propietario 1 </label>
+        <div id="cid_43" class="form-input-wide" data-layout="half">
           <div data-wrapper-react="true">
-            <div id="signature_pad_43" class="form-advanced-signature-wrapper" data-component="advanced-signature" data-id="43" data-required="Yes" data-width="310" data-height="75" data-signature-draw="Yes" data-signature-typed="No" data-signature-color="No" data-signature-font="No" data-signature-default-method="" data-use-jotform-sign="Yes" style="border:none;background:transparent"><input type="hidden" name="q43_firmaPropietario" class="output4 validate[required]" id="input_43" value="" /></div>
+            <div id="signature_pad_43" class="form-advanced-signature-wrapper" data-component="advanced-signature" data-id="43" data-required="No" data-width="310" data-height="75" data-signature-draw="Yes" data-signature-typed="No" data-signature-color="No" data-signature-font="No" data-signature-default-method="" data-use-jotform-sign="Yes" style="border:none;background:transparent"><input type="hidden" name="q43_firmaPropietario" class="output4" id="input_43" value="" /></div>
           </div>
         </div>
       </li>
@@ -1648,6 +1648,29 @@ JotForm.paymentExtrasOnTheFly([{"name":"q1_header","qid":"1","text":"AUTORIZACIO
     refInput.parentNode.appendChild(estado);
     setBotones(false);
     if (limpiar(refInput.value).length >= 2) comprobar(limpiar(refInput.value));
+  });
+})();
+</script>
+<script>
+/* DH EXTRA (AUTORIZACION_COMERCIALIZACION): cada propietario firma por separado en su casilla; ninguna firma es obligatoria por sí sola, pero no deja enviar sin al menos una firma */
+(function() {
+  var FORM_ID = "263225564982061", FIRMAS = ["input_43", "input_44", "input_45"];
+  var MSG = "Firme en la casilla que corresponde a su nombre (Propietario 1, 2 o 3) antes de enviar.";
+  function firmado() { for (var i = 0; i < FIRMAS.length; i++) { var e = document.getElementById(FIRMAS[i]); if (e && (e.value || "").trim()) return true; } return false; }
+  function aviso(mostrar) {
+    var li = document.getElementById("id_43"); if (!li) return;
+    var a = document.getElementById("dh-aviso-firma");
+    if (!mostrar) { if (a) a.remove(); return; }
+    if (!a) { a = document.createElement("div"); a.id = "dh-aviso-firma"; a.setAttribute("role", "alert"); a.style.cssText = "margin:8px 0 0;padding:10px 12px;border-radius:10px;background:#FFF6F3;border:1px solid #F2C9BC;color:#A8402A;font-size:14px;font-weight:600"; a.textContent = MSG; li.appendChild(a); }
+    li.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+  window.addEventListener("load", function() {
+    var form = document.getElementById(FORM_ID); if (!form) return;
+    form.addEventListener("submit", function(e) {
+      if (firmado()) { aviso(false); return; }
+      e.preventDefault(); e.stopImmediatePropagation(); aviso(true);
+    }, true);
+    setInterval(function() { if (firmado()) aviso(false); }, 800);
   });
 })();
 </script>
