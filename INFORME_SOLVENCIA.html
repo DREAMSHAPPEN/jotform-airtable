@@ -160,7 +160,7 @@ var EJEMPLO = {
   /* Inquilino 3: otro motivo + solvencia propia */
   q134_:"Sofía Navarro Gil", q165_:"Otro", q177_:"Reforma de su vivienda habitual", q136_:"N/A", q166_:"Propia",
   q143_:"✅ Verificado", q144_:"✅ Verificado", q145_:"✅ Verificado",
-  q107_:"✅ Verificado", q109_:"✅ Verificado", q113_:"SÍ", q169_:"Seguro de impago de alquiler", q19_:""
+  q107_:"✅ Verificado", q109_:"✅ Verificado", q113_:"SÍ", q169_:"", q19_:""
 };
 
 /* ---------- lectura de respuestas por número de pregunta ---------- */
@@ -236,7 +236,7 @@ var vg = ''
  + fila(I.doc,  'Autenticidad documental', 'Documentos sin indicios de manipulación', q(35))
  + fila(I.bank, 'Ficheros de morosidad', 'Sin incidencias registradas', q(36))
  + fila(I.video,'Entrevista personal', 'Entrevista presencial o por videollamada', q(37))
- + fila(I.globe,'Perfiles públicos', 'Identidad contrastada en fuentes públicas', q(38))
+ + fila(I.globe,'Perfiles públicos facilitados', 'Identidad contrastada en fuentes públicas', q(38))
  + fila(I.link, 'Coherencia de la información', 'Datos aportados consistentes entre sí', q(39));
 
 var Q = [
@@ -313,7 +313,7 @@ document.getElementById('informe').innerHTML = ''
  +     '<div><h5>'+I.users+'Qué aporta este informe</h5><ul><li>Mayor seguridad para el propietario.</li><li>Evaluación objetiva y documentada.</li><li>Selección de inquilinos más fiable.</li></ul></div>'
  +     '<div><img src="https://www.jotform.com/uploads/DreamsHappen/form_files/logo%20sin%20fondo.68d5727f0b15b1.19652169.png" alt="DreamsHappen"></div>'
  +   '</div>'
- +   '<div class="legal">Informe elaborado por DreamsHappen a partir de la documentación aportada por los candidatos. Uso exclusivo del propietario para la valoración de la candidatura; no debe difundirse a terceros.</div>'
+ +   '<div class="legal">Informe elaborado por DreamsHappen a partir de la documentación aportada por los candidatos. Uso exclusivo del propietario para la valoración de la candidatura.<br><b>La Ley de Protección de Datos prohíbe difundir esta información a terceros.</b></div>'
  + '</div>';
 }
 
