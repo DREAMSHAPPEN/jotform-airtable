@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Preguntas frecuentes · DreamsHappen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* VOICE: cercano, claro y tranquilizador; para estudiantes que reservan a distancia
+   IDEA: la guía de bienvenida de un piso, ordenada por el camino de la reserva
+   PICTURE: el recorrido en 5 etapas (reserva → salida) como mapa clicable
+   COLOUR and TYPE: azul marino DreamsHappen + naranja #C84E16 de su web; Figtree
+   LAYOUT: cabecera marina con el recorrido, buscador, secciones por etapa en acordeón */
+:root{color-scheme:light dark;
+ --bg:light-dark(#ffffff,#0f1626);--soft:light-dark(#f3f5f9,#18213a);--ink:light-dark(#16213a,#e9edf5);
+ --mut:light-dark(#56607a,#a9b2c7);--line:light-dark(#dde2ec,#2a3553);
+ --navy:#16284a;--navy2:#22396a;--or:#C84E16;--or2:light-dark(#C84E16,#ff8a52)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Figtree,system-ui,sans-serif;overflow-x:clip}
+a{color:var(--or2)}
+.band{padding:clamp(28px,4vw,64px) max(5vw,16px)}
+.wrap{max-width:1040px;margin:0 auto}
+header{background:linear-gradient(160deg,var(--navy) 0%,var(--navy2) 100%);color:#fff}
+.brand{font-weight:800;letter-spacing:.02em;font-size:15px;opacity:.9}
+.brand b{color:#ff9a66}
+h1{font-size:clamp(32px,5vw,50px);line-height:1.05;margin:14px 0 10px;text-wrap:balance}
+.lead{max-width:62ch;color:#d6deef;font-size:17px;margin:0}
+.road{list-style:none;padding:0;margin:34px 0 6px;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;position:relative}
+.road::before{content:"";position:absolute;left:6%;right:6%;top:27px;height:3px;background:rgba(255,255,255,.22);border-radius:3px}
+.road a{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;color:#fff;text-decoration:none;position:relative;padding:0 2px}
+.dot{width:56px;height:56px;border-radius:50%;background:#fff;color:var(--navy);display:grid;place-items:center;box-shadow:0 6px 18px rgba(0,0,0,.25);transition:transform .2s}
+.dot svg{width:26px;height:26px}
+.road a:hover .dot,.road a:focus-visible .dot{transform:translateY(-3px);background:var(--or);color:#fff}
+.road span{font-weight:600;font-size:14px;line-height:1.25}
+.search{margin-top:30px;display:flex;gap:10px;flex-wrap:wrap}
+.search input{flex:1 1 260px;font:inherit;font-size:16px;padding:14px 18px;border-radius:999px;border:0;background:#fff;color:#16213a;min-height:48px}
+.search input:focus{outline:3px solid #ff9a66;outline-offset:2px}
+.count{color:#d6deef;font-size:14px;align-self:center}
+section{scroll-margin-top:20px}
+h2{font-size:clamp(24px,3vw,32px);line-height:1.1;margin:0 0 6px;display:flex;align-items:center;gap:12px}
+h2 i{font-style:normal;width:36px;height:36px;border-radius:50%;background:var(--or);color:#fff;display:grid;place-items:center;font-size:16px;flex:none}
+.sub{color:var(--mut);margin:0 0 18px}
+details{border:1px solid var(--line);border-radius:14px;margin:10px 0;background:var(--bg)}
+details[open]{background:var(--soft);border-color:transparent}
+summary{cursor:pointer;list-style:none;padding:16px 52px 16px 20px;font-weight:600;font-size:17px;position:relative;min-height:44px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";position:absolute;right:20px;top:50%;transform:translateY(-50%);font-size:24px;color:var(--or2);font-weight:500}
+details[open] summary::after{content:"–"}
+summary:focus-visible{outline:3px solid var(--or);outline-offset:2px;border-radius:14px}
+.a{padding:0 20px 18px;max-width:72ch}
+.a p{margin:0 0 10px}.a ul,.a ol{margin:0 0 10px;padding-left:22px}.a li{margin:4px 0}
+.note{border-left:4px solid var(--or);padding:10px 14px;background:light-dark(#fff4ee,#2a1d18);border-radius:0 10px 10px 0;margin:10px 0}
+.alt{background:var(--soft)}
+.alt details{background:var(--bg)}
+.alt details[open]{background:var(--bg);border-color:var(--line)}
+.cta{background:var(--navy);color:#fff}
+.cta h2{color:#fff}
+.cta p{color:#d6deef;max-width:60ch}
+.btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+.btn{display:inline-flex;align-items:center;min-height:48px;padding:12px 22px;border-radius:999px;background:var(--or);color:#fff;font-weight:700;text-decoration:none}
+.btn.ghost{background:transparent;border:2px solid rgba(255,255,255,.5)}
+.contact{margin-top:14px;font-size:15px;color:#d6deef}
+.empty{display:none;color:var(--mut);padding:20px 0}
+.hide{display:none}
+mark{background:#ffd9c4;color:#16213a;border-radius:3px;padding:0 2px}
+@media(max-width:700px){.road{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:20px}.road::before{display:none}}
+@media(prefers-reduced-motion:reduce){.dot{transition:none}}
+</style>
+</head>
+<body>
+<header class="band">
+ <div class="wrap">
+  <div class="brand">Dreams<b>Happen</b> · Alquiler temporal en Madrid</div>
+  <h1>Resolvemos tus dudas antes de que las tengas</h1>
+  <p class="lead">Todo lo que suelen preguntarnos los inquilinos, ordenado por etapas: desde la reserva hasta la salida del piso. Si tu duda no está aquí, escríbenos y te contestamos en el día.</p>
+  <ol class="road" aria-label="Etapas del proceso">
+   <li><a href="#reserva"><div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></div><span>Reserva</span></a></li>
+   <li><a href="#pagos"><div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/></svg></div><span>Pagos</span></a></li>
+   <li><a href="#contrato"><div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z"/><path d="M14 3v5h5M8 13h8M8 17h5"/></svg></div><span>Documentos y contrato</span></a></li>
+   <li><a href="#checkin"><div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l3 3M15 8l2 2"/></svg></div><span>Llegada y llaves</span></a></li>
+   <li><a href="#estancia"><div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0"/><circle cx="12" cy="19.5" r="1"/><path d="M2 9a14 14 0 0 1 20 0"/></svg></div><span>Durante la estancia</span></a></li>
+   <li><a href="#salida"><div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 17l5-5-5-5M15 12H3M14 3h5a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-5"/></svg></div><span>Salida y fianza</span></a></li>
+  </ol>
+  <div class="search">
+   <input id="q" type="search" placeholder="Busca tu duda: fianza, llaves, luz, avalista…" aria-label="Buscar en las preguntas frecuentes">
+   <span class="count" id="count" aria-live="polite"></span>
+  </div>
+ </div>
+</header>
+
+<main>
+<section class="band" id="reserva"><div class="wrap">
+ <h2><i>1</i>Reserva</h2>
+ <p class="sub">Cómo funciona el proceso y qué tipo de contrato vas a firmar.</p>
+
+ <details><summary>¿Cómo reservo un piso?</summary><div class="a">
+  <p>Todo el proceso es online y se hace en pocos pasos:</p>
+  <ol>
+   <li><strong>Datos de reserva:</strong> rellena el formulario de reserva del piso. Basta con los datos de <strong>un solo inquilino</strong>; los del resto se añaden después, al formalizar el contrato.</li>
+   <li><strong>Pago de la reserva:</strong> haz la transferencia y envíanos el justificante desde el formulario de pago.</li>
+   <li><strong>Datos del contrato y documentación:</strong> recibirás por email los enlaces para enviar los datos del contrato y, después, la documentación de cada inquilino y su avalista.</li>
+   <li><strong>Firma y llegada:</strong> revisamos la documentación, recibís el contrato para firmar online y, una semana antes de la entrada, os enviamos las instrucciones de llegada.</li>
+  </ol>
+ </div></details>
+
+ <details><summary>¿Necesito tener a todos mis compañeros de piso para reservar?</summary><div class="a">
+  <p>No. Para reservar es suficiente con los datos de un inquilino. Los datos y la documentación del resto se piden más adelante, cuando se prepara el contrato.</p>
+ </div></details>
+
+ <details><summary>¿Qué tipo de contrato es?</summary><div class="a">
+  <p>Habitualmente es un <strong>contrato de arrendamiento de temporada</strong> (artículo 3.2 de la Ley de Arrendamientos Urbanos), pensado para estancias por estudios o trabajo. En algunos pisos el propietario puede optar por otro tipo de contrato; en ese caso se indica en el propio contrato.</p>
+  <p>El contrato se firma directamente con el propietario del piso; DreamsHappen lo gestiona.</p>
+ </div></details>
+
+ <details><summary>¿Puedo pedir cambios en el contrato?</summary><div class="a">
+  <p>El contrato es un modelo estándar y no admite modificaciones individuales en sus cláusulas. Lo que sí corregimos siempre son errores en los datos (nombres, documentos, fechas o importes): avísanos antes de firmar y te enviamos una versión corregida.</p>
+ </div></details>
+</div></section>
+
+<section class="band alt" id="pagos"><div class="wrap">
+ <h2><i>2</i>Pagos</h2>
+ <p class="sub">Qué se paga, cuándo y a quién.</p>
+
+ <details><summary>¿Cuánto cuesta reservar?</summary><div class="a">
+  <p>La reserva equivale a la <strong>fianza: una mensualidad de renta</strong>. Se paga por transferencia a la cuenta del propietario que aparece en el formulario de pago, y debes enviarnos el justificante desde ese mismo formulario.</p>
+ </div></details>
+
+ <details><summary>¿Tengo que pagar honorarios de agencia?</summary><div class="a">
+  <p>Sí. Los honorarios de agencia son <strong>una mensualidad de renta</strong> y se pagan en la entrega de llaves.</p>
+ </div></details>
+
+ <details><summary>¿Qué es el paquete Easy Rental?</summary><div class="a">
+  <p>Es un paquete de servicios vinculado a tu alquiler que incluye, entre otros, la <strong>conexión WiFi</strong> y la <strong>cobertura del seguro de hogar para pequeñas incidencias</strong>, para que vivas tranquilo desde el primer día.</p>
+  <p>Cuesta <strong>25, 35 o 50 € al mes</strong>, según el piso, y se paga en efectivo en la entrega de llaves por el total de la duración del contrato.</p>
+ </div></details>
+
+ <details><summary>¿Qué tengo que pagar el día de la entrega de llaves?</summary><div class="a">
+  <ul>
+   <li>La <strong>renta del mes en curso</strong>.</li>
+   <li>Los <strong>honorarios de agencia</strong>: una mensualidad de renta.</li>
+  </ul>
+  <p>No hay que pagar nada más de fianza: ya quedó cubierta con la reserva.</p>
+  <div class="note">Las llaves se entregan una vez completado el check-in y los pagos correspondientes.</div>
+ </div></details>
+
+ <details><summary>¿Cómo pago la renta cada mes?</summary><div class="a">
+  <p>Por transferencia a la cuenta del propietario que figura en el contrato. Puedes usar una cuenta extranjera para pagar la renta.</p>
+  <div class="note">La renta de cada mes debe pagarse en <strong>una única transferencia</strong> por el importe total, no en varias transferencias separadas de cada inquilino.</div>
+ </div></details>
+
+ <details><summary>¿Cómo se paga el agua?</summary><div class="a">
+  <p>En muchos pisos el agua es una <strong>cuota fija mensual por piso</strong> (no por persona) que se paga junto con la renta. El importe exacto aparece en tu contrato.</p>
+ </div></details>
+
+ <details><summary>¿Me daréis recibos del alquiler?</summary><div class="a">
+  <p>No se emiten recibos mensuales. El contrato junto con los justificantes de tus transferencias acreditan tanto el importe de la renta como su pago. Si quieres, puedes subir el justificante de cada mes al <strong>Portal del Inquilino MY HOME</strong>, al que tendrás acceso desde tu llegada.</p>
+ </div></details>
+</div></section>
+
+<section class="band" id="contrato"><div class="wrap">
+ <h2><i>3</i>Documentación y contrato</h2>
+ <p class="sub">Qué enviar, quién firma y qué hacer si no te llega el email.</p>
+
+ <details><summary>¿Qué documentación tengo que enviar?</summary><div class="a">
+  <p><strong>Cada inquilino:</strong></p>
+  <ul>
+   <li>DNI, NIE o pasaporte.</li>
+   <li>Si eres estudiante: carta de admisión o matrícula de tu universidad o escuela.</li>
+  </ul>
+  <p><strong>Cada avalista:</strong></p>
+  <ul>
+   <li>DNI, NIE o pasaporte.</li>
+   <li>Documentación que acredite su solvencia económica (por ejemplo, nóminas o declaración de la renta).</li>
+  </ul>
+  <p>Si el avalista es una empresa, se envía la documentación de solvencia de la sociedad y los datos de la persona que la representa.</p>
+ </div></details>
+
+ <details><summary>¿Cómo y cuándo se envía la documentación?</summary><div class="a">
+  <p>Primero se envían los <strong>datos del contrato</strong> (con el email de cada inquilino y avalista). Después, cada inquilino recibe por email el enlace <strong>Enviar documentación</strong> y sube la suya y la de su avalista. Cada inquilino la envía por separado.</p>
+  <div class="note"><strong>Revisa bien los emails</strong> de cada inquilino y avalista al rellenar los datos del contrato: es la dirección a la que llegarán la documentación y el contrato para firmar. Si un email está mal escrito, esa persona no recibirá nada.</div>
+ </div></details>
+
+ <details><summary>¿Cuándo recibiré el contrato para firmar?</summary><div class="a">
+  <p>Cuando hayamos revisado la documentación de todos los inquilinos y avalistas, os enviaremos el contrato para firmar online a través de <strong>Jotform Sign</strong>. Cada inquilino y cada avalista recibe su propio email y firma de forma individual.</p>
+ </div></details>
+
+ <details><summary>No me llega el email para firmar el contrato</summary><div class="a">
+  <p>Casi siempre se debe a un <strong>email mal escrito</strong> en los datos del contrato: el contrato solo llega a la dirección que nos indicasteis.</p>
+  <ol>
+   <li>Comprueba que tu email está bien escrito en los datos del contrato.</li>
+   <li>Revisa la carpeta de <strong>spam o correo no deseado</strong>: el email llega desde Jotform Sign.</li>
+   <li>Si el email tiene un error o sigue sin llegar, escríbenos desde <strong>Resuelve tus dudas</strong> indicando el email correcto y te lo reenviamos.</li>
+  </ol>
+ </div></details>
+
+ <details><summary>¿Tiene que firmar también el avalista?</summary><div class="a">
+  <p>Sí. El contrato solo es válido cuando han firmado <strong>todos los inquilinos y todos los avalistas</strong>. Sin todas las firmas no se puede entregar las llaves.</p>
+ </div></details>
+
+ <details><summary>¿Mi avalista responde solo por mí?</summary><div class="a">
+  <p>No. El contrato establece la <strong>responsabilidad solidaria</strong> de todos los inquilinos y de todos los avalistas, por lo que no es posible limitar el aval a un solo inquilino.</p>
+ </div></details>
+</div></section>
+
+<section class="band alt" id="checkin"><div class="wrap">
+ <h2><i>4</i>Llegada y llaves</h2>
+ <p class="sub">Cuenta bancaria, check-in, entrega de llaves y estado del piso.</p>
+
+ <details><summary>¿Cuándo recibiré la información para la llegada?</summary><div class="a">
+  <p>Una semana antes de la fecha de inicio del contrato, el sistema envía automáticamente a uno de los inquilinos un email con todos los pasos a seguir para el check-in.</p>
+ </div></details>
+
+ <details><summary>¿Necesito una cuenta bancaria española?</summary><div class="a">
+  <p>Para pagar la renta puedes usar una cuenta extranjera. Pero <strong>sí necesitas una cuenta con IBAN español (ES) antes del check-in</strong>, porque al llegar tendrás que poner la luz a tu nombre y domiciliarla.</p>
+  <p>Puedes abrirla de forma rápida y totalmente online con bancos digitales (por ejemplo, Revolut, N26 o bunq), comprobando que te asignen un IBAN que empiece por ES.</p>
+ </div></details>
+
+ <details><summary>¿A qué hora es la entrega de llaves? ¿Puedo cambiarla?</summary><div class="a">
+  <p>La entrega de llaves se hace con cita, en la franja que te asignamos; la hora más temprana son las <strong>10:00</strong>. Si necesitas cambiar la fecha o la hora, avísanos con antelación: lo intentaremos encajar, aunque depende de la disponibilidad porque ese día puede haber otros check-in.</p>
+ </div></details>
+
+ <details><summary>¿Puedo recibir las llaves antes de la fecha del contrato?</summary><div class="a">
+  <p>No. Por motivos legales, las llaves nunca se entregan antes de la fecha de inicio del contrato, y siempre después de completar el check-in y los pagos.</p>
+ </div></details>
+
+ <details><summary>¿Tengo que poner la luz a mi nombre?</summary><div class="a">
+  <p>Sí. Al hacer el check-in recibirás un email con los datos e instrucciones para cambiar la titularidad de la luz (y del gas, si el piso lo tiene). Para ello necesitas la cuenta con IBAN español.</p>
+ </div></details>
+
+ <details><summary>¿Qué hago si encuentro algún desperfecto al llegar?</summary><div class="a">
+  <p>Revisa bien el piso, el menaje, los textiles y los colchones, y comunícanos cualquier daño <strong>con fotos en los 2–3 días siguientes a tu llegada</strong>.</p>
+  <div class="note">Si no recibimos ningún aviso, entenderemos que el piso estaba en perfectas condiciones, y cualquier desperfecto posterior podría descontarse de la fianza al final del contrato.</div>
+ </div></details>
+</div></section>
+
+<section class="band" id="estancia"><div class="wrap">
+ <h2><i>5</i>Durante la estancia</h2>
+ <p class="sub">Incidencias, internet y visitas.</p>
+
+ <details><summary>¿Cómo aviso de una avería o incidencia?</summary><div class="a">
+  <p>Desde el <strong>Portal del Inquilino MY HOME</strong>, en el apartado <strong>Incidencias</strong>. Tendrás acceso desde tu check-in.</p>
+  <div class="note">El formulario Resuelve tus dudas es para dudas antes de tu llegada; las averías se gestionan siempre desde el Portal del Inquilino.</div>
+ </div></details>
+
+ <details><summary>¿Hay internet en el piso?</summary><div class="a">
+  <p>Depende del piso. Si tu piso ya tiene WiFi incluido, no tienes que contratar nada.</p>
+  <div class="note">Si no está incluido, <strong>solicítalo antes de tu llegada</strong> desde Resuelve tus dudas, para que podamos tenerlo instalado cuando entres.</div>
+ </div></details>
+
+ <details><summary>¿Pueden visitarme amigos o familiares?</summary><div class="a">
+  <p>Sí. Las visitas y estancias cortas de amigos o familiares son normales y no hace falta avisar, siempre que no causen molestias a los vecinos ni a tus compañeros de piso.</p>
+ </div></details>
+</div></section>
+
+<section class="band alt" id="salida"><div class="wrap">
+ <h2><i>6</i>Salida y fianza</h2>
+ <p class="sub">Cómo dejar el piso y recuperar tu fianza.</p>
+
+ <details><summary>¿Cómo es el proceso de salida?</summary><div class="a">
+  <p>Antes de terminar el contrato te enviaremos por email los pasos:</p>
+  <ol>
+   <li>Confirmar tu fecha de salida.</li>
+   <li>Indicar los datos bancarios para la devolución de la fianza.</li>
+   <li>Hacer el check-out, con fotos de los contadores y del estado del piso.</li>
+  </ol>
+ </div></details>
+
+ <details><summary>¿Cuándo me devolvéis la fianza?</summary><div class="a">
+  <p>Tras la entrega de llaves revisamos el estado del piso y los importes pendientes (suministros, desperfectos o limpieza, si los hubiera). La fianza se devuelve por transferencia dentro del plazo legal de un mes desde la entrega de llaves, descontando en su caso esos importes.</p>
+ </div></details>
+</div></section>
+
+<p class="empty wrap band" id="empty">No hemos encontrado ninguna pregunta con esa búsqueda. Escríbenos y te ayudamos.</p>
+</main>
+
+<section class="band cta" id="contacto"><div class="wrap">
+ <h2>¿No encuentras tu respuesta?</h2>
+ <p>Envíanos tu duda indicando la referencia del piso y te contestamos en el día.</p>
+ <div class="btns">
+  <a class="btn" href="https://dreamshappen.github.io/jotform-airtable/RESUELVE_TUS_DUDAS.html" target="_blank" rel="noopener">Resuelve tus dudas</a>
+  <a class="btn ghost" href="https://www.dreamshappen.es/alquiler/" target="_blank" rel="noopener">Ver pisos disponibles</a>
+ </div>
+ <p class="contact">info@dreamshappen.es · +34 604 20 50 83 (teléfono y WhatsApp)</p>
+</div></section>
+
+<script>
+{
+const q=document.getElementById('q'),count=document.getElementById('count'),empty=document.getElementById('empty');
+const items=[...document.querySelectorAll('main details')];
+const secs=[...document.querySelectorAll('main section')];
+const norm=s=>s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+items.forEach(d=>d.dataset.t=norm(d.textContent));
+const run=()=>{
+ const v=norm(q.value.trim());let n=0;
+ items.forEach(d=>{const ok=!v||v.split(/\s+/).every(w=>d.dataset.t.includes(w));d.classList.toggle('hide',!ok);if(ok)n++;if(v&&ok)d.open=true;if(!v)d.open=false});
+ secs.forEach(s=>s.classList.toggle('hide',!s.querySelector('details:not(.hide)')));
+ count.textContent=v?(n+(n===1?' resultado':' resultados')):items.length+' preguntas';
+ empty.style.display=v&&!n?'block':'none';
+};
+q.addEventListener('input',run);run();
+}
+</script>
+</body>
+</html>
