@@ -67,9 +67,17 @@ summary:focus-visible{outline:3px solid var(--or);outline-offset:2px;border-radi
 mark{background:#ffd9c4;color:#16213a;border-radius:3px;padding:0 2px}
 @media(max-width:700px){.road{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:20px}.road::before{display:none}}
 @media(prefers-reduced-motion:reduce){.dot{transition:none}}
+.lang{position:fixed;top:14px;right:14px;z-index:10;display:flex;background:rgba(255,255,255,.95);border-radius:999px;padding:4px;box-shadow:0 4px 14px rgba(0,0,0,.18)}
+.lang button{font:700 14px Figtree,system-ui,sans-serif;border:0;background:transparent;color:#16284a;min-width:44px;min-height:36px;border-radius:999px;cursor:pointer}
+.lang button[aria-pressed=true]{background:var(--or);color:#fff}
+.lang button:focus-visible{outline:3px solid #ff9a66;outline-offset:2px}
+html[data-lang=en] .lang-es,html:not([data-lang=en]) .lang-en{display:none}
+header .wrap{padding-top:28px}
 </style>
 </head>
 <body>
+<nav class="lang" aria-label="Idioma / Language"><button type="button" data-l="es" aria-pressed="true">ES</button><button type="button" data-l="en" aria-pressed="false">EN</button></nav>
+<div class="lang-es" lang="es">
 <header class="band">
  <div class="wrap">
   <div class="brand">Dreams<b>Happen</b> · Alquiler temporal en Madrid</div>
@@ -84,8 +92,8 @@ mark{background:#ffd9c4;color:#16213a;border-radius:3px;padding:0 2px}
    <li><a href="#salida"><div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 17l5-5-5-5M15 12H3M14 3h5a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-5"/></svg></div><span>Salida y fianza</span></a></li>
   </ol>
   <div class="search">
-   <input id="q" type="search" placeholder="Busca tu duda: fianza, llaves, luz, avalista…" aria-label="Buscar en las preguntas frecuentes">
-   <span class="count" id="count" aria-live="polite"></span>
+   <input class="q" type="search" placeholder="Busca tu duda: fianza, llaves, luz, avalista…" aria-label="Buscar en las preguntas frecuentes">
+   <span class="count" aria-live="polite"></span>
   </div>
  </div>
 </header>
@@ -271,7 +279,7 @@ mark{background:#ffd9c4;color:#16213a;border-radius:3px;padding:0 2px}
  </div></details>
 </div></section>
 
-<p class="empty wrap band" id="empty">No hemos encontrado ninguna pregunta con esa búsqueda. Escríbenos y te ayudamos.</p>
+<p class="empty wrap band">No hemos encontrado ninguna pregunta con esa búsqueda. Escríbenos y te ayudamos.</p>
 </main>
 
 <section class="band cta" id="contacto"><div class="wrap">
@@ -284,21 +292,251 @@ mark{background:#ffd9c4;color:#16213a;border-radius:3px;padding:0 2px}
  <p class="contact">info@dreamshappen.es · +34 604 20 50 83 (teléfono y WhatsApp)</p>
 </div></section>
 
+</div>
+<div class="lang-en" lang="en">
+<header class="band">
+ <div class="wrap">
+  <div class="brand">Dreams<b>Happen</b> · Mid-term rentals in Madrid</div>
+  <h1>Your questions, answered before you ask them</h1>
+  <p class="lead">Everything tenants usually ask us, step by step: from booking to moving out. If your question isn't here, write to us and we'll reply the same day.</p>
+  <ol class="road" aria-label="Process stages">
+   <li><a href="#en-reserva"><div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></div><span>Booking</span></a></li>
+   <li><a href="#en-pagos"><div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/></svg></div><span>Payments</span></a></li>
+   <li><a href="#en-contrato"><div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z"/><path d="M14 3v5h5M8 13h8M8 17h5"/></svg></div><span>Documents and contract</span></a></li>
+   <li><a href="#en-checkin"><div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l3 3M15 8l2 2"/></svg></div><span>Arrival and keys</span></a></li>
+   <li><a href="#en-estancia"><div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0"/><circle cx="12" cy="19.5" r="1"/><path d="M2 9a14 14 0 0 1 20 0"/></svg></div><span>During your stay</span></a></li>
+   <li><a href="#en-salida"><div class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 17l5-5-5-5M15 12H3M14 3h5a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-5"/></svg></div><span>Move-out and deposit</span></a></li>
+  </ol>
+  <div class="search">
+   <input class="q" type="search" placeholder="Search: deposit, keys, electricity, guarantor…" aria-label="Search the FAQ">
+   <span class="count" aria-live="polite"></span>
+  </div>
+ </div>
+</header>
+
+<main>
+<section class="band" id="en-reserva"><div class="wrap">
+ <h2><i>1</i>Booking</h2>
+ <p class="sub">How the process works and what kind of contract you'll sign.</p>
+
+ <details><summary>How do I book a flat?</summary><div class="a">
+  <p>The whole process is online and takes just a few steps:</p>
+  <ol>
+   <li><strong>Booking details:</strong> fill in the booking form for the flat. You only need the details of <strong>one tenant</strong>; the others are added later, when the contract is prepared.</li>
+   <li><strong>Booking payment:</strong> make the bank transfer and send us the receipt through the payment form.</li>
+   <li><strong>Contract details and documents:</strong> you'll receive by email the links to send the contract details and, after that, the documents of each tenant and their guarantor.</li>
+   <li><strong>Signing and arrival:</strong> we review the documents, you all receive the contract to sign online and, one week before move-in, we send you the arrival instructions.</li>
+  </ol>
+ </div></details>
+
+ <details><summary>Do I need all my flatmates to book?</summary><div class="a">
+  <p>No. To book, the details of one tenant are enough. The details and documents of the others are requested later, when the contract is prepared.</p>
+ </div></details>
+
+ <details><summary>What type of contract is it?</summary><div class="a">
+  <p>It is usually a <strong>temporary (seasonal) rental contract</strong> (article 3.2 of the Spanish Urban Leases Act), designed for stays for study or work. In some flats the owner may choose a different type of contract; if so, it is stated in the contract itself.</p>
+  <p>The contract is signed directly with the owner of the flat; DreamsHappen manages it.</p>
+ </div></details>
+
+ <details><summary>Can I ask for changes to the contract?</summary><div class="a">
+  <p>The contract is a standard model and its clauses can't be changed individually. What we always correct are errors in the details (names, ID documents, dates or amounts): let us know before signing and we'll send you a corrected version.</p>
+ </div></details>
+</div></section>
+
+<section class="band alt" id="en-pagos"><div class="wrap">
+ <h2><i>2</i>Payments</h2>
+ <p class="sub">What you pay, when and to whom.</p>
+
+ <details><summary>How much does it cost to book?</summary><div class="a">
+  <p>The booking payment is the <strong>deposit: one month's rent</strong>. It is paid by bank transfer to the owner's account shown in the payment form, and you must send us the receipt through that same form.</p>
+ </div></details>
+
+ <details><summary>Do I have to pay agency fees?</summary><div class="a">
+  <p>Yes. The agency fee is <strong>one month's rent</strong> and is paid at key handover.</p>
+ </div></details>
+
+ <details><summary>What is Easy Rental?</summary><div class="a">
+  <p>It is an additional guarantee from DreamsHappen so you can live with peace of mind from day one, with <strong>home insurance cover for minor incidents</strong>.</p>
+ </div></details>
+
+ <details><summary>What do I pay on the day I collect the keys?</summary><div class="a">
+  <ul>
+   <li>The <strong>rent for the current month</strong>.</li>
+   <li>The <strong>agency fee</strong>: one month's rent.</li>
+  </ul>
+  <p>Nothing more is due for the deposit: it was already covered by the booking payment.</p>
+  <div class="note">Keys are handed over once the check-in and the corresponding payments have been completed.</div>
+ </div></details>
+
+ <details><summary>How do I pay the rent each month?</summary><div class="a">
+  <p>By bank transfer to the owner's account stated in the contract. You can use a foreign bank account to pay the rent.</p>
+  <div class="note">Each month's rent must be paid in <strong>one single transfer</strong> for the full amount, not in separate transfers from each tenant.</div>
+ </div></details>
+
+ <details><summary>How is water paid?</summary><div class="a">
+  <p>In many flats water is a <strong>fixed monthly fee per flat</strong> (not per person), paid together with the rent. The exact amount is stated in your contract.</p>
+ </div></details>
+
+ <details><summary>Will I get rent receipts?</summary><div class="a">
+  <p>No monthly receipts are issued. The contract together with your bank transfer receipts prove both the rent amount and its payment. If you like, you can upload each month's receipt to the <strong>MY HOME Tenant Portal</strong>, which you'll have access to from your arrival.</p>
+ </div></details>
+</div></section>
+
+<section class="band" id="en-contrato"><div class="wrap">
+ <h2><i>3</i>Documents and contract</h2>
+ <p class="sub">What to send, who signs, and what to do if the email doesn't arrive.</p>
+
+ <details><summary>Which documents do I need to send?</summary><div class="a">
+  <p><strong>Each tenant:</strong></p>
+  <ul>
+   <li>DNI, NIE or passport.</li>
+   <li>If you are a student: acceptance letter or enrolment from your university or school.</li>
+  </ul>
+  <p><strong>Each guarantor:</strong></p>
+  <ul>
+   <li>DNI, NIE or passport.</li>
+   <li>Documents proving their financial solvency (for example, payslips or tax return).</li>
+  </ul>
+  <p>If the guarantor is a company, send the company's solvency documents and the details of the person who represents it.</p>
+ </div></details>
+
+ <details><summary>How and when are the documents sent?</summary><div class="a">
+  <p>First, the <strong>contract details</strong> are sent (including the email of each tenant and guarantor). Then each tenant receives by email the <strong>Send documents</strong> link and uploads their own documents and their guarantor's. Each tenant sends them separately.</p>
+  <div class="note"><strong>Double-check the emails</strong> of each tenant and guarantor when filling in the contract details: that is the address where the documents request and the contract to sign will arrive. If an email is misspelled, that person won't receive anything.</div>
+ </div></details>
+
+ <details><summary>When will I receive the contract to sign?</summary><div class="a">
+  <p>Once we have reviewed the documents of all tenants and guarantors, we'll send you the contract to sign online via <strong>Jotform Sign</strong>. Each tenant and each guarantor receives their own email and signs individually.</p>
+ </div></details>
+
+ <details><summary>I haven't received the email to sign the contract</summary><div class="a">
+  <p>It is almost always due to a <strong>misspelled email</strong> in the contract details: the contract only reaches the address you gave us.</p>
+  <ol>
+   <li>Check that your email is spelled correctly in the contract details.</li>
+   <li>Check your <strong>spam or junk folder</strong>: the email comes from Jotform Sign.</li>
+   <li>If the email has a mistake or still doesn't arrive, write to us via <strong>Resuelve tus dudas</strong> with the correct email and we'll resend it.</li>
+  </ol>
+ </div></details>
+
+ <details><summary>Does the guarantor also have to sign?</summary><div class="a">
+  <p>Yes. The contract is only valid once <strong>all tenants and all guarantors</strong> have signed. Keys can't be handed over without all signatures.</p>
+ </div></details>
+
+ <details><summary>Is my guarantor only liable for me?</summary><div class="a">
+  <p>No. The contract establishes the <strong>joint and several liability</strong> of all tenants and all guarantors, so a guarantee can't be limited to a single tenant.</p>
+ </div></details>
+</div></section>
+
+<section class="band alt" id="en-checkin"><div class="wrap">
+ <h2><i>4</i>Arrival and keys</h2>
+ <p class="sub">Bank account, check-in, key handover and the condition of the flat.</p>
+
+ <details><summary>When will I receive the arrival information?</summary><div class="a">
+  <p>One week before the contract start date, the system automatically sends one of the tenants an email with all the check-in steps.</p>
+ </div></details>
+
+ <details><summary>Do I need a Spanish bank account?</summary><div class="a">
+  <p>You can use a foreign account to pay the rent. But <strong>you do need an account with a Spanish IBAN (ES) before check-in</strong>, because when you arrive you'll have to put the electricity in your name and set up direct debit.</p>
+  <p>You can open one quickly and fully online with digital banks (for example Revolut, N26 or bunq), making sure you are given an IBAN starting with ES.</p>
+ </div></details>
+
+ <details><summary>What time is the key handover? Can I change it?</summary><div class="a">
+  <p>Key handover is by appointment, in the time slot we assign you; the earliest time is <strong>10:00</strong>. If you need to change the date or time, let us know in advance: we'll try to fit it in, although it depends on availability as there may be other check-ins that day.</p>
+ </div></details>
+
+ <details><summary>Can I get the keys before the contract start date?</summary><div class="a">
+  <p>No. For legal reasons, keys are never handed over before the contract start date, and always after completing the check-in and payments.</p>
+ </div></details>
+
+ <details><summary>Do I have to put the electricity in my name?</summary><div class="a">
+  <p>Yes. At check-in you'll receive an email with the details and instructions to transfer the electricity account (and gas, if the flat has it) to your name. You need the account with a Spanish IBAN for this.</p>
+ </div></details>
+
+ <details><summary>What if I find any damage when I arrive?</summary><div class="a">
+  <p>Check the flat, kitchenware, textiles and mattresses carefully, and report any damage to us <strong>with photos within 2–3 days of your arrival</strong>.</p>
+  <div class="note">If we don't receive any report, we'll understand the flat was in perfect condition, and any later damage may be deducted from the deposit at the end of the contract.</div>
+ </div></details>
+</div></section>
+
+<section class="band" id="en-estancia"><div class="wrap">
+ <h2><i>5</i>During your stay</h2>
+ <p class="sub">Repairs, internet and visitors.</p>
+
+ <details><summary>How do I report a breakdown or incident?</summary><div class="a">
+  <p>Through the <strong>MY HOME Tenant Portal</strong>, in the <strong>Incidents</strong> section. You'll have access from your check-in.</p>
+  <div class="note">The Resuelve tus dudas form is for questions before you arrive; repairs are always handled through the Tenant Portal.</div>
+ </div></details>
+
+ <details><summary>Is there internet in the flat?</summary><div class="a">
+  <p>It depends on the flat. If your flat already includes WiFi, you don't need to arrange anything.</p>
+  <div class="note">If it isn't included, <strong>tick it in the contract details form</strong> (€19/month, installation included) and it will be ready when you move in.</div>
+ </div></details>
+
+ <details><summary>Can friends or family visit me?</summary><div class="a">
+  <p>Yes. Visits and short stays from friends or family are normal and you don't need to tell us, as long as they don't disturb the neighbours or your flatmates.</p>
+ </div></details>
+</div></section>
+
+<section class="band alt" id="en-salida"><div class="wrap">
+ <h2><i>6</i>Move-out and deposit</h2>
+ <p class="sub">How to leave the flat and get your deposit back.</p>
+
+ <details><summary>How does moving out work?</summary><div class="a">
+  <p>Before the contract ends we'll email you the steps:</p>
+  <ol>
+   <li>Confirm your move-out date.</li>
+   <li>Provide your bank details for the deposit refund.</li>
+   <li>Do the check-out, with photos of the meters and the condition of the flat.</li>
+  </ol>
+ </div></details>
+
+ <details><summary>When will I get my deposit back?</summary><div class="a">
+  <p>After the keys are returned, we check the condition of the flat and any outstanding amounts (utilities, damage or cleaning, if any). The deposit is refunded by bank transfer within the legal period of one month from the return of the keys, minus those amounts where applicable.</p>
+ </div></details>
+</div></section>
+
+<p class="empty wrap band">We couldn't find any question matching your search. Write to us and we'll help.</p>
+</main>
+
+<section class="band cta" id="en-contacto"><div class="wrap">
+ <h2>Can't find your answer?</h2>
+ <p>Send us your question with the flat reference and we'll reply the same day.</p>
+ <div class="btns">
+  <a class="btn" href="https://dreamshappen.github.io/jotform-airtable/RESUELVE_TUS_DUDAS.html" target="_blank" rel="noopener">Ask us a question</a>
+  <a class="btn ghost" href="https://www.dreamshappen.es/alquiler/" target="_blank" rel="noopener">See available flats</a>
+ </div>
+ <p class="contact">info@dreamshappen.es · +34 604 20 50 83 (phone and WhatsApp)</p>
+</div></section>
+</div>
 <script>
 {
-const q=document.getElementById('q'),count=document.getElementById('count'),empty=document.getElementById('empty');
-const items=[...document.querySelectorAll('main details')];
-const secs=[...document.querySelectorAll('main section')];
-const norm=s=>s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
-items.forEach(d=>d.dataset.t=norm(d.textContent));
-const run=()=>{
- const v=norm(q.value.trim());let n=0;
- items.forEach(d=>{const ok=!v||v.split(/\s+/).every(w=>d.dataset.t.includes(w));d.classList.toggle('hide',!ok);if(ok)n++;if(v&&ok)d.open=true;if(!v)d.open=false});
- secs.forEach(s=>s.classList.toggle('hide',!s.querySelector('details:not(.hide)')));
- count.textContent=v?(n+(n===1?' resultado':' resultados')):items.length+' preguntas';
- empty.style.display=v&&!n?'block':'none';
-};
-q.addEventListener('input',run);run();
+const norm=s=>s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+const T={es:{one:' resultado',many:' resultados',all:' preguntas'},en:{one:' result',many:' results',all:' questions'}};
+document.querySelectorAll('.lang-es,.lang-en').forEach(box=>{
+ const L=box.classList.contains('lang-en')?'en':'es';
+ const q=box.querySelector('.q'),count=box.querySelector('.count'),empty=box.querySelector('.empty');
+ const items=[...box.querySelectorAll('main details')],secs=[...box.querySelectorAll('main section')];
+ items.forEach(d=>d.dataset.t=norm(d.textContent));
+ const run=()=>{const v=norm(q.value.trim());let n=0;
+  items.forEach(d=>{const ok=!v||v.split(/\s+/).every(w=>d.dataset.t.includes(w));d.classList.toggle('hide',!ok);if(ok)n++;if(v&&ok)d.open=true;if(!v)d.open=false});
+  secs.forEach(s=>s.classList.toggle('hide',!s.querySelector('details:not(.hide)')));
+  count.textContent=v?(n+(n===1?T[L].one:T[L].many)):items.length+T[L].all;
+  empty.style.display=v&&!n?'block':'none';};
+ q.addEventListener('input',run);run();
+});
+const btns=[...document.querySelectorAll('.lang button')];
+const setLang=(l,scroll)=>{document.documentElement.dataset.lang=l;document.documentElement.lang=l;
+ btns.forEach(b=>b.setAttribute('aria-pressed',b.dataset.l===l));
+ document.title=l==='en'?'FAQ · DreamsHappen':'Preguntas frecuentes · DreamsHappen';
+ try{localStorage.setItem('dh-faq-lang',l)}catch(e){}
+ if(scroll)goHash();};
+const goHash=()=>{let h=location.hash.slice(1);if(!h)return;const l=document.documentElement.dataset.lang;
+ h=h.replace(/^en-/,'');const id=l==='en'?'en-'+h:h;const el=document.getElementById(id);if(el)el.scrollIntoView();};
+btns.forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.l,true)));
+let l=null;try{l=localStorage.getItem('dh-faq-lang')}catch(e){}
+const p=new URLSearchParams(location.search).get('lang');if(p==='en'||p==='es')l=p;
+if(!l)l=(navigator.language||'es').toLowerCase().startsWith('es')?'es':'en';
+setLang(l,false);goHash();window.addEventListener('hashchange',goHash);
 }
 </script>
 </body>
