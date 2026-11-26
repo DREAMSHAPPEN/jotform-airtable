@@ -1504,7 +1504,7 @@ JotForm.paymentExtrasOnTheFly([{"name":"q1_header","qid":"1","text":"AUTORIZACIO
       .then(function(data) {
         if (data.records && data.records.length > 0) {
           rellenarCampos(data.records[0].fields);
-          setEstado(true, "✔ Referencia encontrada");
+          window.__dhRefOK = true; setEstado(true, "✔ Referencia encontrada");
           bloquearFormulario(false);
         } else {
           limpiarCampos();
@@ -1554,7 +1554,10 @@ JotForm.paymentExtrasOnTheFly([{"name":"q1_header","qid":"1","text":"AUTORIZACIO
     // Si el enlace del email trae la referencia (?ref=PD294 o prellenado de JotForm), buscar al cargar
     var q = new URLSearchParams(location.search);
     var refUrl = q.get("ref") || q.get("REFERENCIA") || refInput.value;
-    if (refUrl) { refInput.value = refUrl; onRef(); }
+    if (refUrl) { refInput.value = refUrl; onRef();
+      /* Si viene del ALTA, Make puede tardar unos segundos en crear la ficha: reintentar */
+      [5000, 10000, 20000, 30000].forEach(function(ms){ setTimeout(function(){ if (!window.__dhRefOK) { lastRef = ""; refInput.dispatchEvent(new Event("input", {bubbles: true})); } }, ms); });
+    }
   });
 })();
 </script>
